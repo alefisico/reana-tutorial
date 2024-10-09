@@ -2,5 +2,5 @@
 site: sandpaper::sandpaper_site
 ---
 
-This is a lesson on how to create **workflows** for CMS analysts. In particular, we will create workflows using [Snakemake](https://snakemake.readthedocs.io/en/stable/#). These workflows then will be used _locally_ in your local/university machine or will run inside the CERN [REANA](https://docs.reana.io/).
+This lesson guides CMS analysts on creating **workflows**. Specifically, we will use [Snakemake](https://snakemake.readthedocs.io/en/stable/#) to develop these workflows. They can be executed either _locally_ on your personal or university machine, or within CERN's [REANA](https://docs.reana.io/).
 
