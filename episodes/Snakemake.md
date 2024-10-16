@@ -6,109 +6,32 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a lesson using Markdown and `{sandpaper}`?
+- fixme
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to use markdown with The Carpentries Workbench
-- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+- fixme
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## Introduction
+## Snakemake: A Flexible Workflow Engine
 
-This is a lesson created via The Carpentries Workbench. It is written in
-[Pandoc-flavored Markdown](https://pandoc.org/MANUAL.txt) for static files and
-[R Markdown][r-markdown] for dynamic files that can render code into output. 
-Please refer to the [Introduction to The Carpentries 
-Workbench](https://carpentries.github.io/sandpaper-docs/) for full documentation.
+Snakemake is a workflow management system that simplifies the creation and execution of complex computational pipelines. It's particularly well-suited for tasks involving large datasets and parallel processing, making it a popular choice in fields like high energy physics.
 
-What you need to know is that there are three sections required for a valid
-Carpentries lesson:
+## Key Features:
 
- 1. `questions` are displayed at the beginning of the episode to prime the
-    learner for the content.
- 2. `objectives` are the learning objectives for an episode displayed with
-    the questions.
- 3. `keypoints` are displayed at the end of the episode to reinforce the
-    objectives.
+    Declarative Syntax: Snakemake uses a declarative language to define workflows, focusing on what you want to achieve rather than how to achieve it. This makes pipelines more readable and maintainable.
+    Rule-Based System: Workflows are defined as a series of rules. Each rule represents a task or process, specifying its inputs, outputs, and the command to execute.
+    Dependency Management: Snakemake automatically determines the order in which rules need to be executed based on their dependencies. This ensures that tasks are performed in the correct sequence.
+    Parallel Execution: Snakemake can efficiently distribute tasks across multiple cores or machines, accelerating the execution of large-scale pipelines.
+    Flexibility: It can handle a wide range of computational tasks, from simple data processing to complex simulations.
+    Integration with Tools: Snakemake can easily integrate with various tools and libraries used in high energy physics, such as ROOT, TensorFlow, and PyTorch.
 
-:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::: instructor
+## Why Snakemake for High Energy Physics?
 
-Inline instructor notes can help inform instructors of timing challenges
-associated with the lessons. They appear in the "Instructor View"
-
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-::::::::::::::::::::::::::::::::::::: challenge 
-
-## Challenge 1: Can you do it?
-
-What is the output of this command?
-
-```r
-paste("This", "new", "lesson", "looks", "good")
-```
-
-:::::::::::::::::::::::: solution 
-
-## Output
- 
-```output
-[1] "This new lesson looks good"
-```
-
-:::::::::::::::::::::::::::::::::
-
-
-## Challenge 2: how do you nest solutions within challenge blocks?
-
-:::::::::::::::::::::::: solution 
-
-You can add a line with at least three colons and a `solution` tag.
-
-:::::::::::::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-## Figures
-
-You can use standard markdown for static figures with the following syntax:
-
-`![optional caption that appears below the figure](figure url){alt='alt text for
-accessibility purposes'}`
-
-![You belong in The Carpentries!](https://raw.githubusercontent.com/carpentries/logo/master/Badge_Carpentries.svg){alt='Blue Carpentries hex person logo with no text.'}
-
-::::::::::::::::::::::::::::::::::::: callout
-
-Callout sections can highlight information.
-
-They are sometimes used to emphasise particularly important points
-but are also used in some lessons to present "asides": 
-content that is not central to the narrative of the lesson,
-e.g. by providing the answer to a commonly-asked question.
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-
-## Math
-
-One of our episodes contains $\LaTeX$ equations when describing how to create
-dynamic reports with {knitr}, so we now use mathjax to describe this:
-
-`$\alpha = \dfrac{1}{(1 - \beta)^2}$` becomes: $\alpha = \dfrac{1}{(1 - \beta)^2}$
-
-Cool, right?
-
-::::::::::::::::::::::::::::::::::::: keypoints 
-
-- Use `.md` files for episodes when you want static content
-- Use `.Rmd` files for episodes when you need to generate output
-- Run `sandpaper::check_lesson()` to identify any issues with your lesson
-- Run `sandpaper::build_lesson()` to preview your lesson locally
-
-::::::::::::::::::::::::::::::::::::::::::::::::
-
-[r-markdown]: https://rmarkdown.rstudio.com/
+    Complex Workflows: High energy physics experiments often involve intricate pipelines with numerous steps, from data acquisition and reconstruction to analysis and simulation. Snakemake's declarative syntax and dependency management make it easy to handle such complex workflows.
+    Large Datasets: Snakemake can efficiently process and analyze large datasets generated by high energy physics experiments, thanks to its parallel execution capabilities and integration with data management tools.
+    Reproducibility: By defining workflows in a declarative language, Snakemake ensures that results are reproducible. This is crucial in scientific research where experiments need to be verifiable.
+    Scalability: Snakemake can scale to handle large-scale computational resources, allowing researchers to efficiently utilize HPC clusters for their analyses.
