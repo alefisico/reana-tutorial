@@ -10,6 +10,9 @@
     <loc>https://alefisico.github.io/reana-tutorial/LICENSE.html</loc>
   </url>
   <url>
+    <loc>https://alefisico.github.io/reana-tutorial/Snakemake.html</loc>
+  </url>
+  <url>
     <loc>https://alefisico.github.io/reana-tutorial/aio.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://alefisico.github.io/reana-tutorial/instructor/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://alefisico.github.io/reana-tutorial/instructor/Snakemake.html</loc>
   </url>
   <url>
     <loc>https://alefisico.github.io/reana-tutorial/instructor/aio.html</loc>

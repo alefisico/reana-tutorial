@@ -244,7 +244,19 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Using Markdown</a>
+        <a href="introduction.html">1. Reproducibility</a>
+    </div>
+<!--/div.accordion-header-->
+
+  </div>
+<!--/div.accordion-item-->
+</div>
+<!--/div.accordion-flush-->
+
+<div class="accordion accordion-flush" id="accordionFlush3">
+  <div class="accordion-item">
+    <div class="accordion-header" id="flush-heading3">
+        <a href="Snakemake.html">2. Using Markdown</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -308,9 +320,9 @@
     <main id="main-content" class="main-content"><div class="container lesson-content">
         
         
-<section id="aio-introduction"><p>Content from <a href="introduction.html">Using Markdown</a></p>
+<section id="aio-introduction"><p>Content from <a href="introduction.html">Reproducibility</a></p>
 <hr>
-<p>Last updated on 2024-10-02 |
+<p>Last updated on 2024-10-17 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/introduction.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -345,9 +357,47 @@ challenge blocks</li>
 </div>
 </div>
 </div>
-<section><h2 class="section-heading" id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+<section><h2 class="section-heading" id="reproducibility">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"></a>
 </h2>
 <hr class="half-width">
+<p>Reproducibility is a cornerstone of scientific research, and HEP is
+no exception. It ensures that experimental results can be verified
+independently, bolstering the credibility of scientific findings. To
+achieve reproducibility, researchers must provide detailed descriptions
+of their methodologies, including the tools, datasets, and parameters
+used. This allows others to replicate the experiments and compare their
+results. Tools like <a href="">REANA</a> and <a href="">Snakemake</a>
+can significantly aid in reproducibility by providing platforms for
+creating, managing, and sharing reproducible computational workflows.
+These tools help researchers document their experimental steps, track
+dependencies, and ensure that results can be replicated consistently,
+fostering trust in scientific discoveries.</p>
+</section><section><h2 class="section-heading" id="what-does-reproducibility-has-to-do-with-me">What does reproducibility has to do with me?<a class="anchor" aria-label="anchor" href="#what-does-reproducibility-has-to-do-with-me"></a>
+</h2>
+<hr class="half-width">
+<div id="who-are-the-first-users-of-a-reproducible-workflow" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="who-are-the-first-users-of-a-reproducible-workflow" class="callout-inner">
+<h3 class="callout-title">Who are the first users of a reproducible workflow?</h3>
+<div class="callout-content">
+
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Me, myself and my group. <span class="emoji" data-emoji="grin">😁</span></p>
+</div>
+</div>
+</div>
+</div>
 <p>This is a lesson created via The Carpentries Workbench. It is written
 in <a href="https://pandoc.org/MANUAL.txt" class="external-link">Pandoc-flavored Markdown</a>
 for static files and <a href="https://rmarkdown.rstudio.com/" class="external-link">R
@@ -398,12 +448,12 @@ View”</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
-  <h4 class="accordion-header" id="headingSolution1"> Output </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -425,12 +475,12 @@ View”</p>
 </div>
 </div>
 </div>
-<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
-  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -492,6 +542,76 @@ locally</li>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</section></section><section id="aio-Snakemake"><p>Content from <a href="Snakemake.html">Using Markdown</a></p>
+<hr>
+<p>Last updated on 2024-10-17 |
+
+        <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/Snakemake.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+<p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
+<div class="text-end">
+          <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
+        </div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<ul>
+<li>fixme</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul>
+<li>fixme</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="snakemake-a-flexible-workflow-engine">Snakemake: A Flexible Workflow Engine<a class="anchor" aria-label="anchor" href="#snakemake-a-flexible-workflow-engine"></a>
+</h2>
+<hr class="half-width">
+<p>Snakemake is a workflow management system that simplifies the
+creation and execution of complex computational pipelines. It’s
+particularly well-suited for tasks involving large datasets and parallel
+processing, making it a popular choice in fields like high energy
+physics.</p>
+</section><section><h2 class="section-heading" id="key-features">Key Features:<a class="anchor" aria-label="anchor" href="#key-features"></a>
+</h2>
+<hr class="half-width">
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">Declarative</span> Syntax: Snakemake uses a declarative language to define workflows, focusing on what you want to achieve rather than how to achieve it. This makes pipelines more readable and maintainable.</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">Rule-Based</span> System: Workflows are defined as a series of rules. Each rule represents a task or process, specifying its inputs, outputs, and the command to execute.</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="ex">Dependency</span> Management: Snakemake automatically determines the order in which rules need to be executed based on their dependencies. This ensures that tasks are performed in the correct sequence.</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="ex">Parallel</span> Execution: Snakemake can efficiently distribute tasks across multiple cores or machines, accelerating the execution of large-scale pipelines.</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="ex">Flexibility:</span> It can handle a wide range of computational tasks, from simple data processing to complex simulations.</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="ex">Integration</span> with Tools: Snakemake can easily integrate with various tools and libraries used in high energy physics, such as ROOT, TensorFlow, and PyTorch.</span></code></pre>
+</div>
+</section><section><h2 class="section-heading" id="why-snakemake-for-high-energy-physics">Why Snakemake for High Energy Physics?<a class="anchor" aria-label="anchor" href="#why-snakemake-for-high-energy-physics"></a>
+</h2>
+<hr class="half-width">
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">SH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode sh" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">Complex</span> Workflows: High energy physics experiments often involve intricate pipelines with numerous steps, from data acquisition and reconstruction to analysis and simulation. Snakemake<span class="st">'s declarative syntax and dependency management make it easy to handle such complex workflows.</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="st">Large Datasets: Snakemake can efficiently process and analyze large datasets generated by high energy physics experiments, thanks to its parallel execution capabilities and integration with data management tools.</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="st">Reproducibility: By defining workflows in a declarative language, Snakemake ensures that results are reproducible. This is crucial in scientific research where experiments need to be verifiable.</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="st">Scalability: Snakemake can scale to handle large-scale computational resources, allowing researchers to efficiently utilize HPC clusters for their analyses.</span></span></code></pre>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
 </section></section>
 </div>
     </main>
@@ -539,9 +659,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://alefisico.github.io/reana-tutorial/instructor/aio.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/instructor/aio.html",
-  "dateCreated": "2024-10-16",
-  "dateModified": "2024-10-16",
-  "datePublished": "2024-10-16"
+  "dateCreated": "2024-10-17",
+  "dateModified": "2024-10-17",
+  "datePublished": "2024-10-17"
 }
 
   </script><script>
