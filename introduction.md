@@ -1,21 +1,26 @@
 ---
-title: "Reproducibility"
+title: "Let's talk about workflows"
 teaching: 10
 exercises: 2
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- How do you write a lesson using Markdown and `{sandpaper}`?
+- Could you describe each step of your analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain how to use markdown with The Carpentries Workbench
-- Demonstrate how to include pieces of code, figures, and nested challenge blocks
+- Explain the concept of workflows
+- Demonstrate how workflows are a natural procedure to follow in an analyst's life.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
+
+## The (short) life of a HEX analysis
+
+
+
 
 ## Reproducibility
 
