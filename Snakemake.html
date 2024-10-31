@@ -391,36 +391,90 @@ pipeline. We’ll have two steps:</p>
 <ol style="list-style-type: decimal"><li>Data Simulation: Simulate some data.</li>
 <li>Data Analysis: Analyze the simulated data.</li>
 </ol><p>We’ll use parallel processing to speed up the analysis step.</p>
-<ol style="list-style-type: decimal"><li>Create the Snakefile:</li>
-</ol><div class="codewrapper sourceCode" id="cb1">
+<ol style="list-style-type: decimal"><li>Create the Python Scripts:</li>
+</ol><p>simulate_data.py:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>sample <span class="op">=</span> sys.argv[<span class="dv">1</span>]</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"data/</span><span class="sc">{</span>sample<span class="sc">}</span><span class="ss">.txt"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    f.write(<span class="ss">f"Simulated data for </span><span class="sc">{</span>sample<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre>
+</div>
+<p>analyze_data.py:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">PYTHON<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode python" tabindex="0"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(sys.argv[<span class="dv">1</span>], <span class="st">"r"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    data <span class="op">=</span> f.read()</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="ss">f"results/analysis_</span><span class="sc">{</span>sys<span class="sc">.</span>argv[<span class="dv">1</span>]<span class="sc">.</span>split(<span class="st">'/'</span>)[<span class="op">-</span><span class="dv">1</span>]<span class="sc">}</span><span class="ss">"</span>, <span class="st">"w"</span>) <span class="im">as</span> f:</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    f.write(<span class="ss">f"Analysis of </span><span class="sc">{</span>data<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span></code></pre>
+</div>
+<ol start="2" style="list-style-type: decimal"><li>Create the Config File (config.yaml):</li>
+</ol><div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">configfile</span><span class="kw">:</span><span class="at"> </span><span class="st">"config.yaml"</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">rule all</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">        expand("results/analysis_{sample}.txt", sample=config["samples"])</span></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">rule simulate_data</span><span class="kw">:</span></span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="at">        configfile = "config.yaml"</span></span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py --sample {wildcards.sample} &gt; {output}"</span></span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="fu">rule analyze_data</span><span class="kw">:</span></span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="at">        data = "data/{sample}.txt"</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="at">        </span><span class="st">"results/analysis_{sample}.txt"</span></span>
-<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="at">        </span><span class="st">"python analyze_data.py {input} &gt; {output}"</span></span></code></pre>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">samples</span><span class="kw">:</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sample1</span></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sample2</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sample3</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sample4</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="at">  </span><span class="kw">-</span><span class="at"> sample5</span></span></code></pre>
 </div>
-<!--
+<ol start="3" style="list-style-type: decimal"><li>Create the Snakefile:</li>
+</ol><div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">configfile</span><span class="kw">:</span><span class="at"> </span><span class="st">"config.yaml"</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">rule all</span><span class="kw">:</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="at">        expand("results/analysis_{sample}.txt", sample=config["samples"])</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">rule simulate_data</span><span class="kw">:</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="at">        configfile = "config.yaml"</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py --sample {wildcards.sample} &gt; {output}"</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="fu">rule analyze_data</span><span class="kw">:</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="at">        data = "data/{sample}.txt"</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="at">        </span><span class="st">"results/analysis_{sample}.txt"</span></span>
+<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="at">        </span><span class="st">"python analyze_data.py {input} &gt; {output}"</span></span></code></pre>
+</div>
+<div class="section level3">
+<h3 id="explanation-of-the-workflow">Explanation of the Workflow:<a class="anchor" aria-label="anchor" href="#explanation-of-the-workflow"></a></h3>
+<ul><li>
+<p>Rules:</p>
+<ul><li>rule all: This rule defines the <strong>final goal</strong> of the
+workflow. It specifies that all analysis files should be generated.</li>
+<li>rule simulate_data: This rule simulates data for each sample.</li>
+<li>rule analyze_data: This rule analyzes the simulated data for each
+sample.</li>
+</ul></li>
+<li><p>Parallelism: Snakemake automatically parallelizes the
+analyze_data rule for each sample, as they are independent of each
+other.</p></li>
+<li><p>Wildcards: The <code>{wildcards.sample}</code> syntax is used to
+dynamically generate input and output file names based on the sample
+name.</p></li>
+</ul><p>This is a basic example of how to use Snakemake to create a parallel
+workflow. You can customize this workflow to fit your specific needs by
+adding more rules, modifying the shell commands, and adjusting the
+config file. <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- -->
+ --></p>
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="introduction.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
