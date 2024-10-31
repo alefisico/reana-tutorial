@@ -58,7 +58,40 @@ Let's create a simple workflow that simulates a data analysis pipeline. We'll ha
 
 We'll use parallel processing to speed up the analysis step.
 
-1. Create the Snakefile:
+1. Create the Python Scripts:
+
+simulate_data.py:
+```PYTHON
+import sys
+
+sample = sys.argv[1]
+with open(f"data/{sample}.txt", "w") as f:
+    f.write(f"Simulated data for {sample}\n")
+```
+
+analyze_data.py:
+```PYTHON
+import sys
+
+with open(sys.argv[1], "r") as f:
+    data = f.read()
+
+with open(f"results/analysis_{sys.argv[1].split('/')[-1]}", "w") as f:
+    f.write(f"Analysis of {data}\n")
+```
+
+2. Create the Config File (config.yaml):
+
+```YAML
+samples:
+  - sample1
+  - sample2
+  - sample3
+  - sample4
+  - sample5
+```
+
+3. Create the Snakefile:
 
 ```YAML
 configfile: "config.yaml"
@@ -83,3 +116,16 @@ rule analyze_data:
     shell:
         "python analyze_data.py {input} > {output}"
 ```
+
+### Explanation of the Workflow:
+
+* Rules:
+    * rule all: This rule defines the **final goal** of the workflow. It specifies that all analysis files should be generated.
+    * rule simulate_data: This rule simulates data for each sample.
+    * rule analyze_data: This rule analyzes the simulated data for each sample.
+
+* Parallelism: Snakemake automatically parallelizes the analyze_data rule for each sample, as they are independent of each other.
+
+* Wildcards: The `{wildcards.sample}` syntax is used to dynamically generate input and output file names based on the sample name.
+
+This is a basic example of how to use Snakemake to create a parallel workflow. You can customize this workflow to fit your specific needs by adding more rules, modifying the shell commands, and adjusting the config file.
