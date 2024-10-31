@@ -8,5 +8,5 @@
 "episodes/Snakemake.md" "4e93f8b56e975d902627f553624ff22e" "site/built/Snakemake.md" "2024-10-31"
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2024-10-02"
 "learners/reference.md" "1c7cc4e229304d9806a13f69ca1b8ba4" "site/built/reference.md" "2024-10-02"
-"learners/setup.md" "cd2f2d83442d6737e58a079f5fb590e0" "site/built/setup.md" "2024-10-31"
+"learners/setup.md" "6d809123dee74d3ec0c24bc31eb5e917" "site/built/setup.md" "2024-10-31"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2024-10-02"

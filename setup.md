@@ -5,17 +5,15 @@ title: Introduction
 In this tutorial we will use `Snakemake` and `REANA`. To set up both packages, you can follow this instructions.
 
 
-## Software Setup
+## Snakemake setup
 
-### Snakemake
-
-We will run some jobs locally. To use Snakemake, we can do the following:
+To install snakemake [here](https://snakemake.readthedocs.io/en/stable/getting_started/installation.html) is the official documentation on how to install it in your machine. Since we will run some jobs locally in your machine, we can use snakemake as:
 
 ::::::::::::::::::::::::::::::::::::::: discussion
 
-#### Recommended
+### Recommended
 
-We can use singularity and the official snakemake container to run our jobs. This is the simplest solution if you dont want/can install the official package. Other advantage is that one can keep the analysis environment clean. 
+We can use singularity and the official snakemake container to run our jobs. This is the simplest solution if you dont want/can install the official package in your machine. Other advantage is that one can keep the analysis environment clean this way.
 
 An example in lxplus:
 ```BASH
@@ -55,18 +53,29 @@ run_snakemake snakename --help
 
 :::::::::::::::: spoiler
 
-### Linux
+### Using conda
 
-Use Terminal
+Conda is a popular package and environment management system. To install Snakemake using conda, you can use the following command in your terminal:
+```BASH
+conda create -c conda-forge -c bioconda -n snakemake snakemake
+```
 
 ::::::::::::::::::::::::
 
+To test that everything works, you can run the following command:
+```
+snakemake --help
+```
+
+## REANA setup
+
+
+
+<!-- 
 ## Gitlab repository
 
-<!--
 FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
--->
-<!-- Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop -->
-FIXME
+Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
+FIXME -->
