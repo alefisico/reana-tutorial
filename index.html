@@ -207,8 +207,8 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#gitlab-repository">Gitlab repository</a></li>
-<li><a href="#software-setup">Software Setup</a></li>
+        <ul><li><a href="#software-setup">Software Setup</a></li>
+<li><a href="#gitlab-repository">Gitlab repository</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -218,7 +218,7 @@
 <div class="accordion accordion-flush" id="accordionFlush2">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading2">
-        <a href="introduction.html">1. Reproducibility</a>
+        <a href="introduction.html">1. Let's talk about workflows</a>
     </div><!--/div.accordion-header-->
 
   </div><!--/div.accordion-item-->
@@ -279,7 +279,7 @@
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="introduction.html" rel="next">Next: Reproducibility... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="introduction.html" rel="next">Next: Let's talk about... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <hr></nav><main id="main-content" class="main-content"><h1 class="schedule-heading">Summary and Setup</h1>
       
@@ -294,39 +294,94 @@ any links that you are not going to use.
  -->
 
 
-      <section id="setup"><section><h2 class="section-heading" id="gitlab-repository">Gitlab repository<a class="anchor" aria-label="anchor" href="#gitlab-repository"></a></h2>
-<hr class="half-width"><!--
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
---><!-- Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop --><p>FIXME</p>
-</section><section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
-<hr class="half-width"><div id="details" class="callout discussion">
+      <section id="setup"><p>In this tutorial we will use <code>Snakemake</code> and
+<code>REANA</code>. To set up both packages, you can follow this
+instructions.</p>
+<section><h2 class="section-heading" id="software-setup">Software Setup<a class="anchor" aria-label="anchor" href="#software-setup"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="snakemake">Snakemake<a class="anchor" aria-label="anchor" href="#snakemake"></a></h3>
+<p>We will run some jobs locally. To use Snakemake, we can do the
+following:</p>
+<div id="recommended" class="callout discussion">
 <div class="callout-square">
 <i class="callout-icon" data-feather="message-circle"></i>
 </div>
-<div id="details" class="callout-inner">
-<h3 class="callout-title">Details</h3>
+<div id="recommended" class="callout-inner">
+<h3 class="callout-title">Recommended</h3>
 <div class="callout-content">
-<p>To setup your environment you can do:</p>
+<p>We can use singularity and the official snakemake container to run
+our jobs. This is the simplest solution if you dont want/can install the
+official package. Other advantage is that one can keep the analysis
+environment clean.</p>
+<p>An example in lxplus:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
 </div>
-</div>
-</div>
+<p>One can include these lines in a bash script.</p>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">
   <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  Simpler solution
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>Another simpler solution is to include a bash function in your
+<code>.bashrc</code> or <code>.bash_aliases</code>. For
+<code>.bash_aliases</code>:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">run_snakemake ()</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security &amp;&amp; apptainer exec -B </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv docker://snakemake/snakemake"</span><span class="kw">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: run_snakemake &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">run_snakemake_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_snakemake_cmd</span><span class="st">"</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+</div>
+<p>Reload your <code>.bashrc</code> and then you can just run it from
+anywhere as</p>
+<pre><code>run_snakemake snakename --help</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
   Linux
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Use Terminal</p>
 </div>
 </div>
 </div>
 </div>
+</div>
+</section><section><h2 class="section-heading" id="gitlab-repository">Gitlab repository<a class="anchor" aria-label="anchor" href="#gitlab-repository"></a></h2>
+<hr class="half-width"><!--
+FIXME: place any data you want learners to use in `episodes/data` and then use
+       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
+       link to it, replacing the example.com link.
+--><!-- Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop --><p>FIXME</p>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
@@ -336,7 +391,7 @@ any links that you are not going to use.
       </div>
       <!-- content for large screens -->
       <div class="d-none d-sm-none d-md-block">
-        <a class="chapter-link float-end" href="introduction.html" rel="next">Next: Reproducibility... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
+        <a class="chapter-link float-end" href="introduction.html" rel="next">Next: Let's talk about... <i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
     </nav></div>
 <!-- END  : inst/pkgdown/templates/content-syllabus.html -->
