@@ -18,7 +18,7 @@ exercises: 2
 
 ## Snakemake: A Flexible Workflow Engine
 
-Snakemake is a workflow management system that simplifies the creation and execution of complex computational pipelines. It's particularly well-suited for tasks involving large datasets and parallel processing, making it a popular choice in fields like high energy physics.
+Snakemake is a workflow management system that simplifies the creation and execution of complex computational pipelines. It's particularly useful for bioinformatics pipelines, but can be applied to a wide range of computational tasks. It's particularly well-suited for tasks involving large datasets and parallel processing, making it a popular choice in fields like high energy physics.
 
 ## Key Features:
 
@@ -120,9 +120,9 @@ rule analyze_data:
 ### Explanation of the Workflow:
 
 * Rules:
-    * rule all: This rule defines the **final goal** of the workflow. It specifies that all analysis files should be generated.
-    * rule simulate_data: This rule simulates data for each sample.
-    * rule analyze_data: This rule analyzes the simulated data for each sample.
+  * **rule all**: This rule defines the *final goal* of the workflow. It specifies that all analysis files should be generated.
+  * **rule simulate_data**: This rule simulates data for each sample.
+  * **rule analyze_data**: This rule analyzes the simulated data for each sample.
 
 * Parallelism: Snakemake automatically parallelizes the analyze_data rule for each sample, as they are independent of each other.
 
