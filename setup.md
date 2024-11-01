@@ -66,6 +66,10 @@ To test that everything works, you can run the following command:
 ```
 snakemake --help
 ```
+:::::::::::::::::::::::instructor
+The rest of the tutorial will assume that the bash function exists. So better to emphasize to do that.
+:::::::::::::::::::::::
+
 
 ## REANA setup
 
