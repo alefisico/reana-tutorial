@@ -2,7 +2,14 @@
 title: Introduction
 ---
 
-In this tutorial we will use `Snakemake` and `REANA`. To set up both packages, you can follow this instructions.
+This tutorial is your comprehensive guide to workflow automation. You'll learn:
+
+ * The fundamentals of [Snakemake](https://snakemake.readthedocs.io/en/stable/) and its role in streamlining data analysis pipelines
+ * How to construct and execute basic Snakemake workflows locally
+ * The benefits of cloud-based workflow execution with the [REANA](https://reana.cern.ch/) platform
+ * How to migrate your local Snakemake workflows to the REANA environment
+
+To set up Snakemake and REANA packages, you can follow this instructions.
 
 
 ## Snakemake setup
