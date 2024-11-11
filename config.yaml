@@ -70,12 +70,17 @@ contact: 'alejandro.gomez@cern.ch' # FIXME
 episodes: 
 - introduction.md
 - Snakemake.md
+- SUSYexample.md
+- REANA.md
+- JECexample.md
 
 # Information for Learners
 learners: 
+ - setup.md
 
 # Information for Instructors
 instructors: 
+ - instructor-notes.md
 
 # Learner Profiles
 profiles: 
