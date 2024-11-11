@@ -1,5 +1,5 @@
 ---
-title:
+title: "A simple analysis from SUSY"
 teaching:
 exercises:
 ---

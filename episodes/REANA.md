@@ -1,5 +1,5 @@
 ---
-title:
+title: "Running workflows in REANA"
 teaching:
 exercises:
 ---

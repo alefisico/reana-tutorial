@@ -1,5 +1,5 @@
 ---
-title:
+title: "A more complex example: Calculating JECs"
 teaching:
 exercises:
 ---
