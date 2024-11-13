@@ -100,16 +100,25 @@ reana-client ping
 
 In my opinion, using a container is the easiest way to interact with the REANA cluster from _any machine_. To do that you can use:
 ```BASH
-apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=YOUR_ACCESS_TOKEN --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping
+apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping
 ```
-You can save this in a bash script for convenience.
+You can save this in a bash script for convenience, or in your `.bashrc` as:
+```BASH
+reana_client ()
+{ 
+    local base_command="apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3";
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: reana_client <command> [arguments]";
+        return 1;
+    fi;
+    local command="$1";
+    shift;
+    run_reana_cmd="$base_command $command $@";
+    eval "$run_reana_cmd"
+}
+```
+and, after reloading your `.bashrc`, then simply:
+```BASH
+reana-client ping
+```
 ::::::::::::::::::::::::
-
-<!-- 
-## Gitlab repository
-
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
-FIXME -->
