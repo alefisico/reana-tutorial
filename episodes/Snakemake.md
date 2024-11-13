@@ -274,9 +274,15 @@ Reasons:
 This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
 ```
 
+The `--dry-run` option is a valuable tool for testing your Snakemake workflow without actually executing the commands. It allows you to visualize the planned execution order of rules, inspect input and output files, and verify the use of wildcards and parameters.
+
+To gain even deeper insights into the specific commands that will be executed, you can employ the `--printshellcmds` option. This option will print the shell commands associated with each rule, providing a detailed breakdown of the actions that Snakemake will perform.
+
+By combining these options, you can effectively debug, optimize, and fine-tune your Snakemake workflows.
+
 :::::::::::::::: callout
 
-There are some very useful commands in Snakemake to understand if the pipeline does what we need before running it. One is `--dry-run` as shown in the previous example. Snakemake offers two powerful command-line options for visualizing your workflow: `--dag` and `--rulegraph`. These tools provide a visual representation of your pipeline, making it easier to understand complex workflows, identify bottlenecks, and troubleshoot issues.
+Before diving into the details of your Snakemake workflow, it's crucial to validate its design and ensure it functions as expected. Snakemake offers several tools for this purpose: `--dry-run` simulates the workflow, `--dag` visualizes the dependencies between rules, and `--rulegraph` provides a more detailed view of data flow. By utilizing these tools, you can effectively debug, optimize, and gain a comprehensive understanding of your pipeline.
 
 :::::::::::::::::::
 
@@ -315,8 +321,15 @@ snakemake --snakefile Snakefile --configfile config.yaml --rulegraph | dot -Tpng
 :::::::::solution
 ![Pipeline Visualization using rulegraph](episodes/fig/rulegraph.png)
 :::::::::::::::::
-
 ::::::::::::::::::
+
+
+:::::::::::::::::::: questions
+
+Can you think about when it can be helpful to use `--dry-run`, `--dag`, or `--rulegraph`
+
+::::::::::::::::::::::::
+
 
 
 ## More about wildcards
