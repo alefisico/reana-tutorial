@@ -140,7 +140,8 @@ Each part of this command serves a specific purpose:
 * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
 
 
-::::::::::::::::::::::::::: output
+::::::::::::::::::::::::::::::::::::::::: output
+
 Config file config.yaml is extended by additional config specified via the command line.
 Building DAG of jobs...
 Job stats:
@@ -270,15 +271,29 @@ Reasons:
         analyze_data, simulate_data
 
 This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
-::::::::::::::::::::::::::::::::::
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 
-::::::::::::::::::::::::::CALLOUT
+:::::::::::::::::::::::::::::::::::::::: callout
 
-fjdskflsdjklfdas
 
-::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+There are some very useful commands in Snakemake to understand if the pipeline does what we need before running it. One is `--dry-run` as shown in the previous example. Snakemake offers two powerful command-line options for visualizing your workflow: `--dag` and `--rulegraph`. These tools provide a visual representation of your pipeline, making it easier to understand complex workflows, identify bottlenecks, and troubleshoot issues.
+
+## `--dag`
+
+The `--dag` option generates a Directed Acyclic Graph (DAG) of your workflow. A DAG is a diagram that illustrates the dependencies between rules. Each node in the graph represents a rule, and the edges show the dependencies between rules. By visualizing the DAG, you can:
+
+* Identify critical paths: Pinpoint the longest sequence of dependent rules that determine the overall workflow duration.
+* Detect potential bottlenecks: Identify rules that might limit the overall workflow performance.
+* Optimize workflow design: Rearrange rules or adjust parallelism to improve efficiency.
+
+## `--rulegraph`
+
+The `--rulegraph` option generates a more detailed graph of your workflow, including information about input and output files. This can be helpful for understanding the flow of data through your pipeline.
+
+::::::::::::::::::::::::::::::::::::::::::::::::
 
 
 ## More about wildcards
