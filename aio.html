@@ -789,16 +789,23 @@ the simple example:</p>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--dry-run</span></span></code></pre>
 </div>
-<p>Each part of this command serves a specific purpose: *
-<code>--snakefile</code>: This flag specifies the path to the Snakefile,
-which contains the definitions of the rules and their dependencies. *
+<p>Each part of this command serves a specific purpose:</p>
+<ul>
+<li>
+<code>--snakefile</code>: This flag specifies the path to the
+Snakefile, which contains the definitions of the rules and their
+dependencies.</li>
+<li>
 <code>--configfile</code>: This flag indicates the path to the
 configuration file (YAML format) where you can define parameters and
-variables that can be used within the Snakefile. (It is not mandatory.)
-* <code>--dry-run</code>: This flag tells Snakemake to simulate the
+variables that can be used within the Snakefile. (It is not
+mandatory.)</li>
+<li>
+<code>--dry-run</code>: This flag tells Snakemake to simulate the
 workflow execution without actually running the commands. It’s useful
 for visualizing the execution order of rules and identifying potential
-issues before running the actual workflow.</p>
+issues before running the actual workflow.</li>
+</ul>
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
@@ -947,10 +954,16 @@ offers two powerful command-line options for visualizing your workflow:
 <code>--dag</code> and <code>--rulegraph</code>. These tools provide a
 visual representation of your pipeline, making it easier to understand
 complex workflows, identify bottlenecks, and troubleshoot issues.</p>
-<div class="section level4">
-<h4 id="dag">
-<code>--dag</code><a class="anchor" aria-label="anchor" href="#dag"></a>
-</h4>
+</div>
+</div>
+</div>
+<div id="dag" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="dag" class="callout-inner">
+<h3 class="callout-title"><code>--dag</code></h3>
+<div class="callout-content">
 <p>The <code>--dag</code> option generates a Directed Acyclic Graph
 (DAG) of your workflow. A DAG is a diagram that illustrates the
 dependencies between rules. Each node in the graph represents a rule,
@@ -964,31 +977,11 @@ overall workflow performance.</li>
 <li>Optimize workflow design: Rearrange rules or adjust parallelism to
 improve efficiency.</li>
 </ul>
-</div>
-<div class="section level4">
-<h4 id="rulegraph">
-<code>--rulegraph</code><a class="anchor" aria-label="anchor" href="#rulegraph"></a>
-</h4>
-<p>The <code>--rulegraph</code> option generates a more detailed graph
-of your workflow, including information about input and output files.
-This can be helpful for understanding the flow of data through your
-pipeline.</p>
-</div>
-</div>
-</div>
-</div>
-<div id="challenge1" class="callout challenge">
-<div class="callout-square">
-<i class="callout-icon" data-feather="zap"></i>
-</div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
-<div class="callout-content">
 <p>Can you try to visualize this simple pipeline? Try with:</p>
 <div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--dag</span> <span class="kw">|</span> <span class="ex">dot</span> <span class="at">-Tpng</span> <span class="at">-o</span> dag.png</span></code></pre>
 </div>
 </div>
 </div>
@@ -998,9 +991,42 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
-<figure><img src="fig/rulegraph.png" alt="Pipeline Visualization" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization</div>
+<figure><img src="fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="rulegraph" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="rulegraph" class="callout-inner">
+<h3 class="callout-title"><code>--rulegraph</code></h3>
+<div class="callout-content">
+<p>The <code>--rulegraph</code> option generates a more detailed graph
+of your workflow, including information about input and output files.
+This can be helpful for understanding the flow of data through your
+pipeline.</p>
+<p>Can you try to visualize this simple pipeline? Try with:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--rulegraph</span> <span class="kw">|</span> <span class="ex">dot</span> <span class="at">-Tpng</span> <span class="at">-o</span> rulegraph.png</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution2" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
+  <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
+</button>
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div class="accordion-body">
+<figure><img src="fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure>
 </div>
 </div>
