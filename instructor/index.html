@@ -411,7 +411,7 @@ the analysis environment clean this way.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>Another simpler solution is to include a bash function in your
 <code>.bashrc</code> or <code>.bash_aliases</code>. For
@@ -447,7 +447,7 @@ anywhere as</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Conda is a popular package and environment management system. To
 install Snakemake using conda, you can use the following command in your
@@ -468,7 +468,7 @@ terminal:</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>The rest of the tutorial will assume that the bash function exists.
 So better to emphasize to do that.</p>
@@ -505,28 +505,43 @@ running:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
   <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
 <div class="accordion-body">
 <p>In my opinion, using a container is the easiest way to interact with
 the REANA cluster from <em>any machine</em>. To do that you can use:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=YOUR_ACCESS_TOKEN <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
 </div>
-<p>You can save this in a bash script for convenience.</p>
+<p>You can save this in a bash script for convenience, or in your
+<code>.bashrc</code> as:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">reana_client ()</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3"</span><span class="kw">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: reana_client &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="va">run_reana_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_reana_cmd</span><span class="st">"</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+</div>
+<p>and, after reloading your <code>.bashrc</code>, then simply:</p>
+<div class="codewrapper sourceCode" id="cb10">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
 </div>
 </div>
 </div>
 </div>
-<!--
-## Gitlab repository
-
-FIXME: place any data you want learners to use in `episodes/data` and then use
-       a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
-       link to it, replacing the example.com link.
-Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
-FIXME -->
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.

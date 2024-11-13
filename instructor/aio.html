@@ -577,7 +577,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-Snakemake"><p>Content from <a href="Snakemake.html">Snakemake</a></p>
 <hr>
-<p>Last updated on 2024-10-31 |
+<p>Last updated on 2024-11-13 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/Snakemake.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -661,16 +661,26 @@ their analyses.</li>
 </ul></section><section><h2 class="section-heading" id="understanding-the-basics">Understanding the Basics<a class="anchor" aria-label="anchor" href="#understanding-the-basics"></a>
 </h2>
 <hr class="half-width">
-<p>Snakemake is a workflow management system that simplifies the process
-of defining complex computational pipelines. It’s particularly useful
-for bioinformatics pipelines, but can be applied to a wide range of
-computational tasks.</p>
+<p>At its core, Snakemake organizes computational workflows into
+<strong>rules</strong>, each representing a specific task within the
+pipeline. These rules are interconnected through their input and output
+files, forming a dependency graph. Using a Python-like syntax, you can
+specify the precise commands required to generate output files from
+input data. Snakemake intelligently analyzes this dependency graph to
+determine the optimal execution order and parallelizes tasks to maximize
+efficiency, making it ideal for large-scale data analysis projects.</p>
 </section><section><h2 class="section-heading" id="the-core-components-of-a-snakemake-workflow">The Core Components of a Snakemake Workflow<a class="anchor" aria-label="anchor" href="#the-core-components-of-a-snakemake-workflow"></a>
 </h2>
 <hr class="half-width">
 <ol style="list-style-type: decimal">
+<li>Snakefile: This is the main file of a Snakemake workflow. It
+contains the definition of all rules and config file references. This is
+where you define your pipeline.</li>
+<li>Config file: This file defines parameters and variables that can be
+used in your rules. <em>(Useful, but not mandatory.)</em>
+</li>
 <li>Rules: These define the steps in your pipeline. Each rule has three
-parts:
+important parts:
 <ul>
 <li>Input files: The files that the rule needs to start.</li>
 <li>Output files: The files that the rule will produce.</li>
@@ -678,10 +688,6 @@ parts:
 files from the input files.</li>
 </ul>
 </li>
-<li>Config file: This file defines parameters and variables that can be
-used in your rules.</li>
-<li>Snakefile: This is the main file of a Snakemake workflow. It
-contains the definition of all rules and config file references.</li>
 </ol></section><section><h2 class="section-heading" id="a-simple-example-a-parallel-workflow">A Simple Example: A Parallel Workflow<a class="anchor" aria-label="anchor" href="#a-simple-example-a-parallel-workflow"></a>
 </h2>
 <hr class="half-width">
@@ -743,20 +749,18 @@ pipeline. We’ll have two steps:</p>
 <span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="at">        expand("results/analysis_{sample}.txt", sample=config["samples"])</span></span>
 <span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a></span>
 <span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="fu">rule simulate_data</span><span class="kw">:</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="at">        configfile = "config.yaml"</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py --sample {wildcards.sample} &gt; {output}"</span></span>
-<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="fu">rule analyze_data</span><span class="kw">:</span></span>
-<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="at">        data = "data/{sample}.txt"</span></span>
-<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="at">        </span><span class="st">"results/analysis_{sample}.txt"</span></span>
-<span id="cb4-20"><a href="#cb4-20" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb4-21"><a href="#cb4-21" tabindex="-1"></a><span class="at">        </span><span class="st">"python analyze_data.py {input} &gt; {output}"</span></span></code></pre>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py --sample {wildcards.sample} &gt; {output}"</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="fu">rule analyze_data</span><span class="kw">:</span></span>
+<span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="at">        data="data/{sample}.txt"</span></span>
+<span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="at">        </span><span class="st">"results/analysis_{sample}.txt"</span></span>
+<span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb4-19"><a href="#cb4-19" tabindex="-1"></a><span class="at">        </span><span class="st">"python analyze_data.py {input} &gt; {output}"</span></span></code></pre>
 </div>
 <div class="section level3">
 <h3 id="explanation-of-the-workflow">Explanation of the Workflow:<a class="anchor" aria-label="anchor" href="#explanation-of-the-workflow"></a>
@@ -766,15 +770,21 @@ pipeline. We’ll have two steps:</p>
 <p>Rules:</p>
 <ul>
 <li>
-<strong>rule all</strong>: This rule defines the <em>final goal</em>
-of the workflow. It specifies that all analysis files should be
-generated.</li>
-<li>
 <strong>rule simulate_data</strong>: This rule simulates data for
-each sample.</li>
+each sample. As it has no input dependencies, it can be executed at the
+beginning of the pipeline.</li>
 <li>
 <strong>rule analyze_data</strong>: This rule analyzes the simulated
-data for each sample.</li>
+data for each sample. It depends on the output of the
+<code>simulate_data</code> rule, ensuring that this rule only proceeds
+after <code>simulate_data</code> is complete.</li>
+<li>
+<strong>rule all</strong>: This <strong>mandatory</strong> rule
+specifies the final goal of the workflow. By defining the desired
+output, Snakemake automatically determines the necessary steps and their
+execution order. This rule also allows for the use of
+<code>wildcards</code>, which enable flexible and scalable
+workflows.</li>
 </ul>
 </li>
 <li><p>Parallelism: Snakemake automatically parallelizes the
@@ -784,14 +794,107 @@ other.</p></li>
 dynamically generate input and output file names based on the sample
 name.</p></li>
 </ul>
-<p>This is a basic example of how to use Snakemake to create a parallel
-workflow. You can customize this workflow to fit your specific needs by
-adding more rules, modifying the shell commands, and adjusting the
-config file. <!--
+</div>
+<div class="section level3">
+<h3 id="running-snakemake">Running snakemake<a class="anchor" aria-label="anchor" href="#running-snakemake"></a>
+</h3>
+<p>Load your environment or container to launch snakemake. Then to run
+the simple example:</p>
+<pre><code>snakemake --snakefile Snakefile --configfile config.yaml --dry-run</code></pre>
+<div class="OUTPUT">
+<p>Config file config.yaml is extended by additional config specified
+via the command line. host: cmslpc305.fnal.gov Building DAG of jobs… Job
+stats: job count ————- ——- all 1 analyze_data 5 simulate_data 5 total
+11</p>
+<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
+data/sample2.txt jobid: 4 reason: Missing output files: data/sample2.txt
+wildcards: sample=sample2 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
+data/sample3.txt jobid: 6 reason: Missing output files: data/sample3.txt
+wildcards: sample=sample3 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
+data/sample4.txt jobid: 8 reason: Missing output files: data/sample4.txt
+wildcards: sample=sample4 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
+data/sample5.txt jobid: 10 reason: Missing output files:
+data/sample5.txt wildcards: sample=sample5 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
+data/sample1.txt jobid: 2 reason: Missing output files: data/sample1.txt
+wildcards: sample=sample1 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample5.txt
+output: results/analysis_sample5.txt jobid: 9 reason: Missing output
+files: results/analysis_sample5.txt; Input files updated by another job:
+data/sample5.txt wildcards: sample=sample5 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample1.txt
+output: results/analysis_sample1.txt jobid: 1 reason: Missing output
+files: results/analysis_sample1.txt; Input files updated by another job:
+data/sample1.txt wildcards: sample=sample1 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample4.txt
+output: results/analysis_sample4.txt jobid: 7 reason: Missing output
+files: results/analysis_sample4.txt; Input files updated by another job:
+data/sample4.txt wildcards: sample=sample4 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample3.txt
+output: results/analysis_sample3.txt jobid: 5 reason: Missing output
+files: results/analysis_sample3.txt; Input files updated by another job:
+data/sample3.txt wildcards: sample=sample3 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample2.txt
+output: results/analysis_sample2.txt jobid: 3 reason: Missing output
+files: results/analysis_sample2.txt; Input files updated by another job:
+data/sample2.txt wildcards: sample=sample2 resources: tmpdir=<tbd></tbd></p>
+<p>[Wed Nov 13 15:19:33 2024] rule all: input:
+results/analysis_sample1.txt, results/analysis_sample2.txt,
+results/analysis_sample3.txt, results/analysis_sample4.txt,
+results/analysis_sample5.txt jobid: 0 reason: Input files updated by
+another job: results/analysis_sample3.txt, results/analysis_sample1.txt,
+results/analysis_sample4.txt, results/analysis_sample2.txt,
+results/analysis_sample5.txt resources: tmpdir=<tbd></tbd></p>
+<p>Job stats: job count ————- ——- all 1 analyze_data 5 simulate_data 5
+total 11</p>
+<p>Reasons: (check individual jobs above for details) input files
+updated by another job: all, analyze_data output files have to be
+generated: analyze_data, simulate_data</p>
+<p>This was a dry-run (flag -n). The order of jobs does not reflect the
+order of execution.</p>
+</div>
+<p>Each part of this command serves a specific purpose: *
+<code>--snakefile</code>: This flag specifies the path to the Snakefile,
+which contains the definitions of the rules and their dependencies. *
+<code>--configfile</code>: This flag indicates the path to the
+configuration file (YAML format) where you can define parameters and
+variables that can be used within the Snakefile. (It is not mandatory.)
+* <code>--dry-run</code>: This flag tells Snakemake to simulate the
+workflow execution without actually running the commands. It’s useful
+for visualizing the execution order of rules and identifying potential
+issues before running the actual workflow.</p>
+</div>
+</section><section><h2 class="section-heading" id="more-about-wildcards">More about wildcards<a class="anchor" aria-label="anchor" href="#more-about-wildcards"></a>
+</h2>
+<hr class="half-width">
+<p>Wildcards are powerful tools in Snakemake that enable you to create
+flexible and scalable workflows. They act as placeholders within rule
+names and file paths, allowing you to define generic rules that can
+handle many different input and output files.</p>
+<p>How do wildcards work? You can define wildcards within curly braces
+{} in your Snakemake file. When Snakemake executes a rule, it replaces
+the wildcard with specific values, allowing the rule to process multiple
+files.</p>
+<p>Example:</p>
+<pre><code>rule analyze_sample:
+    input:
+        "data/{sample}.txt"
+    output:
+        "results/{sample}_results.txt"
+    shell:
+        "python analyze.py {input} {output}"</code></pre>
+<p>In this example, {sample} is a wildcard. Snakemake will automatically
+iterate over different sample names and execute the rule for each one,
+creating specific input and output files.</p>
+<p>By effectively using wildcards, you can significantly simplify your
+Snakemake workflows and make them more adaptable to varying datasets and
+experimental designs. <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  --></p>
-</div>
 </section></section><section id="aio-SUSYexample"><p>Content from <a href="SUSYexample.html">A simple analysis from SUSY</a></p>
 <hr>
 <p>Last updated on 2024-11-11 |
