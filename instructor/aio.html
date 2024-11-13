@@ -424,7 +424,7 @@ fostering trust in scientific discoveries.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <p>Me, myself and my group. <span class="emoji" data-emoji="grin">😁</span></p>
 </div>
@@ -455,7 +455,7 @@ reinforce the objectives.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>Inline instructor notes can help inform instructors of timing
 challenges associated with the lessons. They appear in the “Instructor
@@ -486,7 +486,7 @@ View”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -513,7 +513,7 @@ View”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -815,59 +815,139 @@ variables that can be used within the Snakefile. (It is not mandatory.)
 workflow execution without actually running the commands. It’s useful
 for visualizing the execution order of rules and identifying potential
 issues before running the actual workflow.</p>
-<div class="output">
-<p>Config file config.yaml is extended by additional config specified
-via the command line. Building DAG of jobs… Job stats: job count ————-
-——- all 1 analyze_data 5 simulate_data 5 total 11</p>
-<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
-data/sample2.txt jobid: 4 reason: Missing output files: data/sample2.txt
-wildcards: sample=sample2 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
-data/sample3.txt jobid: 6 reason: Missing output files: data/sample3.txt
-wildcards: sample=sample3 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
-data/sample4.txt jobid: 8 reason: Missing output files: data/sample4.txt
-wildcards: sample=sample4 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
-data/sample5.txt jobid: 10 reason: Missing output files:
-data/sample5.txt wildcards: sample=sample5 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
-data/sample1.txt jobid: 2 reason: Missing output files: data/sample1.txt
-wildcards: sample=sample1 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample5.txt
-output: results/analysis_sample5.txt jobid: 9 reason: Missing output
-files: results/analysis_sample5.txt; Input files updated by another job:
-data/sample5.txt wildcards: sample=sample5 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample1.txt
-output: results/analysis_sample1.txt jobid: 1 reason: Missing output
-files: results/analysis_sample1.txt; Input files updated by another job:
-data/sample1.txt wildcards: sample=sample1 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample4.txt
-output: results/analysis_sample4.txt jobid: 7 reason: Missing output
-files: results/analysis_sample4.txt; Input files updated by another job:
-data/sample4.txt wildcards: sample=sample4 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample3.txt
-output: results/analysis_sample3.txt jobid: 5 reason: Missing output
-files: results/analysis_sample3.txt; Input files updated by another job:
-data/sample3.txt wildcards: sample=sample3 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule analyze_data: input: data/sample2.txt
-output: results/analysis_sample2.txt jobid: 3 reason: Missing output
-files: results/analysis_sample2.txt; Input files updated by another job:
-data/sample2.txt wildcards: sample=sample2 resources: tmpdir=<tbd></tbd></p>
-<p>[Wed Nov 13 15:19:33 2024] rule all: input:
-results/analysis_sample1.txt, results/analysis_sample2.txt,
-results/analysis_sample3.txt, results/analysis_sample4.txt,
-results/analysis_sample5.txt jobid: 0 reason: Input files updated by
-another job: results/analysis_sample3.txt, results/analysis_sample1.txt,
-results/analysis_sample4.txt, results/analysis_sample2.txt,
-results/analysis_sample5.txt resources: tmpdir=<tbd></tbd></p>
-<p>Job stats: job count ————- ——- all 1 analyze_data 5 simulate_data 5
-total 11</p>
-<p>Reasons: (check individual jobs above for details) input files
-updated by another job: all, analyze_data output files have to be
-generated: analyze_data, simulate_data</p>
-<p>This was a dry-run (flag -n). The order of jobs does not reflect the
-order of execution.</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+Config file config.yaml is extended by additional config specified via the command line.
+Building DAG of jobs...
+Job stats:
+job              count
+-------------  -------
+all                  1
+analyze_data         5
+simulate_data        5
+total               11
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample2.txt
+    jobid: 4
+    reason: Missing output files: data/sample2.txt
+    wildcards: sample=sample2
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample3.txt
+    jobid: 6
+    reason: Missing output files: data/sample3.txt
+    wildcards: sample=sample3
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample4.txt
+    jobid: 8
+    reason: Missing output files: data/sample4.txt
+    wildcards: sample=sample4
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample5.txt
+    jobid: 10
+    reason: Missing output files: data/sample5.txt
+    wildcards: sample=sample5
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample1.txt
+    jobid: 2
+    reason: Missing output files: data/sample1.txt
+    wildcards: sample=sample1
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample5.txt
+    output: results/analysis_sample5.txt
+    jobid: 9
+    reason: Missing output files: results/analysis_sample5.txt; Input files updated by another job: data/sample5.txt
+    wildcards: sample=sample5
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample1.txt
+    output: results/analysis_sample1.txt
+    jobid: 1
+    reason: Missing output files: results/analysis_sample1.txt; Input files updated by another job: data/sample1.txt
+    wildcards: sample=sample1
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample4.txt
+    output: results/analysis_sample4.txt
+    jobid: 7
+    reason: Missing output files: results/analysis_sample4.txt; Input files updated by another job: data/sample4.txt
+    wildcards: sample=sample4
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample3.txt
+    output: results/analysis_sample3.txt
+    jobid: 5
+    reason: Missing output files: results/analysis_sample3.txt; Input files updated by another job: data/sample3.txt
+    wildcards: sample=sample3
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample2.txt
+    output: results/analysis_sample2.txt
+    jobid: 3
+    reason: Missing output files: results/analysis_sample2.txt; Input files updated by another job: data/sample2.txt
+    wildcards: sample=sample2
+    resources: tmpdir=&lt;TBD&gt;
+
+
+[Wed Nov 13 15:19:33 2024]
+rule all:
+    input: results/analysis_sample1.txt, results/analysis_sample2.txt, results/analysis_sample3.txt, results/analysis_sample4.txt, results/analysis_sample5.txt
+    jobid: 0
+    reason: Input files updated by another job: results/analysis_sample3.txt, results/analysis_sample1.txt, results/analysis_sample4.txt, results/analysis_sample2.txt, results/analysis_sample5.txt
+    resources: tmpdir=&lt;TBD&gt;
+
+Job stats:
+job              count
+-------------  -------
+all                  1
+analyze_data         5
+simulate_data        5
+total               11
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        all, analyze_data
+    output files have to be generated:
+        analyze_data, simulate_data
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</code></pre>
 </div>
 <div id="callout1" class="callout">
 <div class="callout-square">
@@ -883,10 +963,10 @@ offers two powerful command-line options for visualizing your workflow:
 <code>--dag</code> and <code>--rulegraph</code>. These tools provide a
 visual representation of your pipeline, making it easier to understand
 complex workflows, identify bottlenecks, and troubleshoot issues.</p>
-<div class="section level2">
-<h2 id="dag">
+<div class="section level4">
+<h4 id="dag">
 <code>--dag</code><a class="anchor" aria-label="anchor" href="#dag"></a>
-</h2>
+</h4>
 <p>The <code>--dag</code> option generates a Directed Acyclic Graph
 (DAG) of your workflow. A DAG is a diagram that illustrates the
 dependencies between rules. Each node in the graph represents a rule,
@@ -901,14 +981,43 @@ overall workflow performance.</li>
 improve efficiency.</li>
 </ul>
 </div>
-<div class="section level2">
-<h2 id="rulegraph">
+<div class="section level4">
+<h4 id="rulegraph">
 <code>--rulegraph</code><a class="anchor" aria-label="anchor" href="#rulegraph"></a>
-</h2>
+</h4>
 <p>The <code>--rulegraph</code> option generates a more detailed graph
 of your workflow, including information about input and output files.
 This can be helpful for understanding the flow of data through your
 pipeline.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="challenge1" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>Can you try to visualize this simple pipeline? Try with:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<figure><img src="../fig/rulegraph.png" alt="Pipeline Visualization" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization</div>
+</figure>
 </div>
 </div>
 </div>
