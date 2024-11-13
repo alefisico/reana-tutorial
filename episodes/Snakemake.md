@@ -135,6 +135,7 @@ snakemake --snakefile Snakefile --configfile config.yaml --dry-run
 ```
 
 Each part of this command serves a specific purpose:
+
 * `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
 * `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
 * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
@@ -273,12 +274,13 @@ Reasons:
 This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
 ```
 
-
-
-:::::::::::::::::::::::::::::::::::::::: callout
-
+:::::::::::::::: callout
 
 There are some very useful commands in Snakemake to understand if the pipeline does what we need before running it. One is `--dry-run` as shown in the previous example. Snakemake offers two powerful command-line options for visualizing your workflow: `--dag` and `--rulegraph`. These tools provide a visual representation of your pipeline, making it easier to understand complex workflows, identify bottlenecks, and troubleshoot issues.
+
+:::::::::::::::::::
+
+:::::::::::::::::::::::::::::::::::::::: challenge
 
 #### `--dag`
 
@@ -288,21 +290,30 @@ The `--dag` option generates a Directed Acyclic Graph (DAG) of your workflow. A 
 * Detect potential bottlenecks: Identify rules that might limit the overall workflow performance.
 * Optimize workflow design: Rearrange rules or adjust parallelism to improve efficiency.
 
-#### `--rulegraph`
+Can you try to visualize this simple pipeline? Try with:
+```BASH
+snakemake --snakefile Snakefile --configfile config.yaml --dag | dot -Tpng -o dag.png
+```
 
-The `--rulegraph` option generates a more detailed graph of your workflow, including information about input and output files. This can be helpful for understanding the flow of data through your pipeline.
+:::::::::solution
+![Pipeline Visualization using dag](episodes/fig/dag.png)
+:::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 :::::::: challenge
 
+#### `--rulegraph`
+
+The `--rulegraph` option generates a more detailed graph of your workflow, including information about input and output files. This can be helpful for understanding the flow of data through your pipeline.
+
 Can you try to visualize this simple pipeline? Try with:
 ```BASH
-
+snakemake --snakefile Snakefile --configfile config.yaml --rulegraph | dot -Tpng -o rulegraph.png
 ```
 
 :::::::::solution
-![Pipeline Visualization](episodes/fig/rulegraph.png)
+![Pipeline Visualization using rulegraph](episodes/fig/rulegraph.png)
 :::::::::::::::::
 
 ::::::::::::::::::
