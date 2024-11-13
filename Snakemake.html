@@ -669,6 +669,17 @@ Reasons:
 
 This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.</code></pre>
 </div>
+<p>The <code>--dry-run</code> option is a valuable tool for testing your
+Snakemake workflow without actually executing the commands. It allows
+you to visualize the planned execution order of rules, inspect input and
+output files, and verify the use of wildcards and parameters.</p>
+<p>To gain even deeper insights into the specific commands that will be
+executed, you can employ the <code>--printshellcmds</code> option. This
+option will print the shell commands associated with each rule,
+providing a detailed breakdown of the actions that Snakemake will
+perform.</p>
+<p>By combining these options, you can effectively debug, optimize, and
+fine-tune your Snakemake workflows.</p>
 <div id="callout1" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
@@ -676,13 +687,13 @@ This was a dry-run (flag -n). The order of jobs does not reflect the order of ex
 <div class="callout-inner">
 <h3 class="callout-title">Callout</h3>
 <div class="callout-content">
-<p>There are some very useful commands in Snakemake to understand if the
-pipeline does what we need before running it. One is
-<code>--dry-run</code> as shown in the previous example. Snakemake
-offers two powerful command-line options for visualizing your workflow:
-<code>--dag</code> and <code>--rulegraph</code>. These tools provide a
-visual representation of your pipeline, making it easier to understand
-complex workflows, identify bottlenecks, and troubleshoot issues.</p>
+<p>Before diving into the details of your Snakemake workflow, it’s
+crucial to validate its design and ensure it functions as expected.
+Snakemake offers several tools for this purpose: <code>--dry-run</code>
+simulates the workflow, <code>--dag</code> visualizes the dependencies
+between rules, and <code>--rulegraph</code> provides a more detailed
+view of data flow. By utilizing these tools, you can effectively debug,
+optimize, and gain a comprehensive understanding of your pipeline.</p>
 </div>
 </div>
 </div>
@@ -718,7 +729,7 @@ improve efficiency.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure><img src="fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
 </figure></div>
@@ -750,10 +761,33 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <figure><img src="fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure></div>
+</div>
+</div>
+</div>
+<div class="overview card">
+<h2 class="card-header">Overview</h2>
+<div class="row g-0">
+<div class="col-md-4">
+<div class="card-body">
+<div class="inner">
+<h3 class="card-title">Questions</h3>
+<p>Can you think about when it can be helpful to use
+<code>--dry-run</code>, <code>--dag</code>, or
+<code>--rulegraph</code></p>
+</div>
+</div>
+</div>
+<div class="col-md-8">
+<div class="card-body">
+<div class="inner bordered">
+<h3 class="card-title">Objectives</h3>
+<ul><li>fixme</li>
+</ul></div>
+</div>
 </div>
 </div>
 </div>
