@@ -135,12 +135,12 @@ snakemake --snakefile Snakefile --configfile config.yaml --dry-run
 ```
 
 Each part of this command serves a specific purpose:
-    * `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
-    * `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
-    * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
+* `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
+* `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
+* `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
 
 
-::::::::::::::::::::::::::: OUTPUT 
+::::::::::::::::::::::::::: output
 Config file config.yaml is extended by additional config specified via the command line.
 Building DAG of jobs...
 Job stats:
