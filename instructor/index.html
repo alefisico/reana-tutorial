@@ -380,7 +380,7 @@ role in streamlining data analysis pipelines</li>
 <li>The benefits of cloud-based workflow execution with the <a href="https://reana.cern.ch/" class="external-link">REANA</a> platform</li>
 <li>How to migrate your local Snakemake workflows to the REANA
 environment</li>
-</ul><p>To set up Snakemake and REANA packages, you can follow this
+</ul><p>To set up Snakemake and REANA packages, you can follow these
 instructions.</p>
 <section><h2 class="section-heading" id="snakemake-setup">Snakemake setup<a class="anchor" aria-label="anchor" href="#snakemake-setup"></a></h2>
 <hr class="half-width"><p>To install snakemake <a href="https://snakemake.readthedocs.io/en/stable/getting_started/installation.html" class="external-link">here</a>
@@ -411,7 +411,7 @@ the analysis environment clean this way.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Another simpler solution is to include a bash function in your
 <code>.bashrc</code> or <code>.bash_aliases</code>. For
@@ -447,7 +447,7 @@ anywhere as</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Conda is a popular package and environment management system. To
 install Snakemake using conda, you can use the following command in your
@@ -468,7 +468,7 @@ terminal:</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>The rest of the tutorial will assume that the bash function exists.
 So better to emphasize to do that.</p>
@@ -477,17 +477,61 @@ So better to emphasize to do that.</p>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="reana-setup">REANA setup<a class="anchor" aria-label="anchor" href="#reana-setup"></a></h2>
-<hr class="half-width"><!--
+<hr class="half-width"><p>REANA is a platform where you can submit your jobs. Think about it
+more of an Analysis Facility. To create an account you can follow the <a href="https://docs.reana.io/getting-started/first-example/" class="external-link">oficial
+documentation</a> or just go to <a href="https://reana.cern.ch" class="external-link">https://reana.cern.ch</a> to create your
+<strong>access token</strong>. This token is important since you need to
+use it everytime that you want to submit jobs to REANA. This step can
+take some minutes, depending on how busy the REANA team are approving
+their request.</p>
+<p>You can submit jobs to REANA from <em>any machine</em>. If you want
+to use lxplus, you just need to activate the following environment:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">source</span> /afs/cern.ch/user/r/reana/public/reana/bin/activate</span></code></pre>
+</div>
+<p>After this, you can make a test that your REANA account works by
+running:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_SERVER_URL</span><span class="op">=</span>https://reana.cern.ch</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_ACCESS_TOKEN</span><span class="op">=</span>xxxxxxxxxxxxxxxxxxx</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
+</div>
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
+</button>
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div class="accordion-body">
+<p>In my opinion, using a container is the easiest way to interact with
+the REANA cluster from <em>any machine</em>. To do that you can use:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=YOUR_ACCESS_TOKEN <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
+</div>
+<p>You can save this in a bash script for convenience.</p>
+</div>
+</div>
+</div>
+</div>
+<!--
 ## Gitlab repository
 
 FIXME: place any data you want learners to use in `episodes/data` and then use
        a relative link ( [data zip file](data/lesson-data.zip) ) to provide a
        link to it, replacing the example.com link.
 Download the [data zip file](https://example.com/FIXME) and unzip it to your Desktop
-FIXME --><!--
+FIXME -->
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
+ -->
+</section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="../instructor/introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
       <!-- content for large screens -->
@@ -535,9 +579,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://alefisico.github.io/reana-tutorial/instructor/index.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/instructor/index.html",
-  "dateCreated": "2024-11-11",
-  "dateModified": "2024-11-12",
-  "datePublished": "2024-11-12"
+  "dateCreated": "2024-11-13",
+  "dateModified": "2024-11-13",
+  "datePublished": "2024-11-13"
 }
 
   </script><script>

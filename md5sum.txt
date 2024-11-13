@@ -10,5 +10,5 @@
 "episodes/REANA.md" "df492b7894eb3e2c5100a723c7cb0f72" "site/built/REANA.md" "2024-11-11"
 "episodes/JECexample.md" "5d2a7ca0400a6bc56d32b3360c5fe25e" "site/built/JECexample.md" "2024-11-11"
 "instructors/instructor-notes.md" "cae72b6712578d74a49fea7513099f8c" "site/built/instructor-notes.md" "2024-10-02"
-"learners/setup.md" "2a75baa378fa4931eb7bbfe9224330ac" "site/built/setup.md" "2024-11-11"
+"learners/setup.md" "e033fbef5f25a25c3ed1b50998f7f78d" "site/built/setup.md" "2024-11-13"
 "profiles/learner-profiles.md" "60b93493cf1da06dfd63255d73854461" "site/built/learner-profiles.md" "2024-10-02"
