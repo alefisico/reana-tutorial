@@ -38,16 +38,17 @@ Snakemake is a workflow management system that simplifies the creation and execu
 
 ## Understanding the Basics
 
-Snakemake is a workflow management system that simplifies the process of defining complex computational pipelines. It's particularly useful for bioinformatics pipelines, but can be applied to a wide range of computational tasks.
+At its core, Snakemake organizes computational workflows into **rules**, each representing a specific task within the pipeline. These rules are interconnected through their input and output files, forming a dependency graph. Using a Python-like syntax, you can specify the precise commands required to generate output files from input data. Snakemake intelligently analyzes this dependency graph to determine the optimal execution order and parallelizes tasks to maximize efficiency, making it ideal for large-scale data analysis projects.
 
 ## The Core Components of a Snakemake Workflow
 
-1. Rules: These define the steps in your pipeline. Each rule has three parts:
+1. Snakefile: This is the main file of a Snakemake workflow. It contains the definition of all rules and config file references. This is where you define your pipeline.
+2. Config file: This file defines parameters and variables that can be used in your rules. _(Useful, but not mandatory.)_
+3. Rules: These define the steps in your pipeline. Each rule has three important parts:
     * Input files: The files that the rule needs to start.
     * Output files: The files that the rule will produce.
     * Shell command: The command to be executed to produce the output files from the input files.
-2. Config file: This file defines parameters and variables that can be used in your rules.
-3. Snakefile: This is the main file of a Snakemake workflow. It contains the definition of all rules and config file references.
+
 
 ## A Simple Example: A Parallel Workflow
 
@@ -101,8 +102,6 @@ rule all:
         expand("results/analysis_{sample}.txt", sample=config["samples"])
 
 rule simulate_data:
-    input:
-        configfile = "config.yaml"
     output:
         "data/{sample}.txt"
     shell:
@@ -110,7 +109,7 @@ rule simulate_data:
 
 rule analyze_data:
     input:
-        data = "data/{sample}.txt"
+        data="data/{sample}.txt"
     output:
         "results/analysis_{sample}.txt"
     shell:
@@ -120,12 +119,180 @@ rule analyze_data:
 ### Explanation of the Workflow:
 
 * Rules:
-  * **rule all**: This rule defines the *final goal* of the workflow. It specifies that all analysis files should be generated.
-  * **rule simulate_data**: This rule simulates data for each sample.
-  * **rule analyze_data**: This rule analyzes the simulated data for each sample.
+  * **rule simulate_data**: This rule simulates data for each sample. As it has no input dependencies, it can be executed at the beginning of the pipeline.
+  * **rule analyze_data**: This rule analyzes the simulated data for each sample. It depends on the output of the `simulate_data` rule, ensuring that this rule only proceeds after `simulate_data` is complete.
+  * **rule all**: This **mandatory** rule specifies the final goal of the workflow. By defining the desired output, Snakemake automatically determines the necessary steps and their execution order. This rule also allows for the use of `wildcards`, which enable flexible and scalable workflows.
 
 * Parallelism: Snakemake automatically parallelizes the analyze_data rule for each sample, as they are independent of each other.
 
 * Wildcards: The `{wildcards.sample}` syntax is used to dynamically generate input and output file names based on the sample name.
 
-This is a basic example of how to use Snakemake to create a parallel workflow. You can customize this workflow to fit your specific needs by adding more rules, modifying the shell commands, and adjusting the config file.
+### Running snakemake
+
+Load your environment or container to launch snakemake. Then to run the simple example:
+```
+snakemake --snakefile Snakefile --configfile config.yaml --dry-run
+```
+
+:::::::::::::::::::::::::::OUTPUT 
+Config file config.yaml is extended by additional config specified via the command line.
+host: cmslpc305.fnal.gov
+Building DAG of jobs...
+Job stats:
+job              count
+-------------  -------
+all                  1
+analyze_data         5
+simulate_data        5
+total               11
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample2.txt
+    jobid: 4
+    reason: Missing output files: data/sample2.txt
+    wildcards: sample=sample2
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample3.txt
+    jobid: 6
+    reason: Missing output files: data/sample3.txt
+    wildcards: sample=sample3
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample4.txt
+    jobid: 8
+    reason: Missing output files: data/sample4.txt
+    wildcards: sample=sample4
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample5.txt
+    jobid: 10
+    reason: Missing output files: data/sample5.txt
+    wildcards: sample=sample5
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule simulate_data:
+    output: data/sample1.txt
+    jobid: 2
+    reason: Missing output files: data/sample1.txt
+    wildcards: sample=sample1
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample5.txt
+    output: results/analysis_sample5.txt
+    jobid: 9
+    reason: Missing output files: results/analysis_sample5.txt; Input files updated by another job: data/sample5.txt
+    wildcards: sample=sample5
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample1.txt
+    output: results/analysis_sample1.txt
+    jobid: 1
+    reason: Missing output files: results/analysis_sample1.txt; Input files updated by another job: data/sample1.txt
+    wildcards: sample=sample1
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample4.txt
+    output: results/analysis_sample4.txt
+    jobid: 7
+    reason: Missing output files: results/analysis_sample4.txt; Input files updated by another job: data/sample4.txt
+    wildcards: sample=sample4
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample3.txt
+    output: results/analysis_sample3.txt
+    jobid: 5
+    reason: Missing output files: results/analysis_sample3.txt; Input files updated by another job: data/sample3.txt
+    wildcards: sample=sample3
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule analyze_data:
+    input: data/sample2.txt
+    output: results/analysis_sample2.txt
+    jobid: 3
+    reason: Missing output files: results/analysis_sample2.txt; Input files updated by another job: data/sample2.txt
+    wildcards: sample=sample2
+    resources: tmpdir=<TBD>
+
+
+[Wed Nov 13 15:19:33 2024]
+rule all:
+    input: results/analysis_sample1.txt, results/analysis_sample2.txt, results/analysis_sample3.txt, results/analysis_sample4.txt, results/analysis_sample5.txt
+    jobid: 0
+    reason: Input files updated by another job: results/analysis_sample3.txt, results/analysis_sample1.txt, results/analysis_sample4.txt, results/analysis_sample2.txt, results/analysis_sample5.txt
+    resources: tmpdir=<TBD>
+
+Job stats:
+job              count
+-------------  -------
+all                  1
+analyze_data         5
+simulate_data        5
+total               11
+
+Reasons:
+    (check individual jobs above for details)
+    input files updated by another job:
+        all, analyze_data
+    output files have to be generated:
+        analyze_data, simulate_data
+
+This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+Each part of this command serves a specific purpose:
+ * `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
+ * `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
+ * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
+
+
+
+
+## More about wildcards
+
+Wildcards are powerful tools in Snakemake that enable you to create flexible and scalable workflows. They act as placeholders within rule names and file paths, allowing you to define generic rules that can handle many different input and output files.
+
+How do wildcards work?
+You can define wildcards within curly braces {} in your Snakemake file. When Snakemake executes a rule, it replaces the wildcard with specific values, allowing the rule to process multiple files.
+
+Example:
+```
+rule analyze_sample:
+    input:
+        "data/{sample}.txt"
+    output:
+        "results/{sample}_results.txt"
+    shell:
+        "python analyze.py {input} {output}"
+```
+
+In this example, {sample} is a wildcard. Snakemake will automatically iterate over different sample names and execute the rule for each one, creating specific input and output files.
+
+By effectively using wildcards, you can significantly simplify your Snakemake workflows and make them more adaptable to varying datasets and experimental designs.
