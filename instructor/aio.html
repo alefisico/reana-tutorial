@@ -800,12 +800,25 @@ name.</p></li>
 </h3>
 <p>Load your environment or container to launch snakemake. Then to run
 the simple example:</p>
-<pre><code>snakemake --snakefile Snakefile --configfile config.yaml --dry-run</code></pre>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--dry-run</span></span></code></pre>
+</div>
+<p>Each part of this command serves a specific purpose: *
+<code>--snakefile</code>: This flag specifies the path to the Snakefile,
+which contains the definitions of the rules and their dependencies. *
+<code>--configfile</code>: This flag indicates the path to the
+configuration file (YAML format) where you can define parameters and
+variables that can be used within the Snakefile. (It is not mandatory.)
+* <code>--dry-run</code>: This flag tells Snakemake to simulate the
+workflow execution without actually running the commands. It’s useful
+for visualizing the execution order of rules and identifying potential
+issues before running the actual workflow.</p>
 <div class="OUTPUT">
 <p>Config file config.yaml is extended by additional config specified
-via the command line. host: cmslpc305.fnal.gov Building DAG of jobs… Job
-stats: job count ————- ——- all 1 analyze_data 5 simulate_data 5 total
-11</p>
+via the command line. Building DAG of jobs… Job stats: job count ————-
+——- all 1 analyze_data 5 simulate_data 5 total 11</p>
 <p>[Wed Nov 13 15:19:33 2024] rule simulate_data: output:
 data/sample2.txt jobid: 4 reason: Missing output files: data/sample2.txt
 wildcards: sample=sample2 resources: tmpdir=<tbd></tbd></p>
@@ -856,16 +869,9 @@ generated: analyze_data, simulate_data</p>
 <p>This was a dry-run (flag -n). The order of jobs does not reflect the
 order of execution.</p>
 </div>
-<p>Each part of this command serves a specific purpose: *
-<code>--snakefile</code>: This flag specifies the path to the Snakefile,
-which contains the definitions of the rules and their dependencies. *
-<code>--configfile</code>: This flag indicates the path to the
-configuration file (YAML format) where you can define parameters and
-variables that can be used within the Snakefile. (It is not mandatory.)
-* <code>--dry-run</code>: This flag tells Snakemake to simulate the
-workflow execution without actually running the commands. It’s useful
-for visualizing the execution order of rules and identifying potential
-issues before running the actual workflow.</p>
+<div class="CALLOUT">
+<p>fjdskflsdjklfdas</p>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="more-about-wildcards">More about wildcards<a class="anchor" aria-label="anchor" href="#more-about-wildcards"></a>
 </h2>
