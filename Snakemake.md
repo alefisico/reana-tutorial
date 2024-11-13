@@ -130,13 +130,18 @@ rule analyze_data:
 ### Running snakemake
 
 Load your environment or container to launch snakemake. Then to run the simple example:
-```
+```BASH
 snakemake --snakefile Snakefile --configfile config.yaml --dry-run
 ```
 
-:::::::::::::::::::::::::::OUTPUT 
+Each part of this command serves a specific purpose:
+    * `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
+    * `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
+    * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
+
+
+::::::::::::::::::::::::::: OUTPUT 
 Config file config.yaml is extended by additional config specified via the command line.
-host: cmslpc305.fnal.gov
 Building DAG of jobs...
 Job stats:
 job              count
@@ -265,14 +270,15 @@ Reasons:
         analyze_data, simulate_data
 
 This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
+::::::::::::::::::::::::::::::::::
+
+
+
+::::::::::::::::::::::::::CALLOUT
+
+fjdskflsdjklfdas
+
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-Each part of this command serves a specific purpose:
- * `--snakefile`: This flag specifies the path to the Snakefile, which contains the definitions of the rules and their dependencies.
- * `--configfile`: This flag indicates the path to the configuration file (YAML format) where you can define parameters and variables that can be used within the Snakefile. (It is not mandatory.)
- * `--dry-run`: This flag tells Snakemake to simulate the workflow execution without actually running the commands. It's useful for visualizing the execution order of rules and identifying potential issues before running the actual workflow.
-
-
 
 
 ## More about wildcards
