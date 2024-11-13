@@ -424,7 +424,7 @@ fostering trust in scientific discoveries.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Me, myself and my group. <span class="emoji" data-emoji="grin">😁</span></p>
 </div>
@@ -455,7 +455,7 @@ reinforce the objectives.</li>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>Inline instructor notes can help inform instructors of timing
 challenges associated with the lessons. They appear in the “Instructor
@@ -486,7 +486,7 @@ View”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Output </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <div class="codewrapper">
 <h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
@@ -513,7 +513,7 @@ View”</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>You can add a line with at least three colons and a
 <code>solution</code> tag.</p>
@@ -869,8 +869,49 @@ generated: analyze_data, simulate_data</p>
 <p>This was a dry-run (flag -n). The order of jobs does not reflect the
 order of execution.</p>
 </div>
-<div class="CALLOUT">
-<p>fjdskflsdjklfdas</p>
+<div id="callout1" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Callout</h3>
+<div class="callout-content">
+<p>There are some very useful commands in Snakemake to understand if the
+pipeline does what we need before running it. One is
+<code>--dry-run</code> as shown in the previous example. Snakemake
+offers two powerful command-line options for visualizing your workflow:
+<code>--dag</code> and <code>--rulegraph</code>. These tools provide a
+visual representation of your pipeline, making it easier to understand
+complex workflows, identify bottlenecks, and troubleshoot issues.</p>
+<div class="section level2">
+<h2 id="dag">
+<code>--dag</code><a class="anchor" aria-label="anchor" href="#dag"></a>
+</h2>
+<p>The <code>--dag</code> option generates a Directed Acyclic Graph
+(DAG) of your workflow. A DAG is a diagram that illustrates the
+dependencies between rules. Each node in the graph represents a rule,
+and the edges show the dependencies between rules. By visualizing the
+DAG, you can:</p>
+<ul>
+<li>Identify critical paths: Pinpoint the longest sequence of dependent
+rules that determine the overall workflow duration.</li>
+<li>Detect potential bottlenecks: Identify rules that might limit the
+overall workflow performance.</li>
+<li>Optimize workflow design: Rearrange rules or adjust parallelism to
+improve efficiency.</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="rulegraph">
+<code>--rulegraph</code><a class="anchor" aria-label="anchor" href="#rulegraph"></a>
+</h2>
+<p>The <code>--rulegraph</code> option generates a more detailed graph
+of your workflow, including information about input and output files.
+This can be helpful for understanding the flow of data through your
+pipeline.</p>
+</div>
+</div>
+</div>
 </div>
 </div>
 </section><section><h2 class="section-heading" id="more-about-wildcards">More about wildcards<a class="anchor" aria-label="anchor" href="#more-about-wildcards"></a>
