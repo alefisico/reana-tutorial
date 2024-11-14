@@ -1,7 +1,7 @@
 ---
 title: "Snakemake"
-teaching: 10
-exercises: 2
+teaching: 30
+exercises: 10
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
@@ -400,6 +400,10 @@ In this example, {sample} is a wildcard. Snakemake will automatically iterate ov
 One can also define wildcards in the `rule all` rule. 
 
 By effectively using wildcards, you can significantly simplify your Snakemake workflows and make them more adaptable to varying datasets and experimental designs.
+
+## What's next?
+
+This is just an overview of the capabilities of Snakemake. As a widely used program, you can find numerous resources online. For more information, you can also visit their [official website](https://snakemake.readthedocs.io).
 
 :::::::::::::::::::::: keypoints
 
