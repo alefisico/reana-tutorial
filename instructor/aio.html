@@ -577,7 +577,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-Snakemake"><p>Content from <a href="Snakemake.html">Snakemake</a></p>
 <hr>
-<p>Last updated on 2024-11-13 |
+<p>Last updated on 2024-11-14 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/Snakemake.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 12 minutes</p>
@@ -752,11 +752,11 @@ pipeline. We’ll have two steps:</p>
 <span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
 <span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py --sample {wildcards.sample} &gt; {output}"</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a><span class="at">        </span><span class="st">"python simulate_data.py {wildcards.sample} &gt; {output}"</span></span>
 <span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a></span>
 <span id="cb4-13"><a href="#cb4-13" tabindex="-1"></a><span class="fu">rule analyze_data</span><span class="kw">:</span></span>
 <span id="cb4-14"><a href="#cb4-14" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="at">        data="data/{sample}.txt"</span></span>
+<span id="cb4-15"><a href="#cb4-15" tabindex="-1"></a><span class="at">        </span><span class="st">"data/{sample}.txt"</span></span>
 <span id="cb4-16"><a href="#cb4-16" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
 <span id="cb4-17"><a href="#cb4-17" tabindex="-1"></a><span class="at">        </span><span class="st">"results/analysis_{sample}.txt"</span></span>
 <span id="cb4-18"><a href="#cb4-18" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
@@ -967,12 +967,12 @@ providing a detailed breakdown of the actions that Snakemake will
 perform.</p>
 <p>By combining these options, you can effectively debug, optimize, and
 fine-tune your Snakemake workflows.</p>
-<div id="callout1" class="callout">
+<div id="how-to-validate-your-workflow" class="callout">
 <div class="callout-square">
 <i class="callout-icon" data-feather="bell"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Callout</h3>
+<div id="how-to-validate-your-workflow" class="callout-inner">
+<h3 class="callout-title">How to validate your workflow</h3>
 <div class="callout-content">
 <p>Before diving into the details of your Snakemake workflow, it’s
 crucial to validate its design and ensure it functions as expected.
@@ -1059,31 +1059,40 @@ pipeline.</p>
 </div>
 </div>
 </div>
-<div class="overview card">
-<h2 class="card-header">Overview</h2>
-<div class="row g-0">
-<div class="col-md-4">
-<div class="card-body">
-<div class="inner">
-<h3 class="card-title">Questions</h3>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
 <p>Can you think about when it can be helpful to use
 <code>--dry-run</code>, <code>--dag</code>, or
 <code>--rulegraph</code></p>
 </div>
 </div>
 </div>
-<div class="col-md-8">
-<div class="card-body">
-<div class="inner bordered">
-<h3 class="card-title">Objectives</h3>
-<ul>
-<li>fixme</li>
-</ul>
 </div>
+<p>Finally, you can run the workflow by removing the
+<code>--dry-run</code> flag:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--dry-run</span></span></code></pre>
 </div>
+<p>if everything ran succesfully, at the end of the output you will have
+something like:</p>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>
+[Thu Nov 14 09:50:51 2024]
+Finished job 0.
+11 of 11 steps (100%) done
+Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 </div>
-</div>
-</div>
+<p>You can also notice that you have two folders: <code>data</code> and
+<code>results</code> which are the outputs of this simple workflow.</p>
 </div>
 </section><section><h2 class="section-heading" id="more-about-wildcards">More about wildcards<a class="anchor" aria-label="anchor" href="#more-about-wildcards"></a>
 </h2>
@@ -1107,6 +1116,7 @@ files.</p>
 <p>In this example, {sample} is a wildcard. Snakemake will automatically
 iterate over different sample names and execute the rule for each one,
 creating specific input and output files.</p>
+<p>One can also define wildcards in the <code>rule all</code> rule.</p>
 <p>By effectively using wildcards, you can significantly simplify your
 Snakemake workflows and make them more adaptable to varying datasets and
 experimental designs. <!--
@@ -1304,9 +1314,9 @@ any links that you are not going to use.
   "creativeWorkStatus": "active",
   "url": "https://alefisico.github.io/reana-tutorial/instructor/aio.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/instructor/aio.html",
-  "dateCreated": "2024-11-13",
-  "dateModified": "2024-11-13",
-  "datePublished": "2024-11-13"
+  "dateCreated": "2024-11-14",
+  "dateModified": "2024-11-14",
+  "datePublished": "2024-11-14"
 }
 
   </script><script>
