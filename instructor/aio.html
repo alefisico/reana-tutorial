@@ -1023,7 +1023,7 @@ improve efficiency.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure><img src="../fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
 </figure>
@@ -1056,7 +1056,7 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <figure><img src="../fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure>
@@ -1113,7 +1113,7 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>A key feature of Snakemake is its ability to efficiently manage
 workflow execution based on file timestamps. When you run a Snakemake
@@ -1414,7 +1414,7 @@ example with</p>
   Did the workflow finish succesfully now?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>If the previous Snakemake command didn’t execute as expected, it’s
 likely due to the requirement for access to CERN tools like CVMFS, EOS,
@@ -1507,7 +1507,7 @@ analysis process and simplifying resource management.</p>
 <hr class="half-width">
 <p>REANA offers flexibility in workflow management by supporting
 multiple systems like <a href="https://www.commonwl.org/" class="external-link">CWL</a>, <a href="https://docs.reana.io/running-workflows/supported-systems/serial/" class="external-link">Serial</a>,
-(Yadage)[<a href="https://yadage.readthedocs.io/en/latest/" class="external-link uri">https://yadage.readthedocs.io/en/latest/</a>], and
+<a href="https://yadage.readthedocs.io/en/latest/" class="external-link">Yadage</a>, and
 Snakemake. While there’s a growing adoption of Snakemake within the LHC
 community due to its large external user base and strong support, REANA
 remains agnostic to the chosen workflow system. However, due to its
@@ -1520,7 +1520,80 @@ throughout this tutorial.</p>
 needs to create a REANA file to include all the parameters that the
 snakemake workflow will need.</p>
 <p>Let’s retake the previous SUSY example, and try to run it using
-REANA.</p>
+REANA. First we need to write a <code>reana.yaml</code> file:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">version</span><span class="kw">:</span><span class="at"> </span><span class="fl">0.9.3</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">inputs</span><span class="kw">:</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="at">  </span><span class="fu">directories</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> SUSY/</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="at">  </span><span class="fu">parameters</span><span class="kw">:</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span><span class="at"> inputs.yaml</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="at">  </span><span class="fu">files</span><span class="kw">:</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> Snakefile</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="fu">workflow</span><span class="kw">:</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="at">  </span><span class="fu">type</span><span class="kw">:</span><span class="at"> snakemake</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="at">  </span><span class="fu">file</span><span class="kw">:</span><span class="at"> Snakefile</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="at">  </span><span class="fu">resources</span><span class="kw">:</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="at">    </span><span class="fu">cvmfs</span><span class="kw">:</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="at">      </span><span class="kw">-</span><span class="at"> cms.cern.ch</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="fu">workspace</span><span class="kw">:</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="at">  </span><span class="fu">retention_days</span><span class="kw">:</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="at">    </span><span class="fu">output/*</span><span class="kw">:</span><span class="at"> </span><span class="dv">30</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="fu">outputs</span><span class="kw">:</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="at">  </span><span class="fu">directories</span><span class="kw">:</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="at">    </span><span class="kw">-</span><span class="at"> output/</span></span></code></pre>
+</div>
+<p>The <code>reana.yaml</code> file acts as a blueprint for your REANA
+workflow, defining essential information for execution.</p>
+<ul>
+<li>
+<code>version</code> (optional): Since REANA is under development,
+specifying the version used (e.g., <code>0.9.3</code> at the time of
+writing) can be helpful for troubleshooting.</li>
+<li>
+<code>inputs</code>: This section defines the files, folders, and
+parameters your workflow requires. Remember that we need to upload all
+necessary files before the workflow runs.
+<ul>
+<li>
+<code>directories</code> and <code>files</code>: Specify the files
+and folders to be uploaded to the REANA platform.</li>
+<li>
+<code>parameters</code>: In this example, workflow parameters are
+defined in a separate <code>inputs.yaml</code> file, so we reference the
+input file here. You can also define parameters directly within
+reana.yaml.</li>
+</ul>
+</li>
+<li>
+<code>workflow</code>: This crucial section tells REANA about the
+type of workflow you’re using.
+<ul>
+<li>
+<code>type</code>: we are using <code>snakemake</code>, but REANA
+supports CWL, Serial or Yadage. (<a href="https://docs.reana.io/running-workflows/supported-systems/" class="external-link">More
+here</a>).</li>
+<li>
+<code>file</code>: This defines the location of your workflow
+script.</li>
+<li>
+<code>resources</code>: Define any <strong>global</strong> resources
+required for your workflow execution (detailed information available at
+<a href="https://docs.reana.io/advanced-usage/" class="external-link">here</a>). Remember that
+you can also define dedicated rule resources in the snakefile.</li>
+</ul>
+</li>
+<li>
+<code>workspace</code>: some useful options can be included here,
+like how many days a user wants a specific folder to be retain
+(<code>retention_days</code>)</li>
+<li>
+<code>outputs</code>: this is mandatory, and tells REANA which files
+or folders can be directly download once the workflow runs. It can be
+files or directories.</li>
+</ul>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
