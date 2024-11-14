@@ -380,7 +380,7 @@ remains agnostic to the chosen workflow system. However, due to its
 popularity and powerful features, we will primarily focus on Snakemake
 throughout this tutorial.</p>
 <div class="section level3">
-<h3 id="a-reana-workflow">A REANA workflow<a class="anchor" aria-label="anchor" href="#a-reana-workflow"></a></h3>
+<h3 id="defining-a-workflow-for-reana">Defining a workflow for REANA<a class="anchor" aria-label="anchor" href="#defining-a-workflow-for-reana"></a></h3>
 <p>While a Snakemake worflow is defined in a snakefile, in REANA one
 needs to create a REANA file to include all the parameters that the
 snakemake workflow will need.</p>
@@ -446,14 +446,110 @@ required for your workflow execution (detailed information available at
 you can also define dedicated rule resources in the snakefile.</li>
 </ul></li>
 <li>
-<code>workspace</code>: some useful options can be included here,
-like how many days a user wants a specific folder to be retain
-(<code>retention_days</code>)</li>
+<code>workspace</code> (optional): Here, you can set options like
+<code>retention_days</code> to specify how long specific folders should
+be retained after workflow completion.</li>
 <li>
-<code>outputs</code>: this is mandatory, and tells REANA which files
-or folders can be directly download once the workflow runs. It can be
-files or directories.</li>
-</ul><div id="keypoints1" class="callout keypoints">
+<code>outputs</code>: This section informs REANA which files or
+folders should be made available for download after successful workflow
+execution. These can be individual files or entire directories.</li>
+</ul></div>
+<div class="section level3">
+<h3 id="running-a-workflow-in-reana">Running a workflow in REANA<a class="anchor" aria-label="anchor" href="#running-a-workflow-in-reana"></a></h3>
+<p>Let’s get familiar with the steps necessary to run our workflow in
+REANA. First, activate the REANA environment, and then remember to set
+these variables:</p>
+<pre><code>export REANA_SERVER_URL=https://reana.cern.ch
+export REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxx</code></pre>
+<p>This needs to be done every time you start a session. Then, the REANA
+client contains a similar validation than Snakemake’s dry-run, we can
+run:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">reana-client</span> validate <span class="at">-f</span> reana.yaml</span></code></pre>
+</div>
+<div class="codewrapper">
+<h3 class="code-label">OUTPUT<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="output" tabindex="0"><code>Building DAG of jobs...
+[WARNING] Building DAG of jobs...
+Job stats:
+job            count
+-----------  -------
+all                1
+datacarding        1
+skimming           1
+total              3
+
+[WARNING] Job stats:
+job            count
+-----------  -------
+all                1
+datacarding        1
+skimming           1
+total              3
+
+==&gt; Verifying REANA specification file... /srv/reana.yaml
+  -&gt; SUCCESS: Valid REANA specification file.
+==&gt; Verifying REANA specification parameters...
+  -&gt; SUCCESS: REANA specification parameters appear valid.
+==&gt; Verifying workflow parameters and commands...
+  -&gt; SUCCESS: Workflow parameters and commands appear valid.
+==&gt; Verifying dangerous workflow operations...
+  -&gt; WARNING: Operation "cd /" found in step "skimming" might be dangerous.
+  -&gt; WARNING: Operation "cd /" found in step "datacarding" might be dangerous.</code></pre>
+</div>
+<p>This step verifies first if the snakefile contains a workflow that
+can be run, and second it verifies that the inputs in the
+<code>reana.yaml</code> file are correct. If everything looks ok, we can
+create a workflow called <code>test_SUSY</code> within the platform:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">reana_client</span> create <span class="at">-w</span> test_SUSY <span class="at">-f</span> reana.yaml</span></code></pre>
+</div>
+<p>Remember that this step will only create the workflow within REANA,
+you can verify it by looking at <a href="https://reana.cern.ch/" class="external-link">https://reana.cern.ch/</a> or by
+running:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">reana-client</span> status <span class="at">-w</span> test_SUSY</span></code></pre>
+</div>
+<p>The next step is to upload the files the workflow needs:</p>
+<div class="codewrapper sourceCode" id="cb7">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="ex">reana-client</span> upload <span class="at">-w</span> test_SUSY </span></code></pre>
+</div>
+<p>and finally we can make it run:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">reana-client</span> start <span class="at">-w</span> test_SUSY </span></code></pre>
+</div>
+<p>Again, you can check the status of your jobs via the REANA website or
+with <code>reana-client status -w test_SUSY</code>.</p>
+<div id="there-must-be-a-better-way" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="there-must-be-a-better-way" class="callout-inner">
+<h3 class="callout-title">There must be a better way!</h3>
+<div class="callout-content">
+<p>Absolutely there is! While there can be specific circunstances where
+one can split these steps, there is a REANA command to create, upload
+and start your workflow. You can try:</p>
+<div class="codewrapper sourceCode" id="cb9">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">reana-client</span> run <span class="at">-w</span> test_SUSY <span class="at">-f</span> reana.yaml</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
