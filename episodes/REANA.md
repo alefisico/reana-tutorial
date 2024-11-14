@@ -154,6 +154,42 @@ reana-client run -w test_SUSY -f reana.yaml
 
 ::::::::::::::::::::::::::::::::
 
+:::::: spoiler
+
+### Did the workflow finish succesfully now?
+
+Unfortunately, not yet
+
+But before throwing your laptop out the window, don't worry, this failure actually highlights a key feature of REANA. Let's explore what happened and how to proceed.
+
+::::::::::::::::::::
+
+
+## More advance REANA commands
+
+In case your workflow did not run succesfully, it is useful to look a the log files of your jobs. In the `reana-client` you can do:
+
+```BASH
+reana-client logs -w test_SUSY
+```
+
+:::::::::::::::::: callout
+
+##### The Easiest Way: The REANA Web Interface
+
+The most user-friendly way to monitor your workflow is through the REANA web interface. Your job's interface should look similar to this:
+
+![](episodes/fig/reana_website_job.png)
+
+This interface provides valuable insights into your workflow's status and execution:
+
+ - Engine Logs: These logs offer a high-level overview of the workflow's progress within the REANA Kubernetes cluster. They can be useful for experienced users who want to delve deeper into the technical details.
+ - Job Logs: Here, you can view the detailed logs for each individual step or rule (in Snakemake terminology) of your workflow. These logs are essential for troubleshooting specific issues.
+ - Workspace: This section allows you to navigate through the files uploaded to your workflow. It's a handy tool for debugging and downloading specific files as needed.
+- Specification: This provides a high-level overview of your workflow's configuration in a Python dictionary format. This can be useful for understanding the workflow's structure and parameters.
+
+:::::::::::::::::::::::::::::::::::::::::::::::::
+
 :::::: keypoints
  - keypoint 1
  - keypoint 2
