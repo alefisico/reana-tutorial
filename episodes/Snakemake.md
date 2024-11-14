@@ -280,13 +280,11 @@ To gain even deeper insights into the specific commands that will be executed, y
 
 By combining these options, you can effectively debug, optimize, and fine-tune your Snakemake workflows.
 
-:::::::::::::::: callout
 
 ### How to validate your workflow
 
 Before diving into the details of your Snakemake workflow, it's crucial to validate its design and ensure it functions as expected. Snakemake offers several tools for this purpose: `--dry-run` simulates the workflow, `--dag` visualizes the dependencies between rules, and `--rulegraph` provides a more detailed view of data flow. By utilizing these tools, you can effectively debug, optimize, and gain a comprehensive understanding of your pipeline.
 
-:::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::::::: challenge
 
@@ -326,7 +324,9 @@ snakemake --snakefile Snakefile --configfile config.yaml --rulegraph | dot -Tpng
 ::::::::::::::::::
 
 
-:::::::::::::::::::: spoiler
+:::::::::::::::::::: callout
+
+### Question:
 
 Can you think about when it can be helpful to use `--dry-run`, `--dag`, or `--rulegraph`
 
@@ -335,7 +335,7 @@ Can you think about when it can be helpful to use `--dry-run`, `--dag`, or `--ru
 
 Finally, you can run the workflow by removing the `--dry-run` flag:
 ```BASH
-snakemake --snakefile Snakefile --configfile config.yaml --dry-run
+snakemake --snakefile Snakefile --configfile config.yaml 
 ```
 if everything ran succesfully, at the end of the output you will have something like:
 ```OUTPUT
@@ -347,6 +347,12 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log
 ```
 
 You can also notice that you have two folders: `data` and `results` which are the outputs of this simple workflow. 
+
+::::::::::::::::::::::::: challenge
+
+What happens if you run *again*
+
+:::::::::::::::::::::::::::::::::::
 
 
 ## More about wildcards
