@@ -795,14 +795,46 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 </div>
 <p>You can also notice that you have two folders: <code>data</code> and
 <code>results</code> which are the outputs of this simple workflow.</p>
-<div id="discussion1" class="callout discussion">
+<div id="what-happens-when-you-run-your-workflow-again" class="callout challenge">
 <div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
+<i class="callout-icon" data-feather="zap"></i>
 </div>
-<div class="callout-inner">
-<h3 class="callout-title">Challenge</h3>
+<div id="what-happens-when-you-run-your-workflow-again" class="callout-inner">
+<h3 class="callout-title">What Happens When You Run Your Workflow
+Again?</h3>
 <div class="callout-content">
-<p>What happens if you run <em>again</em></p>
+<p>Nothing to be done (all requested files are present and up to
+date).</p>
+<p>What happens if you run <em>again</em> your workflow? What would you
+expect?</p>
+</div>
+</div>
+</div>
+<div id="accordionSolution3" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
+  <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
+</button>
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div class="accordion-body">
+<p>A key feature of Snakemake is its ability to efficiently manage
+workflow execution based on file timestamps. When you run a Snakemake
+workflow:</p>
+<ul><li>
+<strong>File Checks</strong>: Snakemake first examines the input and
+output files specified in your rules.</li>
+<li>
+<strong>Dependency Analysis</strong>: It then analyzes the
+dependency graph to determine which rules need to be executed.</li>
+<li>
+<strong>Execution</strong>: Only rules whose output files are
+missing, outdated, or have outdated input files will be executed.</li>
+</ul><p>If you rerun the workflow without modifying the input files or
+deleting the output files, you’ll typically see a message like:</p>
+<pre><code>Nothing to be done (all requested files are present and up to date).</code></pre>
+<p>This behavior ensures that Snakemake avoids unnecessary computations
+and efficiently utilizes resources.</p>
+</div>
 </div>
 </div>
 </div>
