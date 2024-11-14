@@ -400,3 +400,12 @@ In this example, {sample} is a wildcard. Snakemake will automatically iterate ov
 One can also define wildcards in the `rule all` rule. 
 
 By effectively using wildcards, you can significantly simplify your Snakemake workflows and make them more adaptable to varying datasets and experimental designs.
+
+:::::::::::::::::::::: keypoints
+
+- Snakemake automates complex computational pipelines, ensuring efficient resource utilization and avoiding unnecessary computations.
+- The Snakefile contains a list of *rules* describing the pipeline. 
+- Snakemake manages the workflow execution based on file timestamps.
+- Snakemake contains some tools that allows you to debug and validate your workflows, like `--dry-run`, `--dag`, or `--rulegraph`. 
+
+::::::::::::::::::::::::
