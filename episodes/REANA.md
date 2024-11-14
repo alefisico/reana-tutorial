@@ -30,6 +30,8 @@ REANA offers flexibility in workflow management by supporting multiple systems l
 
 While a Snakemake worflow is defined in a snakefile, in REANA one needs to create a REANA file to include all the parameters that the snakemake workflow will need. 
 
+Let's retake the previous SUSY example, and try to run it using REANA. 
+
 
 
 

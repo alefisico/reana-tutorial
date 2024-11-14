@@ -1,17 +1,17 @@
 ---
 title: "A simple analysis from SUSY"
-teaching:
-exercises:
+teaching: 15 
+exercises: 5
 ---
 
 :::::: questions
- - question 1
- - question 2
+ - Are there more useful Snakemake flags that one can use? 
+ - How does Snakemake ensure a consistent and isolated environment for each rule's execution when using containerized environments?
 ::::::
 
 :::::: objectives
- - objective 1
- - objective 2
+ - Understand the needs of each workflow.
+ - Understand how to use Snakemake with containerized environments to ensure consistent and isolated execution of workflow rules.
 ::::::
 
 After learning the basics about Snakemake using dummy processes, let's use a simple example from a SUSY analysis to expand the Snakemake capabilites. 
@@ -126,7 +126,7 @@ snakemake --snakefile Snakefile --configfile inputs.yaml
 
 ::::::::::: challenge
 
-### `--use-apptainer`
+### Did the workflow finish succesfully?
 
 While we've covered the core concepts of Snakemake, there are numerous additional flags that can be used to customize and optimize your workflows. One such flag is `--use-apptainer`, which is essential when running rules within containerized environments.
 
@@ -140,6 +140,8 @@ snakemake --snakefile Snakefile --configfile inputs.yaml --use-apptainer
 
 :::::: spoiler
 
+### Did the workflow finish succesfully now?
+
 If the previous Snakemake command didn't execute as expected, it's likely due to the requirement for access to CERN tools like CVMFS, EOS, or VOMS-proxy. While Snakemake offers some mechanisms to incorporate these tools, REANA provides a more seamless and efficient solution.
 
 In the next episode, we'll delve deeper into REANA and explore how it simplifies the execution of complex workflows, especially those involving CERN-specific tools and resources.
@@ -148,6 +150,6 @@ In the next episode, we'll delve deeper into REANA and explore how it simplifies
 
 
 :::::: keypoints
- - keypoint 1
- - keypoint 2
+ - Understanding the importance of containerized environments in ensuring consistent and isolated execution of Snakemake workflows.
+ - Recognizing the role of REANA in simplifying the execution of complex workflows, especially those requiring CERN-specific tools and resources.
 ::::::
