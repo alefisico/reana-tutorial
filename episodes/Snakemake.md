@@ -105,11 +105,11 @@ rule simulate_data:
     output:
         "data/{sample}.txt"
     shell:
-        "python simulate_data.py --sample {wildcards.sample} > {output}"
+        "python simulate_data.py {wildcards.sample} > {output}"
 
 rule analyze_data:
     input:
-        data="data/{sample}.txt"
+        "data/{sample}.txt"
     output:
         "results/analysis_{sample}.txt"
     shell:
@@ -282,6 +282,8 @@ By combining these options, you can effectively debug, optimize, and fine-tune y
 
 :::::::::::::::: callout
 
+### How to validate your workflow
+
 Before diving into the details of your Snakemake workflow, it's crucial to validate its design and ensure it functions as expected. Snakemake offers several tools for this purpose: `--dry-run` simulates the workflow, `--dag` visualizes the dependencies between rules, and `--rulegraph` provides a more detailed view of data flow. By utilizing these tools, you can effectively debug, optimize, and gain a comprehensive understanding of your pipeline.
 
 :::::::::::::::::::
@@ -324,12 +326,27 @@ snakemake --snakefile Snakefile --configfile config.yaml --rulegraph | dot -Tpng
 ::::::::::::::::::
 
 
-:::::::::::::::::::: questions
+:::::::::::::::::::: spoiler
 
 Can you think about when it can be helpful to use `--dry-run`, `--dag`, or `--rulegraph`
 
 ::::::::::::::::::::::::
 
+
+Finally, you can run the workflow by removing the `--dry-run` flag:
+```BASH
+snakemake --snakefile Snakefile --configfile config.yaml --dry-run
+```
+if everything ran succesfully, at the end of the output you will have something like:
+```OUTPUT
+
+[Thu Nov 14 09:50:51 2024]
+Finished job 0.
+11 of 11 steps (100%) done
+Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log
+```
+
+You can also notice that you have two folders: `data` and `results` which are the outputs of this simple workflow. 
 
 
 ## More about wildcards
@@ -351,5 +368,7 @@ rule analyze_sample:
 ```
 
 In this example, {sample} is a wildcard. Snakemake will automatically iterate over different sample names and execute the rule for each one, creating specific input and output files.
+
+One can also define wildcards in the `rule all` rule. 
 
 By effectively using wildcards, you can significantly simplify your Snakemake workflows and make them more adaptable to varying datasets and experimental designs.
