@@ -6,13 +6,17 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- fixme
+- How can I automate complex computational pipelines?
+- How can I visualize and understand the structure of my Snakemake workflow?
+- How can I create flexible and scalable Snakemake workflows to handle diverse datasets?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- fixme
+- To introduce Snakemake as a powerful tool for automating complex computational pipelines.
+- To provide a practical guide to creating and executing Snakemake workflows, including the use of rules, wildcards, and configuration files.
+- To demonstrate how to visualize and analyze Snakemake workflows using tools like `--dag` and `--rulegraph` to optimize performance and identify potential bottlenecks.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -352,22 +356,17 @@ You can also notice that you have two folders: `data` and `results` which are th
 
 ### What Happens When You Run Your Workflow Again?
 
-
-Nothing to be done (all requested files are present and up to date).
-
-What happens if you run *again* your workflow? What would you expect?
-
 ::::::::::: solution
 
 A key feature of Snakemake is its ability to efficiently manage workflow execution based on file timestamps. When you run a Snakemake workflow:
 
- * __File Checks__: Snakemake first examines the input and output files specified in your rules.
- * __Dependency Analysis__: It then analyzes the dependency graph to determine which rules need to be executed.
- * __Execution__: Only rules whose output files are missing, outdated, or have outdated input files will be executed.
+ * _File Checks_: Snakemake first examines the input and output files specified in your rules.
+ * _Dependency Analysis_: It then analyzes the dependency graph to determine which rules need to be executed.
+ * _Execution_: Only rules whose output files are missing, outdated, or have outdated input files will be executed.
 
 If you rerun the workflow without modifying the input files or deleting the output files, you'll typically see a message like:
 
-```
+```OUTPUT
 Nothing to be done (all requested files are present and up to date).
 ```
 
