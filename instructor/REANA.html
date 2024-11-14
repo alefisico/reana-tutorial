@@ -232,12 +232,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         4. Running workflows in REANA
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#understanding-the-basics">Understanding the Basics</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -358,6 +365,26 @@ workflow to deploying it on a remote computing infrastructure. REANA
 offers a user-friendly approach to reproducible research, empowering you
 to focus on scientific discovery while automating the underlying
 infrastructure.</p>
+<figure><img src="https://docs.reana.io/images/reana-platform-20181202.png" class="figure mx-auto d-block"></figure><p>While REANA is primarily a tool for reproducible analysis, it
+effectively functions as a comprehensive analysis facility, seamlessly
+integrating various CERN resources. This means that essential CERN
+tools, including EOS, CVMFS, Kerberos, Rucio, VOMS-proxy, HTCondor, can
+be directly accessed within the REANA platform, streamlining the
+analysis process and simplifying resource management.</p>
+<section><h2 class="section-heading" id="understanding-the-basics">Understanding the Basics<a class="anchor" aria-label="anchor" href="#understanding-the-basics"></a></h2>
+<hr class="half-width"><p>REANA offers flexibility in workflow management by supporting
+multiple systems like <a href="https://www.commonwl.org/" class="external-link">CWL</a>, <a href="https://docs.reana.io/running-workflows/supported-systems/serial/" class="external-link">Serial</a>,
+(Yadage)[<a href="https://yadage.readthedocs.io/en/latest/" class="external-link uri">https://yadage.readthedocs.io/en/latest/</a>], and
+Snakemake. While there’s a growing adoption of Snakemake within the LHC
+community due to its large external user base and strong support, REANA
+remains agnostic to the chosen workflow system. However, due to its
+popularity and powerful features, we will primarily focus on Snakemake
+throughout this tutorial.</p>
+<div class="section level3">
+<h3 id="a-reana-workflow">A REANA workflow<a class="anchor" aria-label="anchor" href="#a-reana-workflow"></a></h3>
+<p>While a Snakemake worflow is defined in a snakefile, in REANA one
+needs to create a REANA file to include all the parameters that the
+snakemake workflow will need.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -374,10 +401,8 @@ infrastructure.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</div>
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/SUSYexample.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="../instructor/JECexample.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>

@@ -368,59 +368,59 @@ highlight REANA’s potential for more complex and sophisticated workflows
 (more about REANA in the next episode).</p>
 <section><h2 class="section-heading" id="a-simple-susy-analysis">A simple SUSY analysis<a class="anchor" aria-label="anchor" href="#a-simple-susy-analysis"></a></h2>
 <hr class="half-width"><p>Let’s discuss the content of the file <code>Snakefile</code>:</p>
-<div class="codewrapper sourceCode" id="cb2">
-<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Define the final target rule</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">rule all</span><span class="kw">:</span></span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">        config["output_file"]</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># Rule for skimming</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">rule skimming</span><span class="kw">:</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="at">        config["nanoaod_file"]</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="at">        </span><span class="st">"output/skimming/DY_Skim.root"</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="at">    </span><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">        selection = '"(nMuon&gt;0&amp;&amp;nTau&gt;0&amp;&amp;HLT_IsoMu24)"',</span></span>
-<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="at">        N = 1000</span></span>
-<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
-<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="at">        </span><span class="st">"docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
-<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="at">        mkdir -p {output_dir}/output/skimming</span></span>
-<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="at">        cd /code/CMSSW_13_0_10/src &amp;&amp; \</span></span>
-<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="at">        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \</span></span>
-<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="at">        cmsenv &amp;&amp; \</span></span>
-<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="at">        python3 PhysicsTools/NanoAODTools/scripts/nano_postproc.py \</span></span>
-<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="at">            </span><span class="kw">{</span><span class="at">output_dir</span><span class="kw">}</span><span class="at">/output/skimming {output_dir}/{input} \</span></span>
-<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="at">            --bi /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_in.txt \</span></span>
-<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="at">            --bo /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_out.txt \</span></span>
-<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="at">            -c {params.selection} \</span></span>
-<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="at">            -I SUS_ex.Analysis.DiTau_analysis analysis_mutaumc \</span></span>
-<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="at">            -N {params.N}</span></span>
-<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
-<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a></span>
-<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co"># Rule for datacarding</span></span>
-<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="fu">rule datacarding</span><span class="kw">:</span></span>
-<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
-<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="at">        </span><span class="st">"output/skimming/DY_Skim.root"</span></span>
-<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
-<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="at">        config['output_file']</span></span>
-<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="at">    </span><span class="fu">params</span><span class="kw">:</span></span>
-<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="at">        year = "2022postEE"</span></span>
-<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
-<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="at">        </span><span class="st">"docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"</span></span>
-<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
-<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
-<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="at">        mkdir -p {output_dir}/output/datacards</span></span>
-<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="at">        cd /code/CMSSW_13_0_10/src/SUS_ex/Analysis2 &amp;&amp; \</span></span>
-<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="at">        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \</span></span>
-<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="at">        cmsenv &amp;&amp; \</span></span>
-<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="at">        ./FinalSelection_mutau.exe {params.year} {output_dir}/{input} {output_dir}/{output} DY DY</span></span>
-<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span></code></pre>
-</div>
+<pre><code>
+output_dir = "."
+
+# Define the final target rule
+rule all:
+    input:
+        config["output_file"]
+
+# Rule for skimming
+rule skimming:
+    input:
+        config["nanoaod_file"]
+    output:
+        "output/skimming/DY_Skim.root"
+    params:
+        selection = '"(nMuon&gt;0&amp;&amp;nTau&gt;0&amp;&amp;HLT_IsoMu24)"',
+        N = 1000
+    container:
+        "docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"
+    shell:
+        """
+        mkdir -p {output_dir}/output/skimming
+        cd /code/CMSSW_13_0_10/src &amp;&amp; \
+        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \
+        cmsenv &amp;&amp; \
+        python3 PhysicsTools/NanoAODTools/scripts/nano_postproc.py \
+            {output_dir}/output/skimming {output_dir}/{input} \
+            --bi /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_in.txt \
+            --bo /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_out.txt \
+            -c {params.selection} \
+            -I SUS_ex.Analysis.DiTau_analysis analysis_mutaumc \
+            -N {params.N}
+        """
+
+# Rule for datacarding
+rule datacarding:
+    input:
+        "output/skimming/DY_Skim.root"
+    output:
+        config['output_file']
+    params:
+        year = "2022postEE"
+    container:
+        "docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"
+    shell:
+        """
+        mkdir -p {output_dir}/output/datacards
+        cd /code/CMSSW_13_0_10/src/SUS_ex/Analysis2 &amp;&amp; \
+        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \
+        cmsenv &amp;&amp; \
+        ./FinalSelection_mutau.exe {params.year} {output_dir}/{input} {output_dir}/{output} DY DY
+        """
+</code></pre>
 <p>The provided example demonstrates a Snakemake workflow with two
 rules: skimming and datacarding. One can notice that this workflow
 relies on some CMSSW packages, as well as CVMFS environments. While the
@@ -444,7 +444,90 @@ adaptable to different input data or configuration settings.</li>
 <li>Leveraging Configuration Files: By defining parameters in a
 configuration file, you can easily modify the behavior of your workflow
 without changing the Snakefile itself.</li>
-</ul><div id="keypoints1" class="callout keypoints">
+</ul><div id="containers-the-key-to-reproducible-results" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="containers-the-key-to-reproducible-results" class="callout-inner">
+<h3 class="callout-title">Containers: The Key to Reproducible Results</h3>
+<div class="callout-content">
+<p>Using containerized environments is highly recommended for achieving
+reproducible research outcomes. Containers offer several advantages:</p>
+<ul><li>Isolation and Consistency: They create a self-contained environment
+with specific software versions and dependencies, guaranteeing
+consistent execution across different computing platforms. This
+eliminates potential issues arising from variations in the host system’s
+configuration.</li>
+<li>Simplified Setup: Containers eliminate the need for complex
+installations and environment configuration on the user’s machine. By
+pulling the pre-built container image, users can readily execute the
+workflow without worrying about compatibility or missing software.</li>
+<li>Enhanced Sharing: Sharing containerized workflows is straightforward
+as they encapsulate the entire execution environment. This facilitates
+collaboration and streamlines research efforts.</li>
+</ul><p>Curious about the specific software included in the container used
+for this analysis? You can delve deeper by examining the Dockerfile
+located in the repository here: <a href="https://gitlab.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample/-/blob/master/Dockerfile?ref_type=heads" class="external-link">link
+to Dockerfile</a>.</p>
+</div>
+</div>
+</div>
+<p>Let’s validate the workflow:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--dry-run</span></span></code></pre>
+</div>
+<p>You can try to run the <code>--dag</code> and/or
+<code>--rulegraph</code> commands to visualize what you will run. If it
+does like everything is correct, you can try to run it:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml</span></code></pre>
+</div>
+<div id="use-apptainer" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="use-apptainer" class="callout-inner">
+<h3 class="callout-title"><code>--use-apptainer</code></h3>
+<div class="callout-content">
+<p>While we’ve covered the core concepts of Snakemake, there are
+numerous additional flags that can be used to customize and optimize
+your workflows. One such flag is <code>--use-apptainer</code>, which is
+essential when running rules within containerized environments.</p>
+<p>By using <code>--use-apptainer</code>, Snakemake ensures that the
+specified container is utilized for each rule’s execution, providing a
+consistent and isolated environment for your workflow. Let’s try our
+example with</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--use-apptainer</span></span></code></pre>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>If the previous Snakemake command didn’t execute as expected, it’s
+likely due to the requirement for access to CERN tools like CVMFS, EOS,
+or VOMS-proxy. While Snakemake offers some mechanisms to incorporate
+these tools, REANA provides a more seamless and efficient solution.</p>
+<p>In the next episode, we’ll delve deeper into REANA and explore how it
+simplifies the execution of complex workflows, especially those
+involving CERN-specific tools and resources.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
