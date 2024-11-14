@@ -350,7 +350,30 @@ You can also notice that you have two folders: `data` and `results` which are th
 
 ::::::::::::::::::::::::: challenge
 
-What happens if you run *again*
+### What Happens When You Run Your Workflow Again?
+
+
+Nothing to be done (all requested files are present and up to date).
+
+What happens if you run *again* your workflow? What would you expect?
+
+::::::::::: solution
+
+A key feature of Snakemake is its ability to efficiently manage workflow execution based on file timestamps. When you run a Snakemake workflow:
+
+ * __File Checks__: Snakemake first examines the input and output files specified in your rules.
+ * __Dependency Analysis__: It then analyzes the dependency graph to determine which rules need to be executed.
+ * __Execution__: Only rules whose output files are missing, outdated, or have outdated input files will be executed.
+
+If you rerun the workflow without modifying the input files or deleting the output files, you'll typically see a message like:
+
+```
+Nothing to be done (all requested files are present and up to date).
+```
+
+This behavior ensures that Snakemake avoids unnecessary computations and efficiently utilizes resources.
+
+:::::::::::::::::::::::::
 
 :::::::::::::::::::::::::::::::::::
 
