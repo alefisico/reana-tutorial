@@ -27,7 +27,10 @@ In this example, we'll demonstrate a basic use case: skimming a nanoAOD file and
 
 Let's discuss the content of the file `Snakefile`:
 
-```YAML
+```
+
+output_dir = "."
+
 # Define the final target rule
 rule all:
     input:
@@ -93,6 +96,55 @@ skimming and datacarding. One can notice that this workflow relies on some CMSSW
  * Parameterizing Rules: The params option allows you to pass parameters to your shell commands, making your rules more flexible and adaptable to different input data or configuration settings.
  * Leveraging Configuration Files: By defining parameters in a configuration file, you can easily modify the behavior of your workflow without changing the Snakefile itself.
 
+
+:::::::::: callout
+
+#### Containers: The Key to Reproducible Results
+
+Using containerized environments is highly recommended for achieving reproducible research outcomes. Containers offer several advantages:
+
+ * Isolation and Consistency: They create a self-contained environment with specific software versions and dependencies, guaranteeing consistent execution across different computing platforms. This eliminates potential issues arising from variations in the host system's configuration.
+ * Simplified Setup: Containers eliminate the need for complex installations and environment configuration on the user's machine. By pulling the pre-built container image, users can readily execute the workflow without worrying about compatibility or missing software.
+ * Enhanced Sharing: Sharing containerized workflows is straightforward as they encapsulate the entire execution environment. This facilitates collaboration and streamlines research efforts.
+
+Curious about the specific software included in the container used for this analysis? You can delve deeper by examining the Dockerfile located in the repository here: [link to Dockerfile](https://gitlab.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample/-/blob/master/Dockerfile?ref_type=heads).
+
+::::::::::::::::::
+
+
+Let's validate the workflow:
+
+```BASH
+snakemake --snakefile Snakefile --configfile inputs.yaml --dry-run
+```
+
+You can try to run the `--dag` and/or `--rulegraph` commands to visualize what you will run. If it does like everything is correct, you can try to run it:
+
+```BASH
+snakemake --snakefile Snakefile --configfile inputs.yaml
+```
+
+::::::::::: challenge
+
+### `--use-apptainer`
+
+While we've covered the core concepts of Snakemake, there are numerous additional flags that can be used to customize and optimize your workflows. One such flag is `--use-apptainer`, which is essential when running rules within containerized environments.
+
+By using `--use-apptainer`, Snakemake ensures that the specified container is utilized for each rule's execution, providing a consistent and isolated environment for your workflow. Let's try our example with
+
+```BASH
+snakemake --snakefile Snakefile --configfile inputs.yaml --use-apptainer
+```
+::::::::::::::::
+
+
+:::::: spoiler
+
+If the previous Snakemake command didn't execute as expected, it's likely due to the requirement for access to CERN tools like CVMFS, EOS, or VOMS-proxy. While Snakemake offers some mechanisms to incorporate these tools, REANA provides a more seamless and efficient solution.
+
+In the next episode, we'll delve deeper into REANA and explore how it simplifies the execution of complex workflows, especially those involving CERN-specific tools and resources.
+
+::::::::::::::::::::
 
 
 :::::: keypoints
