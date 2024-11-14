@@ -117,11 +117,11 @@
   CMS-CAT Snakemake/REANA tutorial
 </div>
 
-<aside class="col-md-12 lesson-progress"><div style="width: 44%" class="percentage">
-    44%
+<aside class="col-md-12 lesson-progress"><div style="width: 63%" class="percentage">
+    63%
   </div>
   <div class="progress ">
-    <div class="progress-bar " role="progressbar" style="width: 44%" aria-valuenow="44" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
+    <div class="progress-bar " role="progressbar" style="width: 63%" aria-valuenow="63" aria-label="Lesson Progress" aria-valuemin="0" aria-valuemax="100">
     </div>
   </div>
 </aside><div class="container">
@@ -223,12 +223,19 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         3. A simple analysis from SUSY
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#a-simple-susy-analysis">A simple SUSY analysis</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -309,7 +316,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>A simple analysis from SUSY</h1>
-        <p>Last updated on 2024-11-11 |
+        <p>Last updated on 2024-11-14 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/SUSYexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -344,8 +351,100 @@
 </div>
 </div>
 </div>
-<!-- EPISODE CONTENT HERE -->
-<div id="keypoints1" class="callout keypoints">
+<p>After learning the basics about Snakemake using dummy processes,
+let’s use a simple example from a SUSY analysis to expand the Snakemake
+capabilites.</p>
+<p>For this part of the tutorial, let’s clone the following
+repository:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">git</span> clone ssh://git@gitlab.cern.ch:7999/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample.git</span></code></pre>
+</div>
+<p>In this example, we’ll demonstrate a basic use case: skimming a
+nanoAOD file and generating histograms suitable for CMS Combine. While
+the specific details of this analysis aren’t crucial, this example will
+highlight REANA’s potential for more complex and sophisticated workflows
+(more about REANA in the next episode).</p>
+<section><h2 class="section-heading" id="a-simple-susy-analysis">A simple SUSY analysis<a class="anchor" aria-label="anchor" href="#a-simple-susy-analysis"></a></h2>
+<hr class="half-width"><p>Let’s discuss the content of the file <code>Snakefile</code>:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">YAML<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode yaml" tabindex="0"><code class="sourceCode yaml"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Define the final target rule</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="fu">rule all</span><span class="kw">:</span></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="at">        config["output_file"]</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="co"># Rule for skimming</span></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="fu">rule skimming</span><span class="kw">:</span></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a><span class="at">        config["nanoaod_file"]</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a><span class="at">        </span><span class="st">"output/skimming/DY_Skim.root"</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="at">    </span><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="at">        selection = '"(nMuon&gt;0&amp;&amp;nTau&gt;0&amp;&amp;HLT_IsoMu24)"',</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a><span class="at">        N = 1000</span></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a><span class="at">        </span><span class="st">"docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a><span class="at">        mkdir -p {output_dir}/output/skimming</span></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a><span class="at">        cd /code/CMSSW_13_0_10/src &amp;&amp; \</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a><span class="at">        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \</span></span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a><span class="at">        cmsenv &amp;&amp; \</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a><span class="at">        python3 PhysicsTools/NanoAODTools/scripts/nano_postproc.py \</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a><span class="at">            </span><span class="kw">{</span><span class="at">output_dir</span><span class="kw">}</span><span class="at">/output/skimming {output_dir}/{input} \</span></span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a><span class="at">            --bi /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_in.txt \</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a><span class="at">            --bo /code/CMSSW_13_0_10/src/SUS_ex/Analysis/scripts/keep_out.txt \</span></span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a><span class="at">            -c {params.selection} \</span></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a><span class="at">            -I SUS_ex.Analysis.DiTau_analysis analysis_mutaumc \</span></span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a><span class="at">            -N {params.N}</span></span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a><span class="co"># Rule for datacarding</span></span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a><span class="fu">rule datacarding</span><span class="kw">:</span></span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a><span class="at">    </span><span class="fu">input</span><span class="kw">:</span></span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a><span class="at">        </span><span class="st">"output/skimming/DY_Skim.root"</span></span>
+<span id="cb2-36"><a href="#cb2-36" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span></span>
+<span id="cb2-37"><a href="#cb2-37" tabindex="-1"></a><span class="at">        config['output_file']</span></span>
+<span id="cb2-38"><a href="#cb2-38" tabindex="-1"></a><span class="at">    </span><span class="fu">params</span><span class="kw">:</span></span>
+<span id="cb2-39"><a href="#cb2-39" tabindex="-1"></a><span class="at">        year = "2022postEE"</span></span>
+<span id="cb2-40"><a href="#cb2-40" tabindex="-1"></a><span class="at">    </span><span class="fu">container</span><span class="kw">:</span></span>
+<span id="cb2-41"><a href="#cb2-41" tabindex="-1"></a><span class="at">        </span><span class="st">"docker://gitlab-registry.cern.ch/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample:latest"</span></span>
+<span id="cb2-42"><a href="#cb2-42" tabindex="-1"></a><span class="at">    </span><span class="fu">shell</span><span class="kw">:</span></span>
+<span id="cb2-43"><a href="#cb2-43" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span>
+<span id="cb2-44"><a href="#cb2-44" tabindex="-1"></a><span class="at">        mkdir -p {output_dir}/output/datacards</span></span>
+<span id="cb2-45"><a href="#cb2-45" tabindex="-1"></a><span class="at">        cd /code/CMSSW_13_0_10/src/SUS_ex/Analysis2 &amp;&amp; \</span></span>
+<span id="cb2-46"><a href="#cb2-46" tabindex="-1"></a><span class="at">        source /cvmfs/cms.cern.ch/cmsset_default.sh &amp;&amp; \</span></span>
+<span id="cb2-47"><a href="#cb2-47" tabindex="-1"></a><span class="at">        cmsenv &amp;&amp; \</span></span>
+<span id="cb2-48"><a href="#cb2-48" tabindex="-1"></a><span class="at">        ./FinalSelection_mutau.exe {params.year} {output_dir}/{input} {output_dir}/{output} DY DY</span></span>
+<span id="cb2-49"><a href="#cb2-49" tabindex="-1"></a><span class="at">        </span><span class="st">""</span><span class="at">"</span></span></code></pre>
+</div>
+<p>The provided example demonstrates a Snakemake workflow with two
+rules: skimming and datacarding. One can notice that this workflow
+relies on some CMSSW packages, as well as CVMFS environments. While the
+specific details of these rules might be analysis-specific, we can focus
+on the general concepts of <code>params</code> and
+<code>container</code> to enhance workflow flexibility and
+reproducibility.</p>
+<p><code>container</code>:</p>
+<ul><li>Encapsulating Environment: By specifying a container image, you
+create a self-contained environment for your workflow, which can be
+<strong>reproducible</strong>. This ensures that the execution
+environment, including specific software versions and dependencies, is
+consistent across different systems.</li>
+<li>Simplifying Setup: Using containers eliminates the need for complex
+installations and configuration on the host system. You can simply pull
+the container image and run the workflow.</li>
+</ul><p><code>params</code>:</p>
+<ul><li>Parameterizing Rules: The params option allows you to pass
+parameters to your shell commands, making your rules more flexible and
+adaptable to different input data or configuration settings.</li>
+<li>Leveraging Configuration Files: By defining parameters in a
+configuration file, you can easily modify the behavior of your workflow
+without changing the Snakefile itself.</li>
+</ul><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -361,10 +460,7 @@
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="Snakemake.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="REANA.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
@@ -422,7 +518,7 @@ any links that you are not going to use.
   "url": "https://alefisico.github.io/reana-tutorial/SUSYexample.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/SUSYexample.html",
   "dateCreated": "2024-11-14",
-  "dateModified": "2024-11-11",
+  "dateModified": "2024-11-14",
   "datePublished": "2024-11-14"
 }
 
