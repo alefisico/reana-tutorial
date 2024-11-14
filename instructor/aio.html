@@ -967,13 +967,10 @@ providing a detailed breakdown of the actions that Snakemake will
 perform.</p>
 <p>By combining these options, you can effectively debug, optimize, and
 fine-tune your Snakemake workflows.</p>
-<div id="how-to-validate-your-workflow" class="callout">
-<div class="callout-square">
-<i class="callout-icon" data-feather="bell"></i>
 </div>
-<div id="how-to-validate-your-workflow" class="callout-inner">
-<h3 class="callout-title">How to validate your workflow</h3>
-<div class="callout-content">
+<div class="section level3">
+<h3 id="how-to-validate-your-workflow">How to validate your workflow<a class="anchor" aria-label="anchor" href="#how-to-validate-your-workflow"></a>
+</h3>
 <p>Before diving into the details of your Snakemake workflow, it’s
 crucial to validate its design and ensure it functions as expected.
 Snakemake offers several tools for this purpose: <code>--dry-run</code>
@@ -981,9 +978,6 @@ simulates the workflow, <code>--dag</code> visualizes the dependencies
 between rules, and <code>--rulegraph</code> provides a more detailed
 view of data flow. By utilizing these tools, you can effectively debug,
 optimize, and gain a comprehensive understanding of your pipeline.</p>
-</div>
-</div>
-</div>
 <div id="dag" class="callout challenge">
 <div class="callout-square">
 <i class="callout-icon" data-feather="zap"></i>
@@ -1018,7 +1012,7 @@ improve efficiency.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure><img src="../fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
 </figure>
@@ -1051,7 +1045,7 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <figure><img src="../fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure>
@@ -1059,17 +1053,16 @@ pipeline.</p>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Show details </h3>
-</button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
-<div class="accordion-body">
+<div id="question" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="question" class="callout-inner">
+<h3 class="callout-title">Question:</h3>
+<div class="callout-content">
 <p>Can you think about when it can be helpful to use
 <code>--dry-run</code>, <code>--dag</code>, or
 <code>--rulegraph</code></p>
-</div>
 </div>
 </div>
 </div>
@@ -1078,7 +1071,7 @@ pipeline.</p>
 <div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml <span class="at">--dry-run</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> config.yaml </span></code></pre>
 </div>
 <p>if everything ran succesfully, at the end of the output you will have
 something like:</p>
@@ -1093,6 +1086,17 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 </div>
 <p>You can also notice that you have two folders: <code>data</code> and
 <code>results</code> which are the outputs of this simple workflow.</p>
+<div id="discussion1" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div class="callout-inner">
+<h3 class="callout-title">Challenge</h3>
+<div class="callout-content">
+<p>What happens if you run <em>again</em></p>
+</div>
+</div>
+</div>
 </div>
 </section><section><h2 class="section-heading" id="more-about-wildcards">More about wildcards<a class="anchor" aria-label="anchor" href="#more-about-wildcards"></a>
 </h2>
