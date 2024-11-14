@@ -122,3 +122,8 @@ and, after reloading your `.bashrc`, then simply:
 reana-client ping
 ```
 ::::::::::::::::::::::::
+
+
+## Git
+
+In addition, this tutorial assumes that you are confident in the use of `git`. 
