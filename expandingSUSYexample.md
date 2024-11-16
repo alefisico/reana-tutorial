@@ -139,9 +139,47 @@ rule datacarding:
         """
 ```
 
+![The DAG diagraph of the Snakefile](episodes/fig/example2_dag.png)
+
+Before running this workflow, let's discuss a few new features introduced in this example:
+
+* Rule-Specific Containers: One of the advantages of containerization is the ability to define specific software environments for each rule. This allows you to use different tools and configurations for different parts of your workflow.
+* Consolidated Output Folder: While not strictly necessary, organizing all outputs into a single folder can simplify your workflow and subsequent analysis. We recommend this approach for better organization and easier management.
+* Diverse Resource Requirements: To access CMS datasets, Rucio, or other resources, you often need to configure specific credentials and settings. REANA seamlessly integrates with these resources, allowing you to specify the necessary resources for each rule.
+
+## REANA resources
+
+### Securing Your Credentials with REANA Secrets
+
+To access resources like CMS datasets or Rucio, you'll need to provide your credentials, such as VOMS proxies. To ensure the security of this sensitive information, REANA uses `secrets`. These secrets are encrypted and only accessible to your workflow, protecting your credentials from unauthorized access.
+
+For detailed instructions on how to configure secrets in REANA, please refer to the official REANA documentation:
+
+ * VOMS-PROXY: [instructions](https://docs.reana.io/advanced-usage/access-control/voms-proxy/)
+ * kerberos: [instructions](https://docs.reana.io/advanced-usage/access-control/kerberos/)
+ * Rucio: [instructions](https://docs.reana.io/advanced-usage/access-control/rucio/)
+
+Users can verify which secrets REANA know by running in the terminal:
+
+```BASH
+reana-client secrets-list
+```
 
 
+:::::::::::::::: callout
 
+### IMPORTANT INFORMATION ABOUT VOMS-PROXY
+
+The REANA documentation outlines two methods for configuring VOMS-PROXY credentials:
+
+* Automatic Generation: (Recommended approach) Leverages your user certificate and key to automatically generate the VOMS-PROXY when needed. Ensures that your credentials are always up-to-date and valid.
+* Manual Upload: Requires you to upload your VOMS-PROXY file to REANA. Less convenient as you'll need to re-upload the file whenever it expires.
+
+**Important**: Do not use both methods simultaneously. REANA prioritizes the manually uploaded VOMS-PROXY file, so if it's expired, you won't be able to access remote files via XRootD.
+
+_We strongly recommend using the automatic generation method for a seamless and secure workflow._
+
+:::::::::::::::::::::::::::
 
 
 :::::: keypoints
