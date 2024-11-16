@@ -225,10 +225,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#snakemake-a-flexible-workflow-engine">Snakemake: A Flexible Workflow Engine</a></li>
-<li><a href="#key-features">Key Features:</a></li>
-<li><a href="#why-snakemake-for-high-energy-physics">Why Snakemake for High Energy Physics?</a></li>
 <li><a href="#understanding-the-basics">Understanding the Basics</a></li>
-<li><a href="#the-core-components-of-a-snakemake-workflow">The Core Components of a Snakemake Workflow</a></li>
 <li><a href="#a-simple-example-a-parallel-workflow">A Simple Example: A Parallel Workflow</a></li>
 <li><a href="#more-about-wildcards">More about wildcards</a></li>
         </ul></div><!--/div.accordion-body-->
@@ -374,8 +371,8 @@ particularly useful for bioinformatics pipelines, but can be applied to
 a wide range of computational tasks. It’s particularly well-suited for
 tasks involving large datasets and parallel processing, making it a
 popular choice in fields like high energy physics.</p>
-</section><section><h2 class="section-heading" id="key-features">Key Features:<a class="anchor" aria-label="anchor" href="#key-features"></a></h2>
-<hr class="half-width"><ul><li>Declarative Syntax: Snakemake uses a declarative language to define
+<p>Let’s describe the key features of Snakemake:</p>
+<ul><li>Declarative Syntax: Snakemake uses a declarative language to define
 workflows, focusing on what you want to achieve rather than how to
 achieve it. This makes pipelines more readable and maintainable.</li>
 <li>Rule-Based System: Workflows are defined as a series of rules. Each
@@ -392,8 +389,9 @@ simple data processing to complex simulations.</li>
 <li>Integration with Tools: Snakemake can easily integrate with various
 tools and libraries used in high energy physics, such as ROOT,
 TensorFlow, and PyTorch.</li>
-</ul></section><section><h2 class="section-heading" id="why-snakemake-for-high-energy-physics">Why Snakemake for High Energy Physics?<a class="anchor" aria-label="anchor" href="#why-snakemake-for-high-energy-physics"></a></h2>
-<hr class="half-width"><ul><li>Complex Workflows: High energy physics experiments often involve
+</ul><div class="section level3">
+<h3 id="why-snakemake-for-high-energy-physics">Why Snakemake for High Energy Physics?<a class="anchor" aria-label="anchor" href="#why-snakemake-for-high-energy-physics"></a></h3>
+<ul><li>Complex Workflows: High energy physics experiments often involve
 intricate pipelines with numerous steps, from data acquisition and
 reconstruction to analysis and simulation. Snakemake’s declarative
 syntax and dependency management make it easy to handle such complex
@@ -408,7 +406,8 @@ scientific research where experiments need to be verifiable.</li>
 <li>Scalability: Snakemake can scale to handle large-scale computational
 resources, allowing researchers to efficiently utilize HPC clusters for
 their analyses.</li>
-</ul></section><section><h2 class="section-heading" id="understanding-the-basics">Understanding the Basics<a class="anchor" aria-label="anchor" href="#understanding-the-basics"></a></h2>
+</ul></div>
+</section><section><h2 class="section-heading" id="understanding-the-basics">Understanding the Basics<a class="anchor" aria-label="anchor" href="#understanding-the-basics"></a></h2>
 <hr class="half-width"><p>At its core, Snakemake organizes computational workflows into
 <strong>rules</strong>, each representing a specific task within the
 pipeline. These rules are interconnected through their input and output
@@ -417,8 +416,9 @@ specify the precise commands required to generate output files from
 input data. Snakemake intelligently analyzes this dependency graph to
 determine the optimal execution order and parallelizes tasks to maximize
 efficiency, making it ideal for large-scale data analysis projects.</p>
-</section><section><h2 class="section-heading" id="the-core-components-of-a-snakemake-workflow">The Core Components of a Snakemake Workflow<a class="anchor" aria-label="anchor" href="#the-core-components-of-a-snakemake-workflow"></a></h2>
-<hr class="half-width"><ol style="list-style-type: decimal"><li>Snakefile: This is the main file of a Snakemake workflow. It
+<div class="section level3">
+<h3 id="the-core-components-of-a-snakemake-workflow">The Core Components of a Snakemake Workflow<a class="anchor" aria-label="anchor" href="#the-core-components-of-a-snakemake-workflow"></a></h3>
+<ol style="list-style-type: decimal"><li>Snakefile: This is the main file of a Snakemake workflow. It
 contains the definition of all rules and config file references. This is
 where you define your pipeline.</li>
 <li>Config file: This file defines parameters and variables that can be
@@ -431,7 +431,8 @@ important parts:
 <li>Shell command: The command to be executed to produce the output
 files from the input files.</li>
 </ul></li>
-</ol></section><section><h2 class="section-heading" id="a-simple-example-a-parallel-workflow">A Simple Example: A Parallel Workflow<a class="anchor" aria-label="anchor" href="#a-simple-example-a-parallel-workflow"></a></h2>
+</ol></div>
+</section><section><h2 class="section-heading" id="a-simple-example-a-parallel-workflow">A Simple Example: A Parallel Workflow<a class="anchor" aria-label="anchor" href="#a-simple-example-a-parallel-workflow"></a></h2>
 <hr class="half-width"><p>Let’s create a simple workflow that simulates a data analysis
 pipeline. We’ll have two steps:</p>
 <ol style="list-style-type: decimal"><li>Data Simulation: Simulate some data.</li>
@@ -734,7 +735,7 @@ improve efficiency.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <figure><img src="../fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
 </figure></div>
@@ -766,7 +767,7 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
 <div class="accordion-body">
 <figure><img src="../fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure></div>
@@ -822,7 +823,7 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
 <div class="accordion-body">
 <p>A key feature of Snakemake is its ability to efficiently manage
 workflow execution based on file timestamps. When you run a Snakemake
