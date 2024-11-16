@@ -69,6 +69,9 @@ The `reana.yaml` file acts as a blueprint for your REANA workflow, defining esse
  - `workspace` (optional): Here, you can set options like `retention_days` to specify how long specific folders should be retained after workflow completion.
  - `outputs`: This section informs REANA which files or folders should be made available for download after successful workflow execution. These can be individual files or entire directories.
 
+More about `reana.yaml` files can be found [here](https://docs.reana.io/reference/reana-yaml/).
+
+
 ### Running a workflow in REANA
 
 Let's get familiar with the steps necessary to run our workflow in REANA. First, activate the REANA environment, and then remember to set these variables:
