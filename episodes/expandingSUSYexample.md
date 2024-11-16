@@ -5,13 +5,11 @@ exercises:
 ---
 
 :::::: questions
- - question 1
- - question 2
+ - Can we use Snakemake and REANA in more complex examples?
 ::::::
 
 :::::: objectives
- - objective 1
- - objective 2
+ - Learn how to expand a SUSY analysis to handle more complex tasks using Snakemake and REANA.
 ::::::
 
 Now that you've mastered the basics of creating simple Snakemake workflows and submitting them to REANA, let's dive deeper into more complex analyses. This next example will illustrate how to expand our SUSY analysis to perform more sophisticated tasks.
@@ -223,6 +221,6 @@ In addition, users can seek for support and help in the following channels:
 
 
 :::::: keypoints
- - keypoint 1
- - keypoint 2
+ - Explore the REANA team's compilation of examples on their GitHub for more inspiration and advanced use cases.
+ - Utilize the REANA support channels, such as the official Mattermost channel and forum, for assistance and community support.
 ::::::
