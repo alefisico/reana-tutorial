@@ -252,6 +252,7 @@
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
         <ul><li><a href="#a-more-real-susy-analysis">A more real SUSY analysis</a></li>
+<li><a href="#reana-resources">REANA resources</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -489,6 +490,68 @@ rule datacarding:
         cmsenv &amp;&amp; \
         ./FinalSelection_mutau.exe {params.year} {output_dir}/{input} {output_dir}/{output} {params.sample} {params.sample}
         """</code></pre>
+<figure><img src="../fig/example2_dag.png" alt="The DAG diagraph of the Snakefile" class="figure mx-auto d-block"><div class="figcaption">The DAG diagraph of the Snakefile</div>
+</figure><p>Before running this workflow, let’s discuss a few new features
+introduced in this example:</p>
+<ul><li>Rule-Specific Containers: One of the advantages of containerization
+is the ability to define specific software environments for each rule.
+This allows you to use different tools and configurations for different
+parts of your workflow.</li>
+<li>Consolidated Output Folder: While not strictly necessary, organizing
+all outputs into a single folder can simplify your workflow and
+subsequent analysis. We recommend this approach for better organization
+and easier management.</li>
+<li>Diverse Resource Requirements: To access CMS datasets, Rucio, or
+other resources, you often need to configure specific credentials and
+settings. REANA seamlessly integrates with these resources, allowing you
+to specify the necessary resources for each rule.</li>
+</ul></section><section><h2 class="section-heading" id="reana-resources">REANA resources<a class="anchor" aria-label="anchor" href="#reana-resources"></a></h2>
+<hr class="half-width"><div class="section level3">
+<h3 id="securing-your-credentials-with-reana-secrets">Securing Your Credentials with REANA Secrets<a class="anchor" aria-label="anchor" href="#securing-your-credentials-with-reana-secrets"></a></h3>
+<p>To access resources like CMS datasets or Rucio, you’ll need to
+provide your credentials, such as VOMS proxies. To ensure the security
+of this sensitive information, REANA uses <code>secrets</code>. These
+secrets are encrypted and only accessible to your workflow, protecting
+your credentials from unauthorized access.</p>
+<p>For detailed instructions on how to configure secrets in REANA,
+please refer to the official REANA documentation:</p>
+<ul><li>VOMS-PROXY: <a href="https://docs.reana.io/advanced-usage/access-control/voms-proxy/" class="external-link">instructions</a>
+</li>
+<li>kerberos: <a href="https://docs.reana.io/advanced-usage/access-control/kerberos/" class="external-link">instructions</a>
+</li>
+<li>Rucio: <a href="https://docs.reana.io/advanced-usage/access-control/rucio/" class="external-link">instructions</a>
+</li>
+</ul><p>Users can verify which secrets REANA know by running in the
+terminal:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="ex">reana-client</span> secrets-list</span></code></pre>
+</div>
+<div id="important-information-about-voms-proxy" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="important-information-about-voms-proxy" class="callout-inner">
+<h3 class="callout-title">IMPORTANT INFORMATION ABOUT VOMS-PROXY</h3>
+<div class="callout-content">
+<p>The REANA documentation outlines two methods for configuring
+VOMS-PROXY credentials:</p>
+<ul><li>Automatic Generation: (Recommended approach) Leverages your user
+certificate and key to automatically generate the VOMS-PROXY when
+needed. Ensures that your credentials are always up-to-date and
+valid.</li>
+<li>Manual Upload: Requires you to upload your VOMS-PROXY file to REANA.
+Less convenient as you’ll need to re-upload the file whenever it
+expires.</li>
+</ul><p><strong>Important</strong>: Do not use both methods simultaneously.
+REANA prioritizes the manually uploaded VOMS-PROXY file, so if it’s
+expired, you won’t be able to access remote files via XRootD.</p>
+<p><em>We strongly recommend using the automatic generation method for a
+seamless and secure workflow.</em></p>
+</div>
+</div>
+</div>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -505,6 +568,7 @@ rule datacarding:
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="../instructor/REANA.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
