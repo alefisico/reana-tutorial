@@ -265,7 +265,7 @@
 <div class="accordion accordion-flush" id="accordionFlush4">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading4">
-        <a href="SUSYexample.html">3. A simple analysis from SUSY</a>
+        <a href="SUSYexample.html">3. A simple SUSY analysis</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -289,7 +289,7 @@
 <div class="accordion accordion-flush" id="accordionFlush6">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-heading6">
-        <a href="JECexample.html">5. A more complex example: Calculating JECs</a>
+        <a href="expandingSUSYexample.html">5. Expanding the SUSY analysis</a>
     </div>
 <!--/div.accordion-header-->
 
@@ -577,7 +577,7 @@ any links that you are not going to use.
  -->
 </section></section><section id="aio-Snakemake"><p>Content from <a href="Snakemake.html">Snakemake</a></p>
 <hr>
-<p>Last updated on 2024-11-14 |
+<p>Last updated on 2024-11-16 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/Snakemake.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 40 minutes</p>
@@ -1023,7 +1023,7 @@ improve efficiency.</li>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
 <div class="accordion-body">
 <figure><img src="../fig/dag.png" alt="Pipeline Visualization using dag" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using dag</div>
 </figure>
@@ -1056,7 +1056,7 @@ pipeline.</p>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution2" aria-expanded="false" aria-controls="collapseSolution2">
   <h4 class="accordion-header" id="headingSolution2"> Show me the solution </h4>
 </button>
-<div id="collapseSolution2" class="accordion-collapse collapse" data-bs-parent="#accordionSolution2" aria-labelledby="headingSolution2">
+<div id="collapseSolution2" class="accordion-collapse collapse" aria-labelledby="headingSolution2" data-bs-parent="#accordionSolution2">
 <div class="accordion-body">
 <figure><img src="../fig/rulegraph.png" alt="Pipeline Visualization using rulegraph" class="figure mx-auto d-block"><div class="figcaption">Pipeline Visualization using rulegraph</div>
 </figure>
@@ -1113,7 +1113,7 @@ Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log</code></pre>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution3" aria-expanded="false" aria-controls="collapseSolution3">
   <h4 class="accordion-header" id="headingSolution3"> Show me the solution </h4>
 </button>
-<div id="collapseSolution3" class="accordion-collapse collapse" data-bs-parent="#accordionSolution3" aria-labelledby="headingSolution3">
+<div id="collapseSolution3" class="accordion-collapse collapse" aria-labelledby="headingSolution3" data-bs-parent="#accordionSolution3">
 <div class="accordion-body">
 <p>A key feature of Snakemake is its ability to efficiently manage
 workflow execution based on file timestamps. When you run a Snakemake
@@ -1175,6 +1175,10 @@ experimental designs.</p>
 <p>This is just an overview of the capabilities of Snakemake. As a
 widely used program, you can find numerous resources online. For more
 information, you can also visit their <a href="https://snakemake.readthedocs.io" class="external-link">official website</a>.</p>
+<p>In addition, Snakemake has a public catalog of thousands of workflow
+in many fields. If you want to see more sophisticated examples, please
+follow the link to the <a href="https://snakemake.github.io/snakemake-workflow-catalog/" class="external-link">Snakemake
+workflow catalog</a>.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1202,9 +1206,9 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</section></section><section id="aio-SUSYexample"><p>Content from <a href="SUSYexample.html">A simple analysis from SUSY</a></p>
+</section></section><section id="aio-SUSYexample"><p>Content from <a href="SUSYexample.html">A simple SUSY analysis</a></p>
 <hr>
-<p>Last updated on 2024-11-14 |
+<p>Last updated on 2024-11-16 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/SUSYexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 20 minutes</p>
@@ -1414,7 +1418,7 @@ example with</p>
   Did the workflow finish succesfully now?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>If the previous Snakemake command didn’t execute as expected, it’s
 likely due to the requirement for access to CERN tools like CVMFS, EOS,
@@ -1703,7 +1707,7 @@ and start your workflow. You can try:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>Unfortunately, not yet</p>
 <p>But before throwing your laptop out the window, don’t worry, this
@@ -1782,7 +1786,7 @@ variables can be found in the REANA documentation.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>It will be nice to have a list of REANA variables</p>
 </div>
@@ -1817,7 +1821,7 @@ you’re running a modified version of the original workflow.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Finally yes!</p>
 </div>
@@ -1887,11 +1891,11 @@ Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
 </div>
-</section></section><section id="aio-JECexample"><p>Content from <a href="JECexample.html">A more complex example: Calculating JECs</a></p>
+</section></section><section id="aio-expandingSUSYexample"><p>Content from <a href="expandingSUSYexample.html">Expanding the SUSY analysis</a></p>
 <hr>
-<p>Last updated on 2024-11-11 |
+<p>Last updated on 2024-11-16 |
 
-        <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/JECexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
+        <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/expandingSUSYexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <div class="text-end">
           <button role="button" aria-pressed="false" tabindex="0" id="expand-code" class="pull-right" data-expand="Expand All Solutions " data-collapse="Collapse All Solutions "> Expand All Solutions <i aria-hidden="true" data-feather="plus"></i></button>
         </div>
@@ -1922,6 +1926,23 @@ any links that you are not going to use.
 </div>
 </div>
 </div>
+<p>Now that you’ve mastered the basics of creating simple Snakemake
+workflows and submitting them to REANA, let’s dive deeper into more
+complex analyses. This next example will illustrate how to expand our
+SUSY analysis to perform more sophisticated tasks.</p>
+<section><h2 class="section-heading" id="a-more-real-susy-analysis">A more real SUSY analysis<a class="anchor" aria-label="anchor" href="#a-more-real-susy-analysis"></a>
+</h2>
+<hr class="half-width">
+<p>In real-world analysis workflows, processing often involves multiple
+datasets. Typically, we identify these datasets using CERN’s Data Access
+System (DAS) and then extract a list of files for further analysis.
+These files are then processed individually before being merged for
+subsequent steps. This workflow often involves additional CERN tools
+like <a href="https://rucio.cern.ch/" class="external-link">Rucio</a> for dataset discovery
+and manual steps, like using <code>hadd</code> to merge ROOT files.
+However, Snakemake and REANA offer a powerful solution to automate and
+streamline these tasks. Let’s explore how we can leverage their
+capabilities to handle this complex scenario.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -1935,7 +1956,12 @@ any links that you are not going to use.
 </ul>
 </div>
 </div>
-</div></section>
+</div>
+<!--
+Place links that you need to refer to multiple times across pages here. Delete
+any links that you are not going to use.
+ -->
+</section></section>
 </div>
     </main>
 </div>
