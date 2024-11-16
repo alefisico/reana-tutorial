@@ -190,6 +190,47 @@ This interface provides valuable insights into your workflow's status and execut
 
 :::::::::::::::::::::::::::::::::::::::::::::::::
 
+Are you getting this error:
+
+```OUTPUT
+job: :
+ mkdir: cannot create directory ‘./output’: Permission denied
+Error in <TFile::TFile>: file /code/CMSSW_13_0_10/src/./SUSY/DY.root does not exist
+```
+
+A key feature of REANA-like platforms is that your workflow must be self-contained within the REANA environment. This means that your workflow needs to access its input files and write its output files to specific locations within the REANA workspace.
+
+In this example, notice the following lines at the beginning of the Snakefile:
+
+```
+# Define output folder
+# output_dir = "$REANA_WORKSPACE"
+output_dir = "."
+```
+
+The commented-out line `output_dir = "$REANA_WORKSPACE"` demonstrates how to correctly specify the output directory using a REANA environment variable. REANA provides several environment variables to help you interact with the platform. A comprehensive list of these variables can be found in the REANA documentation. 
+
+:::::::::::: instructor
+It will be nice to have a list of REANA variables
+:::::::::::::::::::::::::::
+
+This example demonstrates how to make modifications to your REANA workflow. In this case, after correcting the `output_dir` in your `Snakefile`, you'll need to reupload the file to the REANA platform.
+
+To **reupload** the modified `Snakefile`, use the following command:
+
+```BASH
+reana-client upload -w test_SUSY Snakefile
+```
+
+You can upload multiple files as needed. Once you're satisfied with the updated files in your REANA workspace, you can resubmit the workflow:
+
+```BASH
+reana-client restart -w test_SUSY
+```
+
+You can monitor the status of your workflow either through the command line or the web interface. Note that the workflow name will now include a number (e.g., `test_SUSY.1`). This indicates that you're running a modified version of the original workflow.
+
+
 :::::: keypoints
  - keypoint 1
  - keypoint 2
