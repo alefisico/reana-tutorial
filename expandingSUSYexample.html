@@ -253,6 +253,7 @@
       <div class="accordion-body">
         <ul><li><a href="#a-more-real-susy-analysis">A more real SUSY analysis</a></li>
 <li><a href="#reana-resources">REANA resources</a></li>
+<li><a href="#more-reana-examples">More REANA examples</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -551,7 +552,67 @@ seamless and secure workflow.</em></p>
 </div>
 </div>
 </div>
-<div id="keypoints1" class="callout keypoints">
+</div>
+<div class="section level3">
+<h3 id="computer-backends">Computer backends<a class="anchor" aria-label="anchor" href="#computer-backends"></a></h3>
+<p>By default, REANA utilizes Kubernetes as its computing backend. This
+allows you to easily scale your workflows and allocate resources as
+needed. For instance, to increase the memory allocated to a specific
+rule, you can specify it in the resources section:</p>
+<pre><code>rule skimming:
+    ...
+    resources:
+        compute_backend="kubernetes",
+        kubernetes_memory_limit="8Gi",
+    ...</code></pre>
+<p>Note that Kubernetes imposes a maximum memory limit of
+<code>9.5Gi</code> per container.</p>
+<p>For more demanding workloads or specific resource requirements, REANA
+also supports integration with <a href="https://docs.reana.io/advanced-usage/compute-backends/htcondor/" class="external-link">HTCondor</a>
+and <a href="https://docs.reana.io/advanced-usage/compute-backends/slurm/" class="external-link">Slurm</a>.
+These backends can provide access to larger computing resources and more
+flexible scheduling options, but their usage is outside the scope of
+this tutorial. Please refer to the official documentation for more
+information.</p>
+</div>
+<div class="section level3">
+<h3 id="storage-backends">Storage backends<a class="anchor" aria-label="anchor" href="#storage-backends"></a></h3>
+<p>Each REANA user is allocated 300GB of storage space on the platform.
+(This is visible in under your profile in the web interface). While this
+is typically sufficient for most workflows, you can leverage REANA’s
+integration with your personal EOS storage area for larger datasets. To
+enable this integration, ensure that your Kerberos credentials are
+configured correctly in your REANA profile.</p>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  After you create your secrets, go ahead and try to run this workflow
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<p>In this case, the workflow should work perfectly.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="more-reana-examples">More REANA examples<a class="anchor" aria-label="anchor" href="#more-reana-examples"></a></h2>
+<hr class="half-width"><p>The REANA team has a compilation of examples in their <a href="https://github.com/reanahub?q=reana-demo&amp;type=all&amp;language=&amp;sort=" class="external-link">github
+area</a>. It is well recommended to visit them for more inspiration.</p>
+<p>In addition, users can seek for support and help in the following
+channels:</p>
+<ul><li>REANA official <a href="https://mattermost.web.cern.ch/it-dep/channels/reana" class="external-link">mattemost
+channel</a>
+</li>
+<li>REANA <a href="https://forum.reana.io/" class="external-link">forum</a>
+</li>
+<li>CMS-REANA <a href="https://mattermost.web.cern.ch/cms-exp/channels/cat-reana-support" class="external-link">mattermost
+channel</a>
+</li>
+</ul><div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
 </div>
@@ -567,7 +628,6 @@ seamless and secure workflow.</em></p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="REANA.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
