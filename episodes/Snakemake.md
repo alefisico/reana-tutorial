@@ -405,6 +405,9 @@ By effectively using wildcards, you can significantly simplify your Snakemake wo
 
 This is just an overview of the capabilities of Snakemake. As a widely used program, you can find numerous resources online. For more information, you can also visit their [official website](https://snakemake.readthedocs.io).
 
+In addition, Snakemake has a public catalog of thousands of workflow in many fields. If you want to see more sophisticated examples, please follow the link to the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog/).
+
+
 :::::::::::::::::::::: keypoints
 
 - Snakemake automates complex computational pipelines, ensuring efficient resource utilization and avoiding unnecessary computations.
