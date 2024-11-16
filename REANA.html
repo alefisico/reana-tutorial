@@ -244,6 +244,7 @@
       <div class="accordion-body">
         <ul><li><a href="#understanding-the-basics">Understanding the Basics</a></li>
 <li><a href="#more-advance-reana-commands">More advance REANA commands</a></li>
+<li><a href="#checking-workflow-outputs-and-reports">Checking Workflow Outputs and Reports</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -555,7 +556,7 @@ and start your workflow. You can try:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Unfortunately, not yet</p>
 <p>But before throwing your laptop out the window, don’t worry, this
@@ -649,6 +650,48 @@ workflow:</p>
 command line or the web interface. Note that the workflow name will now
 include a number (e.g., <code>test_SUSY.1</code>). This indicates that
 you’re running a modified version of the original workflow.</p>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div class="accordion-body">
+<p>Finally yes!</p>
+</div>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="checking-workflow-outputs-and-reports">Checking Workflow Outputs and Reports<a class="anchor" aria-label="anchor" href="#checking-workflow-outputs-and-reports"></a></h2>
+<hr class="half-width"><p>Once your workflow completes successfully, you can access its
+outputs.</p>
+<div class="section level3">
+<h3 id="viewing-the-snakemake-report">Viewing the Snakemake Report:<a class="anchor" aria-label="anchor" href="#viewing-the-snakemake-report"></a></h3>
+<p>A valuable feature of REANA’s Snakemake integration is the generation
+of a detailed report. In the REANA web interface, navigate to the
+<code>Workspace</code> section and locate the <code>report.html</code>
+file. This HTML file provides valuable insights into your workflow’s
+execution, including statistics and visualizations.</p>
+<figure><img src="fig/Snakefile_report.png" class="figure mx-auto d-block"></figure></div>
+<div class="section level3">
+<h3 id="downloading-workflow-outputs">Downloading Workflow Outputs:<a class="anchor" aria-label="anchor" href="#downloading-workflow-outputs"></a></h3>
+<p>To download the workflow’s output files, you have two options:</p>
+<ul><li>Manual Download:
+<ul><li>Navigate to the Workspace section of the REANA web interface.</li>
+<li>Click on the desired files to download them individually.</li>
+</ul></li>
+<li>Command-line Download:
+<ul><li>Use the following command to download all output files specified in
+the reana.yaml file into a compressed ZIP file:</li>
+</ul></li>
+</ul><div class="codewrapper sourceCode" id="cb15">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="ex">reana-client</span> download <span class="at">-w</span> test_SUSY</span></code></pre>
+</div>
+<p>Remember that the <code>download</code> command will only retrieve
+the files explicitly listed in the <code>outputs</code> section of your
+<code>reana.yaml</code> configuration.</p>
 <div id="keypoints1" class="callout keypoints">
 <div class="callout-square">
 <i class="callout-icon" data-feather="key"></i>
@@ -665,6 +708,7 @@ you’re running a modified version of the original workflow.</p>
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
+</div>
 </section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="SUSYexample.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
