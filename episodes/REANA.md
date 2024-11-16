@@ -1,17 +1,17 @@
 ---
 title: "Running workflows in REANA"
-teaching:
-exercises:
+teaching: 20
+exercises: 10
 ---
 
 :::::: questions
- - question 1
- - question 2
+ - What is REANA and how does it enhance the reproducibility of scientific research?
+ - How does REANA leverage containerization technology and cloud computing resources to simplify the management of computational environments and data dependencies?
 ::::::
 
 :::::: objectives
- - objective 1
- - objective 2
+ - Understand how to define, execute, and share complex data analysis workflows using REANA.
+ - Learn how REANA leverages containerization technology and cloud computing resources to simplify the management of computational environments, data dependencies, and execution pipelines.
 ::::::
 
 
@@ -269,6 +269,6 @@ Remember that the `download` command will only retrieve the files explicitly lis
 
 
 :::::: keypoints
- - keypoint 1
- - keypoint 2
+ - REANA is more than just a platform for reproducible analysis; it's a comprehensive analysis facility capable of handling large-scale high-energy physics workflows.
+ - To ensure reproducibility, it's crucial to make our workflows independent of the specific analysis facility, such as REANA.
 ::::::
