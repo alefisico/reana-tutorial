@@ -1,5 +1,5 @@
 ---
-title: "A simple analysis from SUSY"
+title: "A simple SUSY analysis"
 teaching: 15 
 exercises: 5
 ---
