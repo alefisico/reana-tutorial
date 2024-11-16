@@ -230,6 +230,43 @@ reana-client restart -w test_SUSY
 
 You can monitor the status of your workflow either through the command line or the web interface. Note that the workflow name will now include a number (e.g., `test_SUSY.1`). This indicates that you're running a modified version of the original workflow.
 
+::::::::::: spoiler
+
+### Did the workflow finish succesfully now?
+
+Finally yes!
+
+::::::::::::::::::::
+
+
+## Checking Workflow Outputs and Reports
+
+Once your workflow completes successfully, you can access its outputs.
+
+### Viewing the Snakemake Report:
+
+A valuable feature of REANA's Snakemake integration is the generation of a detailed report. In the REANA web interface, navigate to the `Workspace` section and locate the `report.html` file. This HTML file provides valuable insights into your workflow's execution, including statistics and visualizations.
+
+![](episodes/fig/Snakefile_report.png)
+
+### Downloading Workflow Outputs:
+
+To download the workflow's output files, you have two options:
+
+* Manual Download:
+    * Navigate to the Workspace section of the REANA web interface.
+    * Click on the desired files to download them individually.
+
+* Command-line Download:
+    * Use the following command to download all output files specified in the reana.yaml file into a compressed ZIP file:
+
+```BASH
+reana-client download -w test_SUSY
+```
+
+Remember that the `download` command will only retrieve the files explicitly listed in the `outputs` section of your `reana.yaml` configuration.
+
+
 
 :::::: keypoints
  - keypoint 1
