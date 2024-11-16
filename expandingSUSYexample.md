@@ -181,6 +181,46 @@ _We strongly recommend using the automatic generation method for a seamless and 
 
 :::::::::::::::::::::::::::
 
+### Computer backends
+
+By default, REANA utilizes Kubernetes as its computing backend. This allows you to easily scale your workflows and allocate resources as needed. For instance, to increase the memory allocated to a specific rule, you can specify it in the resources section:
+
+```
+rule skimming:
+    ...
+    resources:
+        compute_backend="kubernetes",
+        kubernetes_memory_limit="8Gi",
+    ...
+```
+
+Note that Kubernetes imposes a maximum memory limit of `9.5Gi` per container.
+
+For more demanding workloads or specific resource requirements, REANA also supports integration with [HTCondor](https://docs.reana.io/advanced-usage/compute-backends/htcondor/) and [Slurm](https://docs.reana.io/advanced-usage/compute-backends/slurm/). These backends can provide access to larger computing resources and more flexible scheduling options, but their usage is outside the scope of this tutorial. Please refer to the official documentation for more information. 
+
+### Storage backends
+
+Each REANA user is allocated 300GB of storage space on the platform. (This is visible in under your profile in the web interface). While this is typically sufficient for most workflows, you can leverage REANA's integration with your personal EOS storage area for larger datasets. To enable this integration, ensure that your Kerberos credentials are configured correctly in your REANA profile.
+
+:::::: spoiler
+
+### After you create your secrets, go ahead and try to run this workflow
+
+In this case, the workflow should work perfectly.
+
+:::::::::::::::
+
+
+## More REANA examples
+
+The REANA team has a compilation of examples in their [github area](https://github.com/reanahub?q=reana-demo&type=all&language=&sort=). It is well recommended to visit them for more inspiration.
+
+In addition, users can seek for support and help in the following channels:
+
+ * REANA official [mattemost channel](https://mattermost.web.cern.ch/it-dep/channels/reana)
+ * REANA [forum](https://forum.reana.io/)
+ * CMS-REANA [mattermost channel](https://mattermost.web.cern.ch/cms-exp/channels/cat-reana-support)
+
 
 :::::: keypoints
  - keypoint 1
