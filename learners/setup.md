@@ -9,7 +9,66 @@ This tutorial is your comprehensive guide to workflow automation. You'll learn:
  * The benefits of cloud-based workflow execution with the [REANA](https://reana.cern.ch/) platform
  * How to migrate your local Snakemake workflows to the REANA environment
 
-To set up Snakemake and REANA packages, you can follow these instructions.
+## Basic knowledge
+
+This tutorial assumes that the user has basic knowledge on `git`, `singularity` or `docker` containers, `python` and `CMSSW`. 
+
+
+## REANA setup
+
+REANA is a platform where you can submit your jobs. Think about it more of an Analysis Facility. To create an account you can follow the [oficial documentation](https://docs.reana.io/getting-started/first-example/) or just go to [https://reana.cern.ch](https://reana.cern.ch) to create your **access token**. This token is important since you need to use it everytime that you want to submit jobs to REANA. This step can take some minutes, depending on how busy the REANA team are approving their request.
+
+You can submit jobs to REANA from _any machine_. If you want to use lxplus, you just need to activate the following environment:
+```BASH
+source /afs/cern.ch/user/r/reana/public/reana/bin/activate
+```
+
+After this, you can make a test that your REANA account works by running:
+```BASH
+export REANA_SERVER_URL=https://reana.cern.ch
+export REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxx
+reana-client ping
+```
+
+:::::::::::::::: spoiler
+
+### Using a container
+
+In my opinion, using a container is the easiest way to interact with the REANA cluster from _any machine_. To do that you can use:
+```BASH
+apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping
+```
+You can save this in a bash script for convenience, or in your `.bashrc` as:
+```BASH
+reana_client ()
+{ 
+    local base_command="apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3";
+    if [[ $# -eq 0 ]]; then
+        echo "Usage: reana_client <command> [arguments]";
+        return 1;
+    fi;
+    local command="$1";
+    shift;
+    run_reana_cmd="$base_command $command $@";
+    eval "$run_reana_cmd"
+}
+```
+and, after reloading your `.bashrc`, then simply:
+```BASH
+reana-client ping
+```
+::::::::::::::::::::::::
+
+
+
+:::::::: callout
+
+### If you are using lxplus
+
+If you are only using lxplus, activating the reana environment is enough to use REANA and Snakemake. If you are **not** in lxplus, please follow the instructions below to use Snakemake.
+
+::::::::::::::::::::::
+
 
 
 ## Snakemake setup
@@ -76,54 +135,3 @@ snakemake --help
 :::::::::::::::::::::::instructor
 The rest of the tutorial will assume that the bash function exists. So better to emphasize to do that.
 :::::::::::::::::::::::
-
-
-## REANA setup
-
-REANA is a platform where you can submit your jobs. Think about it more of an Analysis Facility. To create an account you can follow the [oficial documentation](https://docs.reana.io/getting-started/first-example/) or just go to [https://reana.cern.ch](https://reana.cern.ch) to create your **access token**. This token is important since you need to use it everytime that you want to submit jobs to REANA. This step can take some minutes, depending on how busy the REANA team are approving their request.
-
-You can submit jobs to REANA from _any machine_. If you want to use lxplus, you just need to activate the following environment:
-```BASH
-source /afs/cern.ch/user/r/reana/public/reana/bin/activate
-```
-
-After this, you can make a test that your REANA account works by running:
-```BASH
-export REANA_SERVER_URL=https://reana.cern.ch
-export REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxx
-reana-client ping
-```
-
-:::::::::::::::: spoiler
-
-### Using a container
-
-In my opinion, using a container is the easiest way to interact with the REANA cluster from _any machine_. To do that you can use:
-```BASH
-apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping
-```
-You can save this in a bash script for convenience, or in your `.bashrc` as:
-```BASH
-reana_client ()
-{ 
-    local base_command="apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3";
-    if [[ $# -eq 0 ]]; then
-        echo "Usage: reana_client <command> [arguments]";
-        return 1;
-    fi;
-    local command="$1";
-    shift;
-    run_reana_cmd="$base_command $command $@";
-    eval "$run_reana_cmd"
-}
-```
-and, after reloading your `.bashrc`, then simply:
-```BASH
-reana-client ping
-```
-::::::::::::::::::::::::
-
-
-## Git
-
-In addition, this tutorial assumes that you are confident in the use of `git`. 
