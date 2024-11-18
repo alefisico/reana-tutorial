@@ -120,7 +120,7 @@ total              3
 This step verifies first if the snakefile contains a workflow that can be run, and second it verifies that the inputs in the `reana.yaml` file are correct. If everything looks ok, we can create a workflow called `test_SUSY` within the platform:
 
 ```BASH
-reana_client create -w test_SUSY -f reana.yaml
+reana-client create -w test_SUSY -f reana.yaml
 ```
 
 Remember that this step will only create the workflow within REANA, you can verify it by looking at [https://reana.cern.ch/](https://reana.cern.ch/) or by running:
