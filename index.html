@@ -206,9 +206,9 @@
 
     <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
       <div class="accordion-body">
-        <ul><li><a href="#snakemake-setup">Snakemake setup</a></li>
+        <ul><li><a href="#basic-knowledge">Basic knowledge</a></li>
 <li><a href="#reana-setup">REANA setup</a></li>
-<li><a href="#git">Git</a></li>
+<li><a href="#snakemake-setup">Snakemake setup</a></li>
         </ul></div><!--/div.accordion-body-->
     </div><!--/div.accordion-collapse-->
 
@@ -329,9 +329,90 @@ role in streamlining data analysis pipelines</li>
 <li>The benefits of cloud-based workflow execution with the <a href="https://reana.cern.ch/" class="external-link">REANA</a> platform</li>
 <li>How to migrate your local Snakemake workflows to the REANA
 environment</li>
-</ul><p>To set up Snakemake and REANA packages, you can follow these
-instructions.</p>
-<section><h2 class="section-heading" id="snakemake-setup">Snakemake setup<a class="anchor" aria-label="anchor" href="#snakemake-setup"></a></h2>
+</ul><section><h2 class="section-heading" id="basic-knowledge">Basic knowledge<a class="anchor" aria-label="anchor" href="#basic-knowledge"></a></h2>
+<hr class="half-width"><p>This tutorial assumes that the user has basic knowledge on
+<code>git</code>, <code>singularity</code> or <code>docker</code>
+containers, <code>python</code> and <code>CMSSW</code>.</p>
+</section><section><h2 class="section-heading" id="reana-setup">REANA setup<a class="anchor" aria-label="anchor" href="#reana-setup"></a></h2>
+<hr class="half-width"><p>REANA is a platform where you can submit your jobs. Think about it
+more of an Analysis Facility. To create an account you can follow the <a href="https://docs.reana.io/getting-started/first-example/" class="external-link">oficial
+documentation</a> or just go to <a href="https://reana.cern.ch" class="external-link">https://reana.cern.ch</a> to create your
+<strong>access token</strong>. This token is important since you need to
+use it everytime that you want to submit jobs to REANA. This step can
+take some minutes, depending on how busy the REANA team are approving
+their request.</p>
+<p>You can submit jobs to REANA from <em>any machine</em>. If you want
+to use lxplus, you just need to activate the following environment:</p>
+<div class="codewrapper sourceCode" id="cb1">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="bu">source</span> /afs/cern.ch/user/r/reana/public/reana/bin/activate</span></code></pre>
+</div>
+<p>After this, you can make a test that your REANA account works by
+running:</p>
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_SERVER_URL</span><span class="op">=</span>https://reana.cern.ch</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_ACCESS_TOKEN</span><span class="op">=</span>xxxxxxxxxxxxxxxxxxx</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div class="accordion-body">
+<p>In my opinion, using a container is the easiest way to interact with
+the REANA cluster from <em>any machine</em>. To do that you can use:</p>
+<div class="codewrapper sourceCode" id="cb3">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
+</div>
+<p>You can save this in a bash script for convenience, or in your
+<code>.bashrc</code> as:</p>
+<div class="codewrapper sourceCode" id="cb4">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">reana_client ()</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3"</span><span class="kw">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: reana_client &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="va">run_reana_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_reana_cmd</span><span class="st">"</span></span>
+<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+</div>
+<p>and, after reloading your <code>.bashrc</code>, then simply:</p>
+<div class="codewrapper sourceCode" id="cb5">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="if-you-are-using-lxplus" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="if-you-are-using-lxplus" class="callout-inner">
+<h3 class="callout-title">If you are using lxplus</h3>
+<div class="callout-content">
+<p>If you are only using lxplus, activating the reana environment is
+enough to use REANA and Snakemake. If you are <strong>not</strong> in
+lxplus, please follow the instructions below to use Snakemake.</p>
+</div>
+</div>
+</div>
+</section><section><h2 class="section-heading" id="snakemake-setup">Snakemake setup<a class="anchor" aria-label="anchor" href="#snakemake-setup"></a></h2>
 <hr class="half-width"><p>To install snakemake <a href="https://snakemake.readthedocs.io/en/stable/getting_started/installation.html" class="external-link">here</a>
 is the official documentation on how to install it in your machine.
 Since we will run some jobs locally in your machine, we can use
@@ -348,38 +429,38 @@ our jobs. This is the simplest solution if you dont want/can install the
 official package in your machine. Other advantage is that one can keep
 the analysis environment clean this way.</p>
 <p>An example in lxplus:</p>
-<div class="codewrapper sourceCode" id="cb1">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
 </div>
 <p>One can include these lines in a bash script.</p>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Another simpler solution is to include a bash function in your
 <code>.bashrc</code> or <code>.bash_aliases</code>. For
 <code>.bash_aliases</code>:</p>
-<div class="codewrapper sourceCode" id="cb2">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">run_snakemake ()</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="kw">{</span> </span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security &amp;&amp; apptainer exec -B </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv docker://snakemake/snakemake"</span><span class="kw">;</span></span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: run_snakemake &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">run_snakemake_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_snakemake_cmd</span><span class="st">"</span></span>
-<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">run_snakemake ()</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security &amp;&amp; apptainer exec -B </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv docker://snakemake/snakemake"</span><span class="kw">;</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: run_snakemake &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">run_snakemake_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_snakemake_cmd</span><span class="st">"</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
 </div>
 <p>Reload your <code>.bashrc</code> and then you can just run it from
 anywhere as</p>
@@ -391,20 +472,20 @@ anywhere as</p>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>Conda is a popular package and environment management system. To
 install Snakemake using conda, you can use the following command in your
 terminal:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> snakemake snakemake</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> snakemake snakemake</span></code></pre>
 </div>
 </div>
 </div>
@@ -413,78 +494,10 @@ terminal:</p>
 <p>To test that everything works, you can run the following command:</p>
 <pre><code><span><span class="va">snakemake</span> <span class="op">-</span><span class="op">-</span><span class="va">help</span></span></code></pre>
 
-</section><section><h2 class="section-heading" id="reana-setup">REANA setup<a class="anchor" aria-label="anchor" href="#reana-setup"></a></h2>
-<hr class="half-width"><p>REANA is a platform where you can submit your jobs. Think about it
-more of an Analysis Facility. To create an account you can follow the <a href="https://docs.reana.io/getting-started/first-example/" class="external-link">oficial
-documentation</a> or just go to <a href="https://reana.cern.ch" class="external-link">https://reana.cern.ch</a> to create your
-<strong>access token</strong>. This token is important since you need to
-use it everytime that you want to submit jobs to REANA. This step can
-take some minutes, depending on how busy the REANA team are approving
-their request.</p>
-<p>You can submit jobs to REANA from <em>any machine</em>. If you want
-to use lxplus, you just need to activate the following environment:</p>
-<div class="codewrapper sourceCode" id="cb6">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">source</span> /afs/cern.ch/user/r/reana/public/reana/bin/activate</span></code></pre>
-</div>
-<p>After this, you can make a test that your REANA account works by
-running:</p>
-<div class="codewrapper sourceCode" id="cb7">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_SERVER_URL</span><span class="op">=</span>https://reana.cern.ch</span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="bu">export</span> <span class="va">REANA_ACCESS_TOKEN</span><span class="op">=</span>xxxxxxxxxxxxxxxxxxx</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
-</div>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
-<div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
-</button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
-<div class="accordion-body">
-<p>In my opinion, using a container is the easiest way to interact with
-the REANA cluster from <em>any machine</em>. To do that you can use:</p>
-<div class="codewrapper sourceCode" id="cb8">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
-</div>
-<p>You can save this in a bash script for convenience, or in your
-<code>.bashrc</code> as:</p>
-<div class="codewrapper sourceCode" id="cb9">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">reana_client ()</span></span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">{</span> </span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3"</span><span class="kw">;</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: reana_client &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
-<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="va">run_reana_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_reana_cmd</span><span class="st">"</span></span>
-<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
-</div>
-<p>and, after reloading your <code>.bashrc</code>, then simply:</p>
-<div class="codewrapper sourceCode" id="cb10">
-<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
-</h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section><section><h2 class="section-heading" id="git">Git<a class="anchor" aria-label="anchor" href="#git"></a></h2>
-<hr class="half-width"><p>In addition, this tutorial assumes that you are confident in the use
-of <code>git</code>. <!--
+<!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
- --></p>
+ -->
 </section></section></main><nav class="bottom-pagination mx-md-4" aria-label="Next Chapter"><!-- content for small screens --><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link float-end" href="introduction.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
       </div>
