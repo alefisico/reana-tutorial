@@ -135,3 +135,11 @@ snakemake --help
 :::::::::::::::::::::::instructor
 The rest of the tutorial will assume that the bash function exists. So better to emphasize to do that.
 :::::::::::::::::::::::
+
+::::::::::::: discussion
+
+## Important Information about the tutorial
+
+Please note that some steps in this tutorial are **intentionally designed to produce errors**. These errors will highlight specific features and capabilities of the tools involved. If you encounter any errors, please continue following the tutorial to understand the underlying concepts.
+
+::::::::::::::::::::::::::::::::
