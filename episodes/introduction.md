@@ -6,18 +6,17 @@ exercises: 2
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- Could you describe each step of your analysis?
+- 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- Explain the concept of workflows
-- Demonstrate how workflows are a natural procedure to follow in an analyst's life.
+- 
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-## The (short) life of a HEX analysis
+<!-- ## The (short) life of a HEX analysis
 
 
 
@@ -135,4 +134,4 @@ Cool, right?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-[r-markdown]: https://rmarkdown.rstudio.com/
+[r-markdown]: https://rmarkdown.rstudio.com/ -->
