@@ -9,6 +9,14 @@ This tutorial is your comprehensive guide to workflow automation. You'll learn:
  * The benefits of cloud-based workflow execution with the [REANA](https://reana.cern.ch/) platform
  * How to migrate your local Snakemake workflows to the REANA environment
 
+::::::::::::: discussion
+
+## Important Information about the tutorial
+
+Please note that some steps in this tutorial are **intentionally designed to produce errors**. These errors will highlight specific features and capabilities of the tools involved. If you encounter any errors, please continue following the tutorial to understand the underlying concepts.
+
+::::::::::::::::::::::::::::::::
+
 ## Basic knowledge
 
 This tutorial assumes that the user has basic knowledge on `git`, `singularity` or `docker` containers, `python` and `CMSSW`. 
@@ -136,10 +144,3 @@ snakemake --help
 The rest of the tutorial will assume that the bash function exists. So better to emphasize to do that.
 :::::::::::::::::::::::
 
-::::::::::::: discussion
-
-## Important Information about the tutorial
-
-Please note that some steps in this tutorial are **intentionally designed to produce errors**. These errors will highlight specific features and capabilities of the tools involved. If you encounter any errors, please continue following the tutorial to understand the underlying concepts.
-
-::::::::::::::::::::::::::::::::

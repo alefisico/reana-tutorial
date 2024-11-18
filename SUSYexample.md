@@ -128,12 +128,12 @@ snakemake --snakefile Snakefile --configfile inputs.yaml
 
 ### Did the workflow finish succesfully?
 
-While we've covered the core concepts of Snakemake, there are numerous additional flags that can be used to customize and optimize your workflows. One such flag is `--use-apptainer`, which is essential when running rules within containerized environments.
+While we've covered the core concepts of Snakemake, there are numerous additional flags that can be used to customize and optimize your workflows. One such flag is `--use-singularity` (or `--use-apptainer` in newer Snakemake versions), which is essential when running rules within containerized environments.
 
 By using `--use-apptainer`, Snakemake ensures that the specified container is utilized for each rule's execution, providing a consistent and isolated environment for your workflow. Let's try our example with
 
 ```BASH
-snakemake --snakefile Snakefile --configfile inputs.yaml --use-apptainer
+snakemake --snakefile Snakefile --configfile inputs.yaml --use-singularity
 ```
 ::::::::::::::::
 
