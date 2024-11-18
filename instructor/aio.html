@@ -1020,7 +1020,7 @@ any links that you are not going to use.
 </div>
 </section></section><section id="aio-SUSYexample"><p>Content from <a href="SUSYexample.html">A simple SUSY analysis</a></p>
 <hr>
-<p>Last updated on 2024-11-16 |
+<p>Last updated on 2024-11-18 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/SUSYexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 <p>Estimated time: <i aria-hidden="true" data-feather="clock"></i> 20 minutes</p>
@@ -1208,7 +1208,8 @@ does like everything is correct, you can try to run it:</p>
 <div class="callout-content">
 <p>While we’ve covered the core concepts of Snakemake, there are
 numerous additional flags that can be used to customize and optimize
-your workflows. One such flag is <code>--use-apptainer</code>, which is
+your workflows. One such flag is <code>--use-singularity</code> (or
+<code>--use-apptainer</code> in newer Snakemake versions), which is
 essential when running rules within containerized environments.</p>
 <p>By using <code>--use-apptainer</code>, Snakemake ensures that the
 specified container is utilized for each rule’s execution, providing a
@@ -1217,7 +1218,7 @@ example with</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--use-apptainer</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--use-singularity</span></span></code></pre>
 </div>
 </div>
 </div>
@@ -1230,7 +1231,7 @@ example with</p>
   Did the workflow finish succesfully now?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>If the previous Snakemake command didn’t execute as expected, it’s
 likely due to the requirement for access to CERN tools like CVMFS, EOS,
@@ -1520,7 +1521,7 @@ and start your workflow. You can try:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>Unfortunately, not yet</p>
 <p>But before throwing your laptop out the window, don’t worry, this
@@ -1599,7 +1600,7 @@ variables can be found in the REANA documentation.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
 <div class="accordion-body">
 <p>It will be nice to have a list of REANA variables</p>
 </div>
@@ -1634,7 +1635,7 @@ you’re running a modified version of the original workflow.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
 <div class="accordion-body">
 <p>Finally yes!</p>
 </div>

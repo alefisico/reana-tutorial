@@ -329,7 +329,22 @@ role in streamlining data analysis pipelines</li>
 <li>The benefits of cloud-based workflow execution with the <a href="https://reana.cern.ch/" class="external-link">REANA</a> platform</li>
 <li>How to migrate your local Snakemake workflows to the REANA
 environment</li>
-</ul><section><h2 class="section-heading" id="basic-knowledge">Basic knowledge<a class="anchor" aria-label="anchor" href="#basic-knowledge"></a></h2>
+</ul><div id="important-information-about-the-tutorial" class="callout discussion">
+<div class="callout-square">
+<i class="callout-icon" data-feather="message-circle"></i>
+</div>
+<div id="important-information-about-the-tutorial" class="callout-inner">
+<h3 class="callout-title">Important Information about the tutorial</h3>
+<div class="callout-content">
+<p>Please note that some steps in this tutorial are
+<strong>intentionally designed to produce errors</strong>. These errors
+will highlight specific features and capabilities of the tools involved.
+If you encounter any errors, please continue following the tutorial to
+understand the underlying concepts.</p>
+</div>
+</div>
+</div>
+<section><h2 class="section-heading" id="basic-knowledge">Basic knowledge<a class="anchor" aria-label="anchor" href="#basic-knowledge"></a></h2>
 <hr class="half-width"><p>This tutorial assumes that the user has basic knowledge on
 <code>git</code>, <code>singularity</code> or <code>docker</code>
 containers, <code>python</code> and <code>CMSSW</code>.</p>
@@ -362,7 +377,7 @@ running:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>In my opinion, using a container is the easiest way to interact with
 the REANA cluster from <em>any machine</em>. To do that you can use:</p>
@@ -441,7 +456,7 @@ the analysis environment clean this way.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Another simpler solution is to include a bash function in your
 <code>.bashrc</code> or <code>.bash_aliases</code>. For
@@ -477,7 +492,7 @@ anywhere as</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
   <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler3" aria-labelledby="headingSpoiler3">
 <div class="accordion-body">
 <p>Conda is a popular package and environment management system. To
 install Snakemake using conda, you can use the following command in your
@@ -494,21 +509,6 @@ terminal:</p>
 <p>To test that everything works, you can run the following command:</p>
 <pre><code><span><span class="va">snakemake</span> <span class="op">-</span><span class="op">-</span><span class="va">help</span></span></code></pre>
 
-<div id="important-information-about-the-tutorial" class="callout discussion">
-<div class="callout-square">
-<i class="callout-icon" data-feather="message-circle"></i>
-</div>
-<div id="important-information-about-the-tutorial" class="callout-inner">
-<h3 class="callout-title">Important Information about the tutorial</h3>
-<div class="callout-content">
-<p>Please note that some steps in this tutorial are
-<strong>intentionally designed to produce errors</strong>. These errors
-will highlight specific features and capabilities of the tools involved.
-If you encounter any errors, please continue following the tutorial to
-understand the underlying concepts.</p>
-</div>
-</div>
-</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
