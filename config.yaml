@@ -12,7 +12,7 @@
 # This option supports custom types so lessons can be branded
 # and themed with your own logo and alt-text (see `carpentry_description`)
 # See https://carpentries.github.io/sandpaper-docs/editing.html#adding-a-custom-logo
-carpentry: ''
+carpentry: 'cmscat'
 
 # Alt-text description of the lesson.
 carpentry_description: 'CMS Snakemake Reana tutorial'
@@ -23,7 +23,7 @@ title: 'CMS-CAT Snakemake/REANA tutorial' # FIXME
 carpentry_logo: 'episodes/fig/QRCode_CodeOfConduct.png'
 
 # Date the lesson was created (YYYY-MM-DD, this is empty by default)
-created: ~ # FIXME
+created: 2024-11-18
 
 # Comma-separated list of keywords for the lesson
 keywords: 'CMS, CERN, CAT, snakemake, reana' # FIXME
