@@ -18,14 +18,15 @@ exercises: 0
 
 Work in progress.... please go to the next episode.
 
-<!-- ## The (short) life of a HEX analysis
+<!-- 
 
+## The (short) life of a HEX analysis
 
 
 
 ## Reproducibility
 
-Reproducibility is a cornerstone of scientific research, and HEP is no exception.
+Reproducibility is a cornerstone of scientific research, and HEX is no exception.
 It ensures that experimental results can be verified independently, bolstering the credibility of scientific findings. 
 To achieve reproducibility, researchers must provide detailed descriptions of their methodologies, including the tools, datasets, and parameters used. 
 This allows others to replicate the experiments and compare their results. 
