@@ -83,6 +83,13 @@ Let's explore a three-step approach:
 
 By implementing these steps, we can significantly improve the reproducibility, maintainability, and shareability of our physics analyses.
 
+:::::::::::::::::::::::::::::::::::::::::::::::::::::: callout
+
+## A quick remark on LAW
+
+While some analysts utilize the Luigi Analysis Workflow (LAW) ([https://github.com/riga/law]), a workflow orchestration tool built on top of Spotify's Luigi ([https://github.com/spotify/luigi]) and developed by a CMS physicist, this tutorial focuses on Snakemake. Both LAW and Snakemake are excellent tools, and if you're already using LAW for your workflow management, that's great!
+
+::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 ## What does reproducibility has to do with me?
 
