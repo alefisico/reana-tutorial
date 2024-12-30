@@ -1,18 +1,20 @@
 ---
 title: "Let's talk about workflows"
-teaching: 5
+teaching: 10
 exercises: 0
 ---
 
 :::::::::::::::::::::::::::::::::::::: questions 
 
-- 
+- What are the common challenges faced in CMS analysis?
+- How can workflow orchestration tools help in capturing the intricate steps involved in producing results in CMS analysis?
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::: objectives
 
-- 
+- Understand the common challenges faced in CMS analysis.
+- Learn how workflow orchestration tools can assist in capturing the intricate steps involved in producing results in CMS analysis.
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
@@ -103,3 +105,16 @@ Me, myself and my group. :grin:
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
+While we've discussed capturing entire CMS analyses, the benefits of reproducible workflows extend beyond best practices.
+
+* Streamlining Repetitive Tasks: Many analyses involve numerous small, repetitive steps. Workflow orchestration tools automate these tasks, saving significant time and resources.
+ * Facilitating Future Revisions: With increasingly complex analyses and rigorous CMS review processes, the need to revisit and modify earlier steps in the analysis is inevitable. A well-defined workflow ensures that these revisions can be implemented efficiently and accurately, preventing the need to "reinvent the wheel."
+
+Ultimately, remember that the most frequent user of your analysis code will be your future self.
+
+:::::::::::::::::::: keypoints
+
+ - Workflow orchestration tools automate repetitive tasks, saving time and resources.
+ - Well-defined workflows facilitate efficient and accurate revisions in complex analyses.
+
+::::::::::::::::::::::::::::::::
