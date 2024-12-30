@@ -205,12 +205,21 @@
 <div class="accordion accordion-flush" id="accordionFlushcurrent">
   <div class="accordion-item">
     <div class="accordion-header" id="flush-headingcurrent">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsecurrent" aria-expanded="true" aria-controls="flush-collapsecurrent">
         <span class="visually-hidden">Current Chapter</span>
         <span class="current-chapter">
         1. Let's talk about workflows
         </span>
-      
+      </button>
     </div><!--/div.accordion-header-->
+
+    <div id="flush-collapsecurrent" class="accordion-collapse collapse show" aria-labelledby="flush-headingcurrent" data-bs-parent="#accordionFlushcurrent">
+      <div class="accordion-body">
+        <ul><li><a href="#the-short-life-of-a-hex-analysis-in-cms">The (short) life of a HEX analysis in CMS</a></li>
+<li><a href="#reproducibility">Reproducibility</a></li>
+<li><a href="#what-does-reproducibility-has-to-do-with-me">What does reproducibility has to do with me?</a></li>
+        </ul></div><!--/div.accordion-body-->
+    </div><!--/div.accordion-collapse-->
 
   </div><!--/div.accordion-item-->
 </div><!--/div.accordion-flush-->
@@ -342,45 +351,95 @@
 </div>
 </div>
 </div>
-<p>Work in progress…. please go to the next episode.</p>
-<!--
+<section><h2 class="section-heading" id="the-short-life-of-a-hex-analysis-in-cms">The (short) life of a HEX analysis in CMS<a class="anchor" aria-label="anchor" href="#the-short-life-of-a-hex-analysis-in-cms"></a></h2>
+<hr class="half-width"><p>Navigating the complexities of CMS analysis can be a daunting task,
+regardless of your experience level. A common challenge we all face is
+capturing the intricate steps involved in producing our results.</p>
+<p>Let’s examine the figure below:</p>
+<figure><img src="fig/Analysis_Clemens.png" alt="The life of a HEX analysis" class="figure mx-auto d-block"><div class="figcaption">The life of a HEX analysis</div>
+</figure><p>This figure illustrates the typical workflow of a CMS analysis,
+divided into three distinct phases:</p>
+<ul><li>Collaboration: This encompasses the extensive groundwork laid by the
+entire research community, over which individual analysts have limited
+control.</li>
+<li>Analysis: This is the core phase where analysts like ourselves
+conduct the actual analysis, utilizing the data and resources provided
+by the collaboration.</li>
+<li>Dissemination: This phase focuses on how our results are shared and
+utilized by others within the scientific community.</li>
+</ul><p>While the dissemination phase is crucial, effective methods for
+sharing and utilizing research outputs already exist.</p>
+<p>In this discussion, I will concentrate on the <em>Analysis</em>
+phase, which lies entirely within our sphere of influence as analysts. A
+recurring challenge in high-energy physics (HEX) analysis is the lack of
+reproducibility. Analysts often embark on a similar (simplified)
+journey:</p>
+<ul><li>Data Exploration: They begin by analyzing data, generating
+histograms to visualize distributions.</li>
+<li>Background Modeling: This crucial step involves developing and
+implementing models to describe background processes.</li>
+<li>Systematic Corrections: Numerous corrections are applied to account
+for various experimental effects.</li>
+<li>Statistical Analysis: Once the corrected data is obtained,
+statistical analyses are performed, often utilizing the combine
+framework.</li>
+<li>Publication: After rigorous peer review, the results are published
+in scientific journals.</li>
+</ul><p>However, this cycle often leads to a significant knowledge gap. When
+an analyst moves on to a new project or leaves the collaboration,
+valuable knowledge about the analysis process is lost. Subsequent
+analysts may struggle to understand (for instance):</p>
+<ul><li>Code Implementation: How the initial histograms were generated and
+the underlying code.</li>
+<li>Software Dependencies: The specific software versions and
+configurations used.</li>
+<li>Analysis Workflow: The precise steps involved in applying
+corrections and performing statistical analyses.</li>
+<li>Tool Usage: How to effectively utilize tools like RooFit or RooStats
+for the given analysis.</li>
+<li>And several other topics.</li>
+</ul><p>This lack of documentation and knowledge transfer hinders efficiency
+and can lead to unnecessary duplication of effort.</p>
+</section><section><h2 class="section-heading" id="reproducibility">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"></a></h2>
+<hr class="half-width"><p>Reproducibility is a cornerstone of scientific research, and HEX is
+no exception. It ensures that experimental results can be verified
+independently, bolstering the credibility of scientific findings. To
+achieve reproducibility, researchers must provide detailed descriptions
+of their methodologies, including the tools, datasets, and parameters
+used. This allows others to replicate the experiments and compare their
+results.
+<!-- Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows.
+These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries. --></p>
+</section><section><h2 class="section-heading" id="what-does-reproducibility-has-to-do-with-me">What does reproducibility has to do with me?<a class="anchor" aria-label="anchor" href="#what-does-reproducibility-has-to-do-with-me"></a></h2>
+<hr class="half-width"><div id="who-are-the-first-users-of-a-reproducible-workflow" class="callout challenge">
+<div class="callout-square">
+<i class="callout-icon" data-feather="zap"></i>
+</div>
+<div id="who-are-the-first-users-of-a-reproducible-workflow" class="callout-inner">
+<h3 class="callout-title">Who are the first users of a reproducible
+workflow?</h3>
+<div class="callout-content">
 
-## The (short) life of a HEX analysis in CMS
-
-![The life of a HEX analysis](episodes/fig/Analysis_Clemens.png)
-
-
-
-## Reproducibility
-
-Reproducibility is a cornerstone of scientific research, and HEX is no exception.
-It ensures that experimental results can be verified independently, bolstering the credibility of scientific findings.
-To achieve reproducibility, researchers must provide detailed descriptions of their methodologies, including the tools, datasets, and parameters used.
-This allows others to replicate the experiments and compare their results.
-Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows.
-These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries.
-
-## What does reproducibility has to do with me?
-
-:::::::::::::::::::::::::::::::::::::::::::::::::::::: challenge
-
-## Who are the first users of a reproducible workflow?
-
-:::::::::::::::::::::: solution
-Me, myself and my group. :grin:
-::::::::::::::::::::::
-::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-
--->
+</div>
+</div>
+</div>
+<div id="accordionSolution1" class="accordion challenge-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
+  <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
+</button>
+<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div class="accordion-body">
+<p>Me, myself and my group. <span class="emoji" data-emoji="grin">😁</span></p>
+</div>
+</div>
+</div>
+</div>
 <!--
 Place links that you need to refer to multiple times across pages here. Delete
 any links that you are not going to use.
  -->
-
-
-
-      </div> <!-- / div.lesson-content -->
+</section></div> <!-- / div.lesson-content -->
     </main><!-- / main#main-content.main-content --><nav class="bottom-pagination mx-md-4" aria-label="Previous and Next Chapter"><div class="d-block d-sm-block d-md-none">
         <a class="chapter-link" href="index.html"><i aria-hidden="true" class="small-arrow" data-feather="arrow-left"></i>Previous</a>
         <a class="chapter-link float-end" href="Snakemake.html">Next<i aria-hidden="true" class="small-arrow" data-feather="arrow-right"></i></a>
