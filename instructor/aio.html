@@ -516,6 +516,21 @@ execute these workflows on CERN’s REANA platform.</li>
 <p>By implementing these steps, we can significantly improve the
 reproducibility, maintainability, and shareability of our physics
 analyses.</p>
+<div id="a-quick-remark-on-law" class="callout">
+<div class="callout-square">
+<i class="callout-icon" data-feather="bell"></i>
+</div>
+<div id="a-quick-remark-on-law" class="callout-inner">
+<h3 class="callout-title">A quick remark on LAW</h3>
+<div class="callout-content">
+<p>While some analysts utilize the Luigi Analysis Workflow (LAW) ([<a href="https://github.com/riga/law" class="external-link uri">https://github.com/riga/law</a>]), a workflow orchestration
+tool built on top of Spotify’s Luigi ([<a href="https://github.com/spotify/luigi" class="external-link uri">https://github.com/spotify/luigi</a>]) and developed by a
+CMS physicist, this tutorial focuses on Snakemake. Both LAW and
+Snakemake are excellent tools, and if you’re already using LAW for your
+workflow management, that’s great!</p>
+</div>
+</div>
+</div>
 </section><section><h2 class="section-heading" id="what-does-reproducibility-has-to-do-with-me">What does reproducibility has to do with me?<a class="anchor" aria-label="anchor" href="#what-does-reproducibility-has-to-do-with-me"></a>
 </h2>
 <hr class="half-width">
@@ -536,7 +551,7 @@ workflow?</h3>
 <button class="accordion-button solution-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSolution1" aria-expanded="false" aria-controls="collapseSolution1">
   <h4 class="accordion-header" id="headingSolution1"> Show me the solution </h4>
 </button>
-<div id="collapseSolution1" class="accordion-collapse collapse" aria-labelledby="headingSolution1" data-bs-parent="#accordionSolution1">
+<div id="collapseSolution1" class="accordion-collapse collapse" data-bs-parent="#accordionSolution1" aria-labelledby="headingSolution1">
 <div class="accordion-body">
 <p>Me, myself and my group. <span class="emoji" data-emoji="grin">😁</span></p>
 </div>
@@ -1686,7 +1701,7 @@ and start your workflow. You can try:</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
   <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
 <div class="accordion-body">
 <p>Unfortunately, not yet</p>
 <p>But before throwing your laptop out the window, don’t worry, this
@@ -1766,7 +1781,7 @@ variables can be found in the REANA documentation.</p>
 <button class="accordion-button instructor-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInstructor1" aria-expanded="false" aria-controls="collapseInstructor1">
   <h3 class="accordion-header" id="headingInstructor1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="edit-2"></i></div> Instructor Note </h3>
 </button>
-<div id="collapseInstructor1" class="accordion-collapse collapse" aria-labelledby="headingInstructor1" data-bs-parent="#accordionInstructor1">
+<div id="collapseInstructor1" class="accordion-collapse collapse" data-bs-parent="#accordionInstructor1" aria-labelledby="headingInstructor1">
 <div class="accordion-body">
 <p>It will be nice to have a list of REANA variables</p>
 </div>
@@ -1801,7 +1816,7 @@ you’re running a modified version of the original workflow.</p>
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
   <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Did the workflow finish succesfully now? </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>Finally yes!</p>
 </div>
