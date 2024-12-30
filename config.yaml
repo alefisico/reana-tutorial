@@ -83,7 +83,8 @@ instructors:
  - instructor-notes.md
 
 # Learner Profiles
-# profiles: 
+profiles: 
+ - learner-profiles.md
 
 # Customisation ---------------------------------------------
 #
