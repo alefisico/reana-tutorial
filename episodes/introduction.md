@@ -51,6 +51,13 @@ However, this cycle often leads to a significant knowledge gap. When an analyst 
 
 This lack of documentation and knowledge transfer hinders efficiency and can lead to unnecessary duplication of effort. 
 
+To address some of these reproducibility challenges, the Common Analysis Group (CAT) has developed valuable resources:
+
+ * *Centralized Code Repository*: CAT maintains a central repository for [CMS analysis code](https://gitlab.cern.ch/cms-analysis). This ensures code accessibility and simplifies collaboration among analysts.
+ * Statistical Interpretation Tools: CAT is working on a suite of tools for [preserving and publishing the statistical interpretations of results](https://cms-analysis.docs.cern.ch/stats/contributing/). These tools promote consistency and transparency in statistical analyses.
+
+By leveraging these resources, analysts can benefit from existing knowledge and code, reducing redundancy and accelerating the analysis process.
+
 ## Reproducibility
 
 Reproducibility is a cornerstone of scientific research, and HEX is no exception.
@@ -59,6 +66,23 @@ To achieve reproducibility, researchers must provide detailed descriptions of th
 This allows others to replicate the experiments and compare their results. 
 <!-- Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows. 
 These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries. -->
+
+## Towards Reusable Analyses: A Three-Step Approach
+
+Let's explore a three-step approach:
+
+1. **Capture Software and Code:** 
+    * **Objective:** Package analysis code and its dependencies for reliable and reproducible execution.
+    * **Current Practices:** Many analyses utilize Git (GitHub/GitLab) for code version control. Some leverage containerization technologies (e.g., Docker, Singularity) to encapsulate the entire software environment.
+2. **Capture Commands:** 
+    * **Objective:** Define the precise commands required to execute the analysis code.
+    * **Current Challenges:** Analysis scripts often consist of complex and difficult-to-understand sequences of bash or Python commands.
+3. **Capture Workflow:** 
+    * **Objective:** Define the ordered execution of commands within the analysis, independent of the specific computing environment.
+    * **Focus:** This tutorial will delve into workflow management using modern tools like Snakemake and demonstrate how to execute these workflows on CERN's REANA platform.
+
+By implementing these steps, we can significantly improve the reproducibility, maintainability, and shareability of our physics analyses.
+
 
 ## What does reproducibility has to do with me?
 
