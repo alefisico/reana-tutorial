@@ -84,20 +84,18 @@ instructors:
 
 # Learner Profiles
 profiles: 
- - learner-profiles.md
 
 # Customisation ---------------------------------------------
 #
 # This space below is where custom yaml items (e.g. pinning
 # sandpaper and varnish versions) should live
+# analytics: |
+#   <!-- Global site tag (gtag.js) - Google Analytics -->
+#   <script async src='https://www.googletagmanager.com/gtag/js?id=GTM-TB5MSKZZ#' ></script>
+#   <script>
+#     window.dataLayer = window.dataLayer || [];
+#     function gtag(){dataLayer.push(arguments);}
+#     gtag('js', new Date());
 
-analytics: |
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src='https://www.googletagmanager.com/gtag/js?id=GTM-TB5MSKZZ#' ></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', '{YOUR TRACKING ID}');
-  </script>
+#     gtag('config', '{YOUR TRACKING ID}');
+#   </script>
