@@ -440,6 +440,22 @@ for the given analysis.</li>
 </ul>
 <p>This lack of documentation and knowledge transfer hinders efficiency
 and can lead to unnecessary duplication of effort.</p>
+<p>To address some of these reproducibility challenges, the Common
+Analysis Group (CAT) has developed valuable resources:</p>
+<ul>
+<li>
+<em>Centralized Code Repository</em>: CAT maintains a central
+repository for <a href="https://gitlab.cern.ch/cms-analysis" class="external-link">CMS
+analysis code</a>. This ensures code accessibility and simplifies
+collaboration among analysts.</li>
+<li>Statistical Interpretation Tools: CAT is working on a suite of tools
+for <a href="https://cms-analysis.docs.cern.ch/stats/contributing/" class="external-link">preserving
+and publishing the statistical interpretations of results</a>. These
+tools promote consistency and transparency in statistical analyses.</li>
+</ul>
+<p>By leveraging these resources, analysts can benefit from existing
+knowledge and code, reducing redundancy and accelerating the analysis
+process.</p>
 </section><section><h2 class="section-heading" id="reproducibility">Reproducibility<a class="anchor" aria-label="anchor" href="#reproducibility"></a>
 </h2>
 <hr class="half-width">
@@ -452,6 +468,53 @@ used. This allows others to replicate the experiments and compare their
 results.
 <!-- Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows.
 These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries. --></p>
+</section><section><h2 class="section-heading" id="towards-reusable-analyses-a-three-step-approach">Towards Reusable Analyses: A Three-Step Approach<a class="anchor" aria-label="anchor" href="#towards-reusable-analyses-a-three-step-approach"></a>
+</h2>
+<hr class="half-width">
+<p>Let’s explore a three-step approach:</p>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Capture Software and Code:</strong>
+<ul>
+<li>
+<strong>Objective:</strong> Package analysis code and its
+dependencies for reliable and reproducible execution.</li>
+<li>
+<strong>Current Practices:</strong> Many analyses utilize Git
+(GitHub/GitLab) for code version control. Some leverage containerization
+technologies (e.g., Docker, Singularity) to encapsulate the entire
+software environment.</li>
+</ul>
+</li>
+<li>
+<strong>Capture Commands:</strong>
+<ul>
+<li>
+<strong>Objective:</strong> Define the precise commands required to
+execute the analysis code.</li>
+<li>
+<strong>Current Challenges:</strong> Analysis scripts often consist
+of complex and difficult-to-understand sequences of bash or Python
+commands.</li>
+</ul>
+</li>
+<li>
+<strong>Capture Workflow:</strong>
+<ul>
+<li>
+<strong>Objective:</strong> Define the ordered execution of commands
+within the analysis, independent of the specific computing
+environment.</li>
+<li>
+<strong>Focus:</strong> This tutorial will delve into workflow
+management using modern tools like Snakemake and demonstrate how to
+execute these workflows on CERN’s REANA platform.</li>
+</ul>
+</li>
+</ol>
+<p>By implementing these steps, we can significantly improve the
+reproducibility, maintainability, and shareability of our physics
+analyses.</p>
 </section><section><h2 class="section-heading" id="what-does-reproducibility-has-to-do-with-me">What does reproducibility has to do with me?<a class="anchor" aria-label="anchor" href="#what-does-reproducibility-has-to-do-with-me"></a>
 </h2>
 <hr class="half-width">
@@ -1328,7 +1391,7 @@ example with</p>
   Did the workflow finish succesfully now?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
 <p>If the previous Snakemake command didn’t execute as expected, it’s
 likely due to the requirement for access to CERN tools like CVMFS, EOS,
