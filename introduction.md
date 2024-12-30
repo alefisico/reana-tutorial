@@ -16,15 +16,40 @@ exercises: 0
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
 
-Work in progress.... please go to the next episode.
-
-<!-- 
 
 ## The (short) life of a HEX analysis in CMS
 
-![The life of a HEX analysis](episodes/fig/Analysis_Clemens.png)
+Navigating the complexities of CMS analysis can be a daunting task, regardless of your experience level. A common challenge we all face is capturing the intricate steps involved in producing our results.
 
+Let's examine the figure below:
 
+![The life of a HEX analysis](episodes/fig/Analysis_Clemens.png){alt="The life of a HEX analysis"}
+
+This figure illustrates the typical workflow of a CMS analysis, divided into three distinct phases:
+
+ * Collaboration: This encompasses the extensive groundwork laid by the entire research community, over which individual analysts have limited control.
+ * Analysis: This is the core phase where analysts like ourselves conduct the actual analysis, utilizing the data and resources provided by the collaboration.
+ * Dissemination: This phase focuses on how our results are shared and utilized by others within the scientific community.
+
+While the dissemination phase is crucial, effective methods for sharing and utilizing research outputs already exist.
+
+In this discussion, I will concentrate on the _Analysis_ phase, which lies entirely within our sphere of influence as analysts. A recurring challenge in high-energy physics (HEX) analysis is the lack of reproducibility. Analysts often embark on a similar (simplified) journey:
+
+ * Data Exploration: They begin by analyzing data, generating histograms to visualize distributions.
+ * Background Modeling: This crucial step involves developing and implementing models to describe background processes.
+ * Systematic Corrections: Numerous corrections are applied to account for various experimental effects.
+ * Statistical Analysis: Once the corrected data is obtained, statistical analyses are performed, often utilizing the combine framework.
+* Publication: After rigorous peer review, the results are published in scientific journals.
+
+However, this cycle often leads to a significant knowledge gap. When an analyst moves on to a new project or leaves the collaboration, valuable knowledge about the analysis process is lost. Subsequent analysts may struggle to understand (for instance):
+
+ * Code Implementation: How the initial histograms were generated and the underlying code.
+ * Software Dependencies: The specific software versions and configurations used.
+ * Analysis Workflow: The precise steps involved in applying corrections and performing statistical analyses.
+ * Tool Usage: How to effectively utilize tools like RooFit or RooStats for the given analysis.
+ * And several other topics.
+
+This lack of documentation and knowledge transfer hinders efficiency and can lead to unnecessary duplication of effort. 
 
 ## Reproducibility
 
@@ -32,8 +57,8 @@ Reproducibility is a cornerstone of scientific research, and HEX is no exception
 It ensures that experimental results can be verified independently, bolstering the credibility of scientific findings. 
 To achieve reproducibility, researchers must provide detailed descriptions of their methodologies, including the tools, datasets, and parameters used. 
 This allows others to replicate the experiments and compare their results. 
-Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows. 
-These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries.
+<!-- Tools like [REANA]() and [Snakemake]() can significantly aid in reproducibility by providing platforms for creating, managing, and sharing reproducible computational workflows. 
+These tools help researchers document their experimental steps, track dependencies, and ensure that results can be replicated consistently, fostering trust in scientific discoveries. -->
 
 ## What does reproducibility has to do with me?
 
@@ -47,4 +72,3 @@ Me, myself and my group. :grin:
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::
 
 
--->
