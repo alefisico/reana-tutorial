@@ -306,7 +306,7 @@ snakemake --snakefile Snakefile --configfile config.yaml --dag | dot -Tpng -o da
 ```
 
 :::::::::solution
-![Pipeline Visualization using dag](episodes/fig/dag.png)
+![Pipeline Visualization using dag](episodes/fig/dag.png){alt="A Directed Acyclic Graph (DAG) showing the dependencies between rules in a Snakemake workflow."}
 :::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::
@@ -323,7 +323,7 @@ snakemake --snakefile Snakefile --configfile config.yaml --rulegraph | dot -Tpng
 ```
 
 :::::::::solution
-![Pipeline Visualization using rulegraph](episodes/fig/rulegraph.png)
+![Pipeline Visualization using rulegraph](episodes/fig/rulegraph.png){alt="A Rule Graph showing the dependencies between rules in a Snakemake workflow."}
 :::::::::::::::::
 ::::::::::::::::::
 
