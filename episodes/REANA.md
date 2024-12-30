@@ -17,7 +17,7 @@ exercises: 10
 
 REANA is a powerful platform designed to streamline and enhance the reproducibility of scientific research, particularly in high-energy physics analysis. It enables researchers to define, execute, and share complex data analysis workflows, ensuring that their work is transparent, verifiable, and easily replicated. By leveraging containerization technology and cloud computing resources, REANA simplifies the management of computational environments, data dependencies, and execution pipelines. This tutorial will guide you through the essential steps of using REANA, from creating your first workflow to deploying it on a remote computing infrastructure. REANA offers a user-friendly approach to reproducible research, empowering you to focus on scientific discovery while automating the underlying infrastructure.
 
-![](https://docs.reana.io/images/reana-platform-20181202.png)
+![The REANA platform](https://docs.reana.io/images/reana-platform-20181202.png){alt="The REANA platform"}
 
 While REANA is primarily a tool for reproducible analysis, it effectively functions as a comprehensive analysis facility, seamlessly integrating various CERN resources. This means that essential CERN tools, including EOS, CVMFS, Kerberos, Rucio, VOMS-proxy, HTCondor, can be directly accessed within the REANA platform, streamlining the analysis process and simplifying resource management.
 
@@ -65,11 +65,11 @@ The `reana.yaml` file acts as a blueprint for your REANA workflow, defining esse
  - `workflow`: This crucial section tells REANA about the type of workflow you're using. 
     - `type`: we are using `snakemake`, but REANA supports CWL, Serial or Yadage. ([More here](https://docs.reana.io/running-workflows/supported-systems/)).
     - `file`: This defines the location of your workflow script.
-    - `resources`: Define any **global** resources required for your workflow execution (detailed information available at [here](https://docs.reana.io/advanced-usage/)). Remember that you can also define dedicated rule resources in the snakefile.
+    - `resources`: Define any **global** resources required for your workflow execution ([detailed information available at here](https://docs.reana.io/advanced-usage/)). Remember that you can also define dedicated rule resources in the snakefile.
  - `workspace` (optional): Here, you can set options like `retention_days` to specify how long specific folders should be retained after workflow completion.
  - `outputs`: This section informs REANA which files or folders should be made available for download after successful workflow execution. These can be individual files or entire directories.
 
-More about `reana.yaml` files can be found [here](https://docs.reana.io/reference/reana-yaml/).
+More about `reana.yaml` [files can be found here](https://docs.reana.io/reference/reana-yaml/).
 
 
 ### Running a workflow in REANA
@@ -182,7 +182,7 @@ reana-client logs -w test_SUSY
 
 The most user-friendly way to monitor your workflow is through the REANA web interface. Your job's interface should look similar to this:
 
-![](episodes/fig/reana_website_job.png)
+![The REANA website](episodes/fig/reana_website_job.png){alt="The REANA website."}
 
 This interface provides valuable insights into your workflow's status and execution:
 
@@ -250,7 +250,7 @@ Once your workflow completes successfully, you can access its outputs.
 
 A valuable feature of REANA's Snakemake integration is the generation of a detailed report. In the REANA web interface, navigate to the `Workspace` section and locate the `report.html` file. This HTML file provides valuable insights into your workflow's execution, including statistics and visualizations.
 
-![](episodes/fig/Snakefile_report.png)
+![An example of the snakefile Report website](episodes/fig/Snakefile_report.png){alt="An example of the snakefile Report website"}
 
 ### Downloading Workflow Outputs:
 
