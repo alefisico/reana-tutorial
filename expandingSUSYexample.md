@@ -1,7 +1,7 @@
 ---
 title: "Expanding the SUSY analysis"
-teaching:
-exercises:
+teaching: 20
+exercises: 10
 ---
 
 :::::: questions
