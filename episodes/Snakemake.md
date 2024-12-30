@@ -125,7 +125,7 @@ rule analyze_data:
 * Rules:
   * **rule simulate_data**: This rule simulates data for each sample. As it has no input dependencies, it can be executed at the beginning of the pipeline.
   * **rule analyze_data**: This rule analyzes the simulated data for each sample. It depends on the output of the `simulate_data` rule, ensuring that this rule only proceeds after `simulate_data` is complete.
-  * **rule all**: This **mandatory** rule specifies the final goal of the workflow. By defining the desired output, Snakemake automatically determines the necessary steps and their execution order. This rule also allows for the use of `wildcards`, which enable flexible and scalable workflows.
+  * **rule all**: A rule without an output will **always** run, and therefore it is one of the possible ways to define the final goal of the workflow. (`rule all` is the common rule name of the final output) By defining the desired output, Snakemake automatically determines the necessary steps and their execution order. This rule also allows for the use of `wildcards`, which enable flexible and scalable workflows.
 
 * Parallelism: Snakemake automatically parallelizes the analyze_data rule for each sample, as they are independent of each other.
 
