@@ -20,7 +20,9 @@ Work in progress.... please go to the next episode.
 
 <!-- 
 
-## The (short) life of a HEX analysis
+## The (short) life of a HEX analysis in CMS
+
+![The life of a HEX analysis](episodes/fig/Analysis_Clemens.png)
 
 
 
