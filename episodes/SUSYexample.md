@@ -21,6 +21,16 @@ For this part of the tutorial, let's clone the following repository:
 git clone ssh://git@gitlab.cern.ch:7999/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample.git
 ```
 
+::::::::::: spoiler
+
+## If you dont have a gitlab account
+
+```BASH
+git clone git@github.com:alefisico/cmsreana_susyexample.git
+```
+
+::::::::::::::::::::::
+
 In this example, we'll demonstrate a basic use case: skimming a nanoAOD file and generating histograms suitable for CMS Combine. While the specific details of this analysis aren't crucial, this example will highlight REANA's potential for more complex and sophisticated workflows (more about REANA in the next episode). 
 
 ## A simple SUSY analysis
