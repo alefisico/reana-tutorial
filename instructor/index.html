@@ -435,40 +435,59 @@ running:</p>
 <div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
 <button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
+  <h3 class="accordion-header" id="headingSpoiler1">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using CMSLPC </h3>
 </button>
 <div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
 <div class="accordion-body">
-<p>In my opinion, using a container is the easiest way to interact with
-the REANA cluster from <em>any machine</em>. To do that you can use:</p>
+<p>At the LPC, since the AFS disc is not mounted, we cannot use the
+reana environment. Therefore, the simplest way to access the REANA
+client is through a container:</p>
 <div class="codewrapper sourceCode" id="cb3">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/uscms_data/ <span class="kw">&amp;&amp;</span> <span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
 </div>
-<p>You can save this in a bash script for convenience, or in your
-<code>.bashrc</code> as:</p>
+</div>
+</div>
+</div>
+</div>
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using a container </h3>
+</button>
+<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div class="accordion-body">
+<p>In my opinion, using a container is the easiest way to interact with
+the REANA cluster from <em>any machine</em>. To do that you can use:</p>
 <div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">reana_client ()</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="kw">{</span> </span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3"</span><span class="kw">;</span></span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: reana_client &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
-<span id="cb4-10"><a href="#cb4-10" tabindex="-1"></a>    <span class="va">run_reana_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb4-11"><a href="#cb4-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_reana_cmd</span><span class="st">"</span></span>
-<span id="cb4-12"><a href="#cb4-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">apptainer</span> run <span class="at">--env</span> REANA_SERVER_URL=https://reana.cern.ch <span class="at">--env</span> REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxx <span class="at">--bind</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv  docker://docker.io/reanahub/reana-client:0.9.3 ping</span></code></pre>
 </div>
-<p>and, after reloading your <code>.bashrc</code>, then simply:</p>
+<p>You can save this in a bash script for convenience, or in your
+<code>.bashrc</code> as:</p>
 <div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">reana_client ()</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxx --bind </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv  docker://docker.io/reanahub/reana-client:0.9.3"</span><span class="kw">;</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: reana_client &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="va">run_reana_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_reana_cmd</span><span class="st">"</span></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+</div>
+<p>and, after reloading your <code>.bashrc</code>, then simply:</p>
+<div class="codewrapper sourceCode" id="cb6">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">reana-client</span> ping</span></code></pre>
 </div>
 </div>
 </div>
@@ -504,38 +523,44 @@ our jobs. This is the simplest solution if you dont want/can install the
 official package in your machine. Other advantage is that one can keep
 the analysis environment clean this way.</p>
 <p>An example in lxplus:</p>
-<div class="codewrapper sourceCode" id="cb6">
+<div class="codewrapper sourceCode" id="cb7">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
+</div>
+<p>An example in cmslpc:</p>
+<div class="codewrapper sourceCode" id="cb8">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security <span class="kw">&amp;&amp;</span> <span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake </span></code></pre>
 </div>
 <p>One can include these lines in a bash script.</p>
-<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
-  <h3 class="accordion-header" id="headingSpoiler2">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
+  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Simpler solution </h3>
 </button>
-<div id="collapseSpoiler2" class="accordion-collapse collapse" aria-labelledby="headingSpoiler2" data-bs-parent="#accordionSpoiler2">
+<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
 <div class="accordion-body">
 <p>Another simpler solution is to include a bash function in your
 <code>.bashrc</code> or <code>.bash_aliases</code>. For
 <code>.bash_aliases</code>:</p>
-<div class="codewrapper sourceCode" id="cb7">
+<div class="codewrapper sourceCode" id="cb9">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">run_snakemake ()</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="kw">{</span> </span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security &amp;&amp; apptainer exec -B </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv docker://snakemake/snakemake"</span><span class="kw">;</span></span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: run_snakemake &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
-<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
-<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
-<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
-<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">run_snakemake_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
-<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_snakemake_cmd</span><span class="st">"</span></span>
-<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">run_snakemake ()</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="kw">{</span> </span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">base_command</span><span class="op">=</span><span class="st">"export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security &amp;&amp; apptainer exec -B </span><span class="va">${PWD}</span><span class="st">:/srv --pwd /srv docker://snakemake/snakemake"</span><span class="kw">;</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">[[</span> <span class="va">$#</span> <span class="ot">-eq</span> 0 <span class="kw">]];</span> <span class="cf">then</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>        <span class="bu">echo</span> <span class="st">"Usage: run_snakemake &lt;command&gt; [arguments]"</span><span class="kw">;</span></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">1</span><span class="kw">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>    <span class="cf">fi</span><span class="kw">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">command</span><span class="op">=</span><span class="st">"</span><span class="va">$1</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>    <span class="bu">shift</span><span class="kw">;</span></span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>    <span class="bu">local</span> <span class="va">run_snakemake_cmd</span><span class="op">=</span><span class="st">"</span><span class="va">$base_command</span><span class="st"> </span><span class="va">$command</span><span class="st"> </span><span class="va">$@</span><span class="st">"</span><span class="kw">;</span></span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>    <span class="bu">eval</span> <span class="st">"</span><span class="va">$run_snakemake_cmd</span><span class="st">"</span></span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a><span class="kw">}</span></span></code></pre>
 </div>
 <p>Reload your <code>.bashrc</code> and then you can just run it from
 anywhere as</p>
@@ -547,20 +572,20 @@ anywhere as</p>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler4" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler3" aria-expanded="false" aria-controls="collapseSpoiler3">
-  <h3 class="accordion-header" id="headingSpoiler3">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler4" aria-expanded="false" aria-controls="collapseSpoiler4">
+  <h3 class="accordion-header" id="headingSpoiler4">  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div> Using conda </h3>
 </button>
-<div id="collapseSpoiler3" class="accordion-collapse collapse" aria-labelledby="headingSpoiler3" data-bs-parent="#accordionSpoiler3">
+<div id="collapseSpoiler4" class="accordion-collapse collapse" aria-labelledby="headingSpoiler4" data-bs-parent="#accordionSpoiler4">
 <div class="accordion-body">
 <p>Conda is a popular package and environment management system. To
 install Snakemake using conda, you can use the following command in your
 terminal:</p>
-<div class="codewrapper sourceCode" id="cb9">
+<div class="codewrapper sourceCode" id="cb11">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> snakemake snakemake</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="ex">conda</span> create <span class="at">-c</span> conda-forge <span class="at">-c</span> bioconda <span class="at">-n</span> snakemake snakemake</span></code></pre>
 </div>
 </div>
 </div>
@@ -634,8 +659,8 @@ any links that you are not going to use.
   "url": "https://alefisico.github.io/reana-tutorial/instructor/index.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/instructor/index.html",
   "dateCreated": "2024-11-18",
-  "dateModified": "2025-01-07",
-  "datePublished": "2025-01-07"
+  "dateModified": "2025-01-13",
+  "datePublished": "2025-01-13"
 }
 
   </script><script>
