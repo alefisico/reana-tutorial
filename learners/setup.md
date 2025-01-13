@@ -40,6 +40,17 @@ reana-client ping
 
 :::::::::::::::: spoiler
 
+### Using CMSLPC
+
+At the LPC, since the AFS disc is not mounted, we cannot use the reana environment. Therefore, the simplest way to access the REANA client is through a container:
+```BASH
+export APPTAINER_BINDPATH=/uscms_data/ && apptainer run --env REANA_SERVER_URL=https://reana.cern.ch --env REANA_ACCESS_TOKEN=xxxxxxxxxxxxxxxxxxxxxxxxx --bind ${PWD}:/srv --pwd /srv docker://docker.io/reanahub/reana-client:0.9.3 ping
+```
+::::::::::::::::::::::::
+
+
+:::::::::::::::: spoiler
+
 ### Using a container
 
 In my opinion, using a container is the easiest way to interact with the REANA cluster from _any machine_. To do that you can use:
@@ -94,6 +105,12 @@ An example in lxplus:
 export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  ## this is optional (if needed)
 apptainer shell -B ${PWD}:/srv --pwd /srv docker://snakemake/snakemake /bin/bash
 ```
+
+An example in cmslpc:
+```BASH
+export APPTAINER_BINDPATH=/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security && apptainer shell -B ${PWD}:/srv --pwd /srv docker://snakemake/snakemake 
+```
+
 One can include these lines in a bash script.
 
 :::::::::::::::: spoiler
