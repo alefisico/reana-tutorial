@@ -315,7 +315,7 @@
       </div>
       <hr></nav><main id="main-content" class="main-content"><div class="container lesson-content">
         <h1>A simple SUSY analysis</h1>
-        <p>Last updated on 2024-11-18 |
+        <p>Last updated on 2025-01-13 |
 
         <a href="https://github.com/alefisico/reana-tutorial/edit/main/episodes/SUSYexample.md" class="external-link">Edit this page <i aria-hidden="true" data-feather="edit"></i></a></p>
 
@@ -363,6 +363,25 @@ repository:</p>
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">git</span> clone ssh://git@gitlab.cern.ch:7999/cms-analysis/analysisexamples/snakemake-reana-examples/cmsreana_susyexample.git</span></code></pre>
+</div>
+<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div class="accordion-item">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
+  <h3 class="accordion-header" id="headingSpoiler1">
+  <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
+  If you dont have a gitlab account
+  </h3>
+</button>
+<div id="collapseSpoiler1" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler1" aria-labelledby="headingSpoiler1">
+<div class="accordion-body">
+<div class="codewrapper sourceCode" id="cb2">
+<h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
+</h3>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">git</span> clone git@github.com:alefisico/cmsreana_susyexample.git</span></code></pre>
+</div>
+</div>
+</div>
+</div>
 </div>
 <p>In this example, we’ll demonstrate a basic use case: skimming a
 nanoAOD file and generating histograms suitable for CMS Combine. While
@@ -476,18 +495,18 @@ to Dockerfile</a>.</p>
 </div>
 </div>
 <p>Let’s validate the workflow:</p>
-<div class="codewrapper sourceCode" id="cb3">
+<div class="codewrapper sourceCode" id="cb4">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--dry-run</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--dry-run</span></span></code></pre>
 </div>
 <p>You can try to run the <code>--dag</code> and/or
 <code>--rulegraph</code> commands to visualize what you will run. If it
 does like everything is correct, you can try to run it:</p>
-<div class="codewrapper sourceCode" id="cb4">
+<div class="codewrapper sourceCode" id="cb5">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml</span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml</span></code></pre>
 </div>
 <div id="did-the-workflow-finish-succesfully" class="callout discussion">
 <div class="callout-square">
@@ -505,23 +524,23 @@ essential when running rules within containerized environments.</p>
 specified container is utilized for each rule’s execution, providing a
 consistent and isolated environment for your workflow. Let’s try our
 example with</p>
-<div class="codewrapper sourceCode" id="cb5">
+<div class="codewrapper sourceCode" id="cb6">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--use-singularity</span></span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="ex">snakemake</span> <span class="at">--snakefile</span> Snakefile <span class="at">--configfile</span> inputs.yaml <span class="at">--use-singularity</span></span></code></pre>
 </div>
 </div>
 </div>
 </div>
-<div id="accordionSpoiler1" class="accordion spoiler-accordion accordion-flush">
+<div id="accordionSpoiler2" class="accordion spoiler-accordion accordion-flush">
 <div class="accordion-item">
-<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler1" aria-expanded="false" aria-controls="collapseSpoiler1">
-  <h3 class="accordion-header" id="headingSpoiler1">
+<button class="accordion-button spoiler-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpoiler2" aria-expanded="false" aria-controls="collapseSpoiler2">
+  <h3 class="accordion-header" id="headingSpoiler2">
   <div class="note-square"><i aria-hidden="true" class="callout-icon" data-feather="eye"></i></div>
   Did the workflow finish succesfully now?
   </h3>
 </button>
-<div id="collapseSpoiler1" class="accordion-collapse collapse" aria-labelledby="headingSpoiler1" data-bs-parent="#accordionSpoiler1">
+<div id="collapseSpoiler2" class="accordion-collapse collapse" data-bs-parent="#accordionSpoiler2" aria-labelledby="headingSpoiler2">
 <div class="accordion-body">
 <p>If the previous Snakemake command didn’t execute as expected, it’s
 likely due to the requirement for access to CERN tools like CVMFS, EOS,
@@ -611,7 +630,7 @@ any links that you are not going to use.
   "url": "https://alefisico.github.io/reana-tutorial/instructor/SUSYexample.html",
   "identifier": "https://alefisico.github.io/reana-tutorial/instructor/SUSYexample.html",
   "dateCreated": "2024-11-18",
-  "dateModified": "2024-11-18",
+  "dateModified": "2025-01-13",
   "datePublished": "2025-01-13"
 }
 
