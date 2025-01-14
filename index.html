@@ -469,11 +469,11 @@ the analysis environment clean this way.</p>
 <pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security  <span class="co">## this is optional (if needed)</span></span>
 <span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake /bin/bash</span></code></pre>
 </div>
-<p>An example in cmslpc:</p>
+<p>A <strong>temporarily</strong> example in cmslpc:</p>
 <div class="codewrapper sourceCode" id="cb8">
 <h3 class="code-label">BASH<i aria-hidden="true" data-feather="chevron-left"></i><i aria-hidden="true" data-feather="chevron-right"></i>
 </h3>
-<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security <span class="kw">&amp;&amp;</span> <span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv docker://snakemake/snakemake </span></code></pre>
+<pre class="sourceCode bash" tabindex="0"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="bu">export</span> <span class="va">APPTAINER_BINDPATH</span><span class="op">=</span>/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security <span class="kw">&amp;&amp;</span> <span class="ex">apptainer</span> shell <span class="at">-B</span> <span class="va">${PWD}</span>:/srv <span class="at">--pwd</span> /srv /cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cmu/coffea4bees:reana_latest /bin/bash</span></code></pre>
 </div>
 <p>One can include these lines in a bash script.</p>
 <div id="accordionSpoiler3" class="accordion spoiler-accordion accordion-flush">
