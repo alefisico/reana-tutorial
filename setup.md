@@ -106,9 +106,9 @@ export APPTAINER_BINDPATH=/afs,/eos,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security
 apptainer shell -B ${PWD}:/srv --pwd /srv docker://snakemake/snakemake /bin/bash
 ```
 
-An example in cmslpc:
+A **temporarily** example in cmslpc:
 ```BASH
-export APPTAINER_BINDPATH=/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security && apptainer shell -B ${PWD}:/srv --pwd /srv docker://snakemake/snakemake 
+export APPTAINER_BINDPATH=/uscms_data/,/uscmst1b_scratch,/cvmfs,/cvmfs/grid.cern.ch/etc/grid-security:/etc/grid-security && apptainer shell -B ${PWD}:/srv --pwd /srv /cvmfs/unpacked.cern.ch/gitlab-registry.cern.ch/cms-cmu/coffea4bees:reana_latest /bin/bash
 ```
 
 One can include these lines in a bash script.
