@@ -32,9 +32,6 @@ pages:
   artifacts:
     paths:
       - public
-  only:
-    - main
-    - master
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
     - if: '$CI_PIPELINE_SOURCE == "web"'
