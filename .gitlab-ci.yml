@@ -12,7 +12,7 @@ before_script:
 
 build_site:
   stage: build
-  image: ubuntu:22.04
+  image: ubuntu:24.04
   script:
     - apt-get update
     - apt-get install -y r-base pandoc
