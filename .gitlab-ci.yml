@@ -3,7 +3,7 @@ stages:
   - deploy
 
 variables:
-  # GITHUB_PAT: $GITHUB_TOKEN
+  GITHUB_PAT: $GITHUB_TOKEN
   RENV_PATHS_ROOT: ~/.local/share/renv/
 
 before_script:
