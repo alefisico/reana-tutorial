@@ -1,3 +1,40 @@
-include:
-  - project: 'authoring/documentation/mkdocs-ci'
-    file: 'mkdocs-gitlab-pages.gitlab-ci.yml'
+stages:
+  - build
+  - deploy
+
+variables:
+  # GITHUB_PAT: $GITHUB_TOKEN
+  RENV_PATHS_ROOT: ~/.local/share/renv/
+
+before_script:
+  - apt-get update
+  - apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+
+build_site:
+  stage: build
+  image: ubuntu:22.04
+  script:
+    - apt-get update
+    - apt-get install -y r-base pandoc
+    - R -e "install.packages('remotes')"
+    - R -e "remotes::install_github('carpentries/sandpaper')"
+    - R -e "remotes::install_github('carpentries/lesson-infrastructure')"
+    - R -e "sandpaper::package_cache_trigger(TRUE)"
+    - R -e "sandpaper:::ci_deploy(reset = ${CI_JOB_TOKEN})"
+  artifacts:
+    paths:
+      - public
+
+pages:
+  stage: deploy
+  script:
+    - mv public/ /public
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+    - master
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+    - if: '$CI_PIPELINE_SOURCE == "web"'
