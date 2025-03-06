@@ -350,6 +350,11 @@ Finished job 0.
 Complete log: .snakemake/log/2024-11-14T095051.589842.snakemake.log
 ```
 
+```CALLOUT
+Depending on the version of Snakemake, you might encounter an error about the number of cores not being specified. If this happens, add `--cores 1` at the end of the bash command.
+```
+
+
 You can also notice that you have two folders: `data` and `results` which are the outputs of this simple workflow. 
 
 ::::::::::::::::::::::::: challenge
