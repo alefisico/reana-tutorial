@@ -1,0 +1,21 @@
+site_name: REANA Tutorial
+nav:
+  - Home: index.md
+  - Episodes:
+      - Introduction: episodes/introduction.md
+      - Expanding SUSY Example: episodes/expandingSUSYexample.md
+      - JEC Example: episodes/JECexample.md
+      - REANA: episodes/REANA.md
+      - Snakemake: episodes/Snakemake.md
+      - SUSY Example: episodes/SUSYexample.md
+  - Learners:
+      - Reference: learners/reference.md
+      - Setup: learners/setup.md
+  - Instructors:
+      - Instructor Notes: instructors/instructor-notes.md
+  - Profiles:
+      - Learner Profiles: profiles/learner-profiles.md
+  - Links: links.md
+  - License: LICENSE.md
+  - Code of Conduct: CODE_OF_CONDUCT.md
+  - Contributing: CONTRIBUTING.md
