@@ -22,7 +22,6 @@ setup:
   stage: setup
   script:
     - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
-    - Rscript -e 'remotes::install_github("carpentries/lesson-dependencies")'
 
 build:
   stage: build
