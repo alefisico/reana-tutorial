@@ -33,6 +33,8 @@ build:
 
     - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = list(carpentries="https://carpentries.r-universe.dev/", CRAN="https://cloud.r-project.org"))'
     - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = c("https://carpentries.r-universe.dev/", getOption("repos")))'
+    - Rscript -e 'sandpaper::validate_lesson()'
+    - Rscript -e 'sandpaper::build_markdown()'
     - Rscript -e 'sandpaper:::build_lesson(preview = FALSE, quiet = FALSE)'
 
 # Deploy stage to GitLab Pages
