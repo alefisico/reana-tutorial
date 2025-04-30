@@ -17,7 +17,7 @@ build:
   stage: build
   script:
     # Checkout Lesson (equivalent to actions/checkout@v4)
-    - git clone $CI_REPOSITORY_URL .
+    - git clone $CI_REPOSITORY_URL
 
     # Setup Lesson Engine (equivalent to carpentries/actions/setup-sandpaper@main)
     - Rscript -e 'install.packages("remotes")'
