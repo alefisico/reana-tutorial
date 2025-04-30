@@ -23,9 +23,6 @@ build:
     - Rscript -e 'install.packages("remotes")'
     - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
 
-    # Setup Package Cache (equivalent to carpentries/actions/setup-lesson-deps@main)
-    - Rscript -e 'remotes::install_github("carpentries/lesson-dependencies")'
-
     # Deploy Site (equivalent to sandpaper:::ci_deploy)
     - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
     - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
