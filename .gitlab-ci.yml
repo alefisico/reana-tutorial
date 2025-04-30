@@ -28,7 +28,8 @@ build:
 
     # Deploy Site (equivalent to sandpaper:::ci_deploy)
     - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
-    - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
+    # - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
+    - Rscript -e 'sandpaper:::build_lesson(preview = FALSE)'
 
 # Deploy stage to GitLab Pages
 deploy:
