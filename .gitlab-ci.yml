@@ -23,6 +23,9 @@ build:
     - Rscript -e 'install.packages("remotes")'
     - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
 
+    # Install the varnish package to resolve the missing dependency
+    - Rscript -e 'remotes::install_github("carpentries/varnish")'
+
     # Deploy Site (equivalent to sandpaper:::ci_deploy)
     - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
     - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
