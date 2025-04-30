@@ -18,15 +18,12 @@ before_script:
   - apt-get update && apt-get install -y pandoc
   - Rscript -e 'install.packages(c("remotes", "sandpaper"))'
 
-setup:
-  stage: setup
-  script:
-    - Rscript -e 'install.packages("remotes")'
-    - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
-
 build:
   stage: build
   script:
+    - apt-get update && apt-get install -y pandoc
+    - Rscript -e 'install.packages("remotes")'
+    - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
     - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
 
 # Deploy stage to GitLab Pages
