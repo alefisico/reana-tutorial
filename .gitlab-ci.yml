@@ -19,17 +19,21 @@ build:
     # Checkout Lesson (equivalent to actions/checkout@v4)
     - git clone $CI_REPOSITORY_URL
 
-    # Setup Lesson Engine (equivalent to carpentries/actions/setup-sandpaper@main)
-    - Rscript -e 'install.packages("remotes")'
-    - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
+    # # Setup Lesson Engine (equivalent to carpentries/actions/setup-sandpaper@main)
+    # - Rscript -e 'install.packages("remotes")'
+    # - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
 
-    # Install the varnish package to resolve the missing dependency
-    - Rscript -e 'remotes::install_github("carpentries/varnish")'
+    # # Install the varnish package to resolve the missing dependency
+    # - Rscript -e 'remotes::install_github("carpentries/varnish")'
 
-    # Deploy Site (equivalent to sandpaper:::ci_deploy)
-    - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
-    # - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
-    - Rscript -e 'sandpaper:::build_lesson(preview = FALSE)'
+    # # Deploy Site (equivalent to sandpaper:::ci_deploy)
+    # - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
+    # # - Rscript -e 'sandpaper:::ci_deploy(reset = FALSE)'
+    # - Rscript -e 'sandpaper:::build_lesson(preview = FALSE)'
+
+    - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = list(carpentries="https://carpentries.r-universe.dev/", CRAN="https://cloud.r-project.org"))'
+    - Rscript -r 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = c("https://carpentries.r-universe.dev/", getOption("repos")))'
+    - Rscript -e 'sandpaper:::build_lesson(preview = FALSE, quiet = FALSE)'
 
 # Deploy stage to GitLab Pages
 deploy:
