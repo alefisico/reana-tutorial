@@ -1,27 +1,41 @@
+# GitLab CI configuration for replicating the sandpaper-main.yaml workflow
+image: rocker/r-ver:4.3.0
+
 stages:
+  - setup
   - build
   - deploy
 
 variables:
-  MKDOCS_BUILD_DIR: public
+  RENV_PATHS_ROOT: /root/.local/share/renv/
 
-build_site:
-  stage: build
-  image: python:3.9
+cache:
+  paths:
+    - /root/.cache/R
+    - /root/.local/share/renv
+
+before_script:
+  - apt-get update && apt-get install -y pandoc
+  - Rscript -e 'install.packages(c("remotes", "sandpaper"))'
+
+setup:
+  stage: setup
   script:
-    - pip install mkdocs
-    - mkdocs build --site-dir $MKDOCS_BUILD_DIR
-  artifacts:
-    paths:
-      - $MKDOCS_BUILD_DIR
+    - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
+    - Rscript -e 'remotes::install_github("carpentries/lesson-dependencies")'
 
-deploy_pages:
+build:
+  stage: build
+  script:
+    - Rscript -e 'sandpaper::package_cache_trigger(TRUE)'
+
+# Deploy stage to GitLab Pages
+deploy:
   stage: deploy
   script:
-    - mv $MKDOCS_BUILD_DIR public
+    - mv site/ public
   artifacts:
     paths:
       - public
-    expire_in: 1 week
   only:
     - main
