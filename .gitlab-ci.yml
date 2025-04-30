@@ -21,6 +21,7 @@ before_script:
 setup:
   stage: setup
   script:
+    - Rscript -e 'install.packages("remotes")'
     - Rscript -e 'remotes::install_github("carpentries/sandpaper")'
 
 build:
