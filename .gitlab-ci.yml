@@ -32,7 +32,8 @@ build:
     # - Rscript -e 'sandpaper:::build_lesson(preview = FALSE)'
 
     - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = list(carpentries="https://carpentries.r-universe.dev/", CRAN="https://cloud.r-project.org"))'
-    - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = c("https://carpentries.r-universe.dev/", getOption("repos")))'
+    # Explicitly reinstall the xml2 package to address potential issues
+    - Rscript -e 'install.packages("xml2", repos = "https://cloud.r-project.org")'
     # - Rscript -e 'sandpaper:::validate_lesson()'
     - Rscript -e 'sandpaper:::build_markdown()'
     - Rscript -e 'sandpaper:::build_lesson(preview = FALSE, quiet = FALSE)'
