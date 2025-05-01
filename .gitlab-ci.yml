@@ -34,6 +34,10 @@ build:
     - Rscript -e 'install.packages(c("sandpaper", "varnish", "pegboard", "tinkr"), repos = list(carpentries="https://carpentries.r-universe.dev/", CRAN="https://cloud.r-project.org"))'
     # Explicitly reinstall the xml2 package to address potential issues
     - Rscript -e 'install.packages("xml2", repos = "https://cloud.r-project.org")'
+    # Add debugging steps to the build stage
+    - Rscript -e 'sessionInfo()'  # Print R session information
+    - ls -R  # List all files in the workspace
+    - echo "Clearing cache..." && rm -rf /root/.cache/R /root/.local/share/renv  # Clear cache
     # - Rscript -e 'sandpaper:::validate_lesson()'
     - Rscript -e 'sandpaper:::build_markdown()'
     - Rscript -e 'sandpaper:::build_lesson(preview = FALSE, quiet = FALSE)'
